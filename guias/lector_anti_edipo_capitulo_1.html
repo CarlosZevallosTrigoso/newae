@@ -1,354 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Anti-Edipo (Cap. I): Guía de Lectura y Estudio Analítico</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --border-color: #000000;
-            --subtle-border: #cccccc;
-            --hover-bg: #f5f5f5;
-            --sidebar-width: 320px;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
-            font-size: 20px;
-            line-height: 1.75;
-            -webkit-font-smoothing: antialiased;
-        }
-        /* Layout estructura tipo Lector */
-        .reader-layout {
-            display: flex;
-            min-height: 100vh;
-        }
-        /* Barra lateral de Tabla de Contenidos */
-        .sidebar {
-            width: var(--sidebar-width);
-            border-right: 1px solid var(--border-color);
-            padding: 2.5rem 1.75rem;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            overflow-y: auto;
-            background-color: var(--bg-color);
-            z-index: 100;
-        }
-        .sidebar-header {
-            font-size: 1.25rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding-bottom: 1rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-        .sidebar-subtitle {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: 400;
-            font-style: italic;
-            text-transform: none;
-            letter-spacing: normal;
-            margin-top: 0.3rem;
-        }
-        .toc-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .toc-item {
-            margin-bottom: 0.65rem;
-            line-height: 1.35;
-        }
-        .toc-part-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-            padding-top: 0.75rem;
-            border-top: 1px solid var(--subtle-border);
-        }
-        .toc-part-title:first-child {
-            border-top: none;
-            margin-top: 0;
-            padding-top: 0;
-        }
-        .toc-link {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 0.98rem;
-            display: block;
-            padding: 0.2rem 0.4rem;
-            border-left: 2px solid transparent;
-            transition: border-color 0.15s ease, background-color 0.15s ease;
-        }
-        .toc-link:hover, .toc-link.active {
-            border-left: 2px solid var(--border-color);
-            background-color: var(--hover-bg);
-        }
-        /* Contenedor Principal de Lectura */
-        .main-reader {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            padding: 4rem 3rem 6rem 3rem;
-            display: flex;
-            justify-content: center;
-        }
-        .reader-column {
-            width: 100%;
-            max-width: 780px;
-        }
-        /* Encabezado Principal del Libro / Guía */
-        .book-header {
-            text-align: center;
-            padding-bottom: 3rem;
-            margin-bottom: 3.5rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-        .book-super {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.75rem;
-        }
-        .book-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            line-height: 1.15;
-            margin: 0 0 1rem 0;
-        }
-        .book-subtitle {
-            font-size: 1.35rem;
-            font-style: italic;
-            font-weight: 400;
-            margin: 0 auto;
-            max-width: 620px;
-        }
-        /* Tipografía de Secciones */
-        section {
-            margin-bottom: 4.5rem;
-            padding-bottom: 3rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        section:last-of-type {
-            border-bottom: none;
-        }
-        .part-banner {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            display: block;
-        }
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.25;
-            margin-top: 0;
-            margin-bottom: 1.75rem;
-            padding-bottom: 0.6rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        h3 {
-            font-size: 1.45rem;
-            font-weight: 600;
-            line-height: 1.35;
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            font-style: italic;
-            margin-top: 1.75rem;
-            margin-bottom: 0.75rem;
-        }
-        p {
-            margin-top: 0;
-            margin-bottom: 1.35rem;
-            text-align: justify;
-            hyphens: auto;
-        }
-        ul, ol {
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            padding-left: 1.75rem;
-        }
-        li {
-            margin-bottom: 0.85rem;
-            text-align: justify;
-        }
-        strong {
-            font-weight: 700;
-        }
-        em {
-            font-style: italic;
-        }
-        /* Tablas en blanco y negro puras */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.92rem;
-            line-height: 1.5;
-            border: 1px solid var(--border-color);
-        }
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 0.75rem 0.9rem;
-            vertical-align: top;
-            text-align: left;
-        }
-        th {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            font-size: 0.85rem;
-            border-bottom: 2px solid var(--border-color);
-        }
-        /* Cuadros de resumen sobrios */
-        .summary-box {
-            border: 1px solid var(--border-color);
-            padding: 1.5rem 1.75rem;
-            margin-top: 2.5rem;
-        }
-        .summary-box h4 {
-            margin-top: 0;
-            font-style: normal;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            font-size: 0.95rem;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        /* Controles de lectura superiores discretos */
-        .reader-controls {
-            display: flex;
-            justify-content: flex-end;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
-            font-size: 0.85rem;
-        }
-        .btn-control {
-            background: #ffffff;
-            color: #000000;
-            border: 1px solid #000000;
-            font-family: 'EB Garamond', serif;
-            font-size: 0.9rem;
-            padding: 0.25rem 0.65rem;
-            cursor: pointer;
-        }
-        .btn-control:hover {
-            background: #000000;
-            color: #ffffff;
-        }
-        /* Responsivo para móviles y pantallas pequeñas */
-        @media (max-width: 980px) {
-            .reader-layout {
-                flex-direction: column;
-            }
-            .sidebar {
-                position: relative;
-                width: 100%;
-                border-right: none;
-                border-bottom: 2px solid var(--border-color);
-                max-height: none;
-            }
-            .main-reader {
-                margin-left: 0;
-                padding: 2.5rem 1.5rem;
-            }
-            .book-title {
-                font-size: 2.2rem;
-            }
-        }
-        @media print {
-            .sidebar, .reader-controls {
-                display: none;
-            }
-            .main-reader {
-                margin-left: 0;
-                padding: 0;
-            }
-            .reader-column {
-                max-width: 100%;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Anti-Edipo · capítulo I</title>
+<link rel="stylesheet" href="../estilo.css">
 </head>
 <body>
-
-<div class="reader-layout">
-    <!-- BARRA LATERAL: TABLA DE CONTENIDOS -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            El Anti-Edipo · Cap. I
-            <span class="sidebar-subtitle">Guía Analítica y Pedagógica</span>
-        </div>
-        <nav>
-            <ul class="toc-list">
-                <li class="toc-part-title">Parte I · Fundamentos y Proceso</li>
-                <li class="toc-item"><a class="toc-link" href="#sec-arquitectura">1. Síntesis, Energías y Máquinas</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sec-proceso">2. El Concepto de «Proceso» y Ejes Maquínicos</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sec-inventario">3. Inventario Conceptual del Capítulo I</a></li>
-
-                <li class="toc-part-title">Parte II · Introducción y Esquema</li>
-                <li class="toc-item"><a class="toc-link" href="#sec-principiantes">4. Explicación Clara para Principiantes</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sec-esquema">5. Esquema Analítico de las 6 Subsecciones</a></li>
-
-                <li class="toc-part-title">Parte III · Guía de Lectura Detallada</li>
-                <li class="toc-item"><a class="toc-link" href="#sub-1">Subsección 1: La producción deseante</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sub-2">Subsección 2: El cuerpo sin órganos</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sub-3">Subsección 3: El sujeto y el goce</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sub-4">Subsección 4: Psiquiatría materialista</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sub-5">Subsección 5: Las máquinas</a></li>
-                <li class="toc-item"><a class="toc-link" href="#sub-6">Subsección 6: El todo y las partes</a></li>
-            </ul>
-        </nav>
-    </aside>
-
-    <!-- ÁREA PRINCIPAL DE LECTURA -->
-    <main class="main-reader">
-        <div class="reader-column">
-            <div class="reader-controls">
-                <button class="btn-control" onclick="changeFontSize(-2)" title="Reducir tamaño de letra">A−</button>
-                <button class="btn-control" onclick="changeFontSize(2)" title="Aumentar tamaño de letra">A+</button>
-                <button class="btn-control" onclick="window.print()" title="Imprimir documento">Imprimir</button>
-            </div>
-
-            <header class="book-header">
-                <div class="book-super">Gilles Deleuze &amp; Félix Guattari · Capitalismo y Esquizofrenia</div>
-                <h1 class="book-title">El Anti-Edipo: Capítulo Primero</h1>
-                <p class="book-subtitle">Estudio sistemático, mapa conceptual y guía de lectura paso a paso sobre «Las máquinas deseantes»</p>
+  <header class="barra">
+    <h1 id="marca"><a href="../index.html">EL ANTI-EDIPO</a> <span>· guías</span></h1>
+    <div id="estado">III · Guía analítica del capítulo primero: «Las máquinas deseantes»</div>
+    <div class="acciones">
+      <button id="toggleToc" class="btn" type="button">índice</button>
+      <a class="btn" href="lector_informe_anti_edipo.html" title="contextualización">I</a>
+      <a class="btn" href="prolegomenos_anti_edipo_lector.html" title="prolegómenos">II</a>
+      <a class="btn actual" href="lector_anti_edipo_capitulo_1.html" title="capítulo I">III</a>
+      <a class="btn" href="https://carloszevallostrigoso.github.io/ae/" target="ae-lector" title="Abrir el lector del Anti-Edipo">lector</a>
+    </div>
+  </header>
+  <main>
+    <nav id="toc" aria-label="Secciones"><h2>Secciones</h2><ol id="tocLista"></ol></nav>
+    <article>
+      <div id="doc">
+<header>
+                <div class="kicker">Gilles Deleuze &amp; Félix Guattari · Capitalismo y Esquizofrenia</div>
+                <h1>El Anti-Edipo: Capítulo Primero</h1>
+                <p class="subtitulo">Estudio sistemático, mapa conceptual y guía de lectura paso a paso sobre «Las máquinas deseantes»</p>
             </header>
 
             <!-- SECCIÓN 1: ARQUITECTURA DE SÍNTESIS, ENERGÍAS Y MÁQUINAS -->
             <section id="sec-arquitectura">
-                <span class="part-banner">Parte I · Fundamentos y Proceso</span>
+                <span class="parte">Parte I · Fundamentos y Proceso</span>
                 <h2>1. Síntesis Pasivas, Energías (Libido, Numen, Voluptas) y Avatares Maquínicos</h2>
 
                 <p>La arquitectura conceptual que abre el primer capítulo de <em>El Anti-Edipo</em> supone una subversión radical tanto de la metafísica occidental como del dogmatismo psicoanalítico de su época, al desplazar el eje cartesiano del <em>Yo pienso</em> hacia la afirmación materialista e inmanente de que <em>Ello funciona</em> por todas partes. Para Deleuze y Guattari, el inconsciente no constituye un teatro expresivo o representacional habitado por mitos familiares, sino una fábrica productiva compuesta por un entramado ontológico de <strong>máquinas deseantes</strong> que operan mediante acoplamientos y cortes de flujo. Estas máquinas no deben interpretarse en un sentido metafórico; son literalmente sistemas de cortes que se acoplan a flujos materiales continuos (<em>hylè</em>). Bajo la ley de la producción de producción, toda máquina es máquina de máquina: una máquina-órgano (como la boca o el ano) efectúa una extracción o corte sobre un flujo continuo (leche, mierda, aire o sonido) únicamente en la medida en que está conectada a otra máquina que se supone productora de dicho flujo (el pecho, el intestino, el estómago). Para explicar cómo opera este campo trascendental maquínico sin presuponer un sujeto previo, los autores articulan una teoría de las <strong>tres síntesis pasivas del inconsciente</strong>, las cuales movilizan tres tipos específicos de energía microfísica y engendran, en su confrontación con la instancia de antiproducción llamada <strong>Cuerpo sin Órganos (CsO)</strong>, tres configuraciones o avatares maquínicos fundamentales.</p>
@@ -458,7 +140,7 @@
                     <li><strong>El Todo como pieza al lado de las partes y el Inconsciente huérfano:</strong> Inspirándose en Marcel Proust, los autores sostienen que <strong>el Todo (encarnado en el Cuerpo sin Órganos) no unifica ni totaliza las partes</strong>, sino que es producido como una parte suplementaria <strong>al lado de las partes</strong> (<em>à côté des parties</em>). El inconsciente es un <strong>inconsciente huérfano</strong> donde el niño, desde su más tierna infancia («el niño ya» / <em>déjà</em>), conecta sus máquinas deseantes directamente con el campo social, histórico y cósmico.</li>
                 </ul>
 
-                <div class="table-wrapper">
+                <div class="tabla">
                     <table>
                         <thead>
                             <tr>
@@ -512,7 +194,7 @@
 
             <!-- SECCIÓN 4: EXPLICACIÓN PARA PRINCIPIANTES -->
             <section id="sec-principiantes">
-                <span class="part-banner">Parte II · Introducción y Esquema General</span>
+                <span class="parte">Parte II · Introducción y Esquema General</span>
                 <h2>4. Explicación Pedagógica Global para Principiantes</h2>
 
                 <p>Abordar por primera vez <em>El Anti-Edipo</em> suele ser una experiencia desconcertante porque Gilles Deleuze y Félix Guattari sumergen al lector directamente en medio de un torbellino de conceptos nuevos sin ofrecer un diccionario previo. Sin embargo, toda la arquitectura del primer capítulo se vuelve sumamente clara y accesible cuando comprendemos cuál es la gran revolución que proponen desde la primera página: <strong>cambiar nuestra forma de entender qué es el deseo y cómo funciona el inconsciente</strong>. En la tradición filosófica y en el psicoanálisis clásico (como el de Freud o Lacan), siempre se nos enseñó que deseamos algo porque «nos falta» (deseo como carencia) y que nuestro inconsciente es como un pequeño <strong>teatro interior</strong> donde se representa una y otra vez la misma obra trágica familiar: el complejo de Edipo (papá, mamá y yo). Contra esta idea, Deleuze y Guattari afirman de manera rotunda que al deseo no le falta nada y que el inconsciente no es un teatro donde se representan fantasmas, sino una <strong>fábrica</strong> que produce cosas reales sin parar. Por eso no debemos preguntarnos «¿qué significa este sueño o este síntoma?» (pues en sí mismos no tienen un significado oculto que interpretar), sino hacernos una pregunta puramente práctica y funcional, como lo haría un mecánico o un ingeniero: <strong>«¿cómo funciona?»</strong> y con qué otras piezas se está conectando.</p>
@@ -532,7 +214,7 @@
                 </ol>
 
                 <h3>4.3. Guía Rápida de Bolsillo</h3>
-                <div class="table-wrapper">
+                <div class="tabla">
                     <table>
                         <thead>
                             <tr>
@@ -592,7 +274,7 @@
                     <li><strong>El todo y las partes</strong> (<em>Le tout et les parties</em>)</li>
                 </ol>
 
-                <div class="table-wrapper">
+                <div class="tabla">
                     <table>
                         <thead>
                             <tr>
@@ -646,7 +328,7 @@
 
             <!-- SUBSECCIÓN 1 -->
             <section id="sub-1">
-                <span class="part-banner">Parte III · Guía de Lectura Detallada por Subsección</span>
+                <span class="parte">Parte III · Guía de Lectura Detallada por Subsección</span>
                 <h2>Subsección 1: «La producción deseante» (<em>La production désirante</em>)</h2>
 
                 <h3>1. El umbral de entrada: Del «Yo pienso» al «Ello funciona» y el carácter literal de las máquinas</h3>
@@ -672,7 +354,7 @@
 
                 <p>Sin embargo, justo cuando estas conexiones («y... y luego...») parecen organizarnos como un organismo productivo que no descansa jamás, ocurre en el corazón mismo de esta primera síntesis un giro sorprendente con el que culmina la Subsección 1: la emergencia del <strong>Cuerpo sin Órganos (CsO)</strong>. Las máquinas deseantes intentan convertirnos en un organismo eficiente donde cada órgano trabaje a destajo (igual que el capital explota y organiza la fuerza muscular del obrero en la fábrica), pero en medio de ese trajín el cuerpo sufre por estar tan rígidamente organizado y no tener otra organización o ninguna organización en absoluto. En ese instante de saturación —por ejemplo, cuando la conexión entre la boca y el pecho ya cumplió su ciclo productivo y el bebé queda satisfecho y se aparta—, las máquinas trabajadoras se detienen en seco y dejan emerger un «tercer término» que no es productivo ni tiene órganos: una masa fluida y desorganizada, una superficie lisa, opaca, estéril e inengendrada que es el <strong>Cuerpo sin Órganos</strong>. Lejos de ser la muerte biológica, esta pausa de <strong>antiproducción</strong> suspende y congela momentáneamente las conexiones de los órganos para desexualizar o neutralizar su trabajo forzado, preparando así un lienzo en blanco o superficie de reposo donde podrán registrarse las experiencias y hacerse posibles conexiones totalmente nuevas en la siguiente subsección.</p>
 
-                <div class="summary-box">
+                <div class="recuadro">
                     <h4>Cuadro de Conceptos Clave de la Subsección 1</h4>
                     <ul>
                         <li><strong>Inconsciente-Fábrica («Ello funciona»):</strong> El inconsciente no es un teatro donde se representan dramas familiares ni tiene significados ocultos que interpretar; es un taller productivo literal cuyas piezas hacen pasar y cortan flujos reales.</li>
@@ -717,7 +399,7 @@
 
                 <p>Su fórmula gramatical es <strong>«o... o... o...» (o «ya sea... ya sea...» / <em>soit... soit...</em>)</strong>. Pero aquí reside la lección más importante de toda la Subsección 2: en el funcionamiento libre, inmanente y «legítimo» del inconsciente, esta disyunción <strong>no es exclusiva ni restrictiva</strong>, sino <strong>inclusiva y afirmativa</strong>. Mientras que la familia edípica y el psicoanálisis hacen un uso ilegítimo y excluyente de la disyunción para encerrarnos en alternativas binarias rígidas («<em>o bien</em> eres hombre <em>o bien</em> eres mujer, <em>o</em> estás vivo <em>o</em> estás muerto, <em>o</em> eres niño <em>o</em> eres adulto, <em>o</em> te sometes a la ley del padre <em>o</em> caes en la locura indiferenciada»), en la síntesis disyuntiva libre del Cuerpo sin Órganos los dos términos se afirman a través de su misma distancia y diferencia sin que uno elimine al otro. Esto da lugar a una <strong>genealogía esquizofrénica</strong> del deseo que destruye el árbol genealógico familiar (como cuando Artaud escribe: «Yo, Antonin Artaud, soy mi hijo, mi padre, mi madre y yo») y permite que el código del deseo mezcle transversalmente todos los registros —biológicos, históricos, políticos y cósmicos— sobre la pizarra abierta del Cuerpo sin Órganos, preparando el terreno para que en la tercera subsección surja el sujeto que habrá de experimentar intensivamente todos esos estados.</p>
 
-                <div class="summary-box">
+                <div class="recuadro">
                     <h4>Cuadro de Conceptos Clave de la Subsección 2</h4>
                     <ul>
                         <li><strong>Cuerpo sin Órganos (CsO) y Antiproducción:</strong> Superficie lisa, improductiva e inengendrada que emerge en el tercer tiempo de la síntesis conectiva para suspender la organización forzada de los órganos; no se opone a los órganos parciales, sino al <strong>organismo</strong> fijo, funcionando como el motor inmóvil o modelo materialista del instinto de muerte (intensidad = 0) que libera al deseo de la determinación instintiva animal.</li>
@@ -759,7 +441,7 @@
 
                 <p>Para un principiante, es fundamental entender cómo interpretan Deleuze y Guattari estas afirmaciones: <strong>no se trata de que un «Yo» inflado y megalómano se confunda con otra persona histórica</strong>, sino exactamente al revés. El «Yo» personal del profesor de filología Friedrich Nietzsche ha abandonado el centro del círculo; en el centro ahora gira la máquina célibe del Eterno Retorno, y en el borde del círculo el sujeto nómada va pasando por distintas <strong>zonas de intensidad</strong> sobre el Cuerpo sin Órganos. Cada una de esas temperaturas o zonas intensivas de sufrimiento, alegría, opresión o rebeldía que la humanidad ha vivido lleva el sello de un «nombre propio» histórico o geográfico (Prado, Chambige, Juana de Arco, los indios, los mongoles). Al atravesar ese umbral intensivo, el sujeto exclama cada vez con júbilo: «¡Soy yo, luego soy yo!». Así se cierra el arco perfecto de las tres primeras subsecciones del Capítulo I: aquel esquizofrénico que en la Subsección 1 había comenzado su paseo por las montañas como <strong>Homo natura</strong> (conectando sus órganos con los árboles y las estrellas) termina ahora en la Subsección 3 como <strong>Homo historia</strong>, consumiendo de un solo golpe toda la historia universal, las luchas políticas y las razas del mundo sobre su propio cuerpo intensivo, dejando listo el terreno para que en la Subsección 4 veamos cómo este inconsciente histórico se enfrenta cara a cara con el capitalismo.</p>
 
-                <div class="summary-box">
+                <div class="recuadro">
                     <h4>Cuadro de Conceptos Clave de la Subsección 3</h4>
                     <ul>
                         <li><strong>Máquina célibe (<em>Machine célibataire</em>):</strong> Tercer avatar maquínico que reconcilia la repulsión de la máquina paranoica y la atracción de la máquina milagrosa; instaura una «nueva alianza» no familiar entre las máquinas deseantes y el Cuerpo sin Órganos para transformar las tensiones en un consumo directo de placer y creación intensiva.</li>
@@ -810,7 +492,7 @@
 
                 <p>Así, la cuarta subsección se cierra mostrando cómo las tres grandes categorías de la clínica psiquiátrica —<strong>la neurosis, la perversión y la psicosis</strong>— no son enfermedades caídas del cielo, sino los tres destinos que sufre el proceso del deseo cuando choca con estas barreras del capitalismo: el <strong>neurótico</strong> es aquel que se deja encerrar dócilmente en las «tierras edípicas» de papá y mamá; el <strong>perverso</strong> es el que rechaza la familia pero se inventa sus propias «tierras artificiales» y exóticas llenas de reglas secretas y fetiches; y el <strong>psicótico clínico de hospital</strong> es aquel que intentó llevar el proceso de descodificación más allá de todos los límites, pero fue castigado y detenido por la represión social hasta quedar encerrado a la fuerza en el aislamiento autista del manicomio sobre un Cuerpo sin Órganos bloqueado y vacío.</p>
 
-                <div class="summary-box">
+                <div class="recuadro">
                     <h4>Cuadro de Conceptos Clave de la Subsección 4</h4>
                     <ul>
                         <li><strong>Psiquiatría materialista (Fábrica vs. Teatro):</strong> Proyecto clínico y político que introduce el concepto de <strong>producción</strong> en el deseo, oponiendo el inconsciente real como fábrica productiva al modelo del psicoanálisis clásico que lo reduce a un teatro de representación familiar (Edipo, Hamlet).</li>
@@ -847,7 +529,7 @@
                     <li><strong>Las máquinas que Freud no quiso ver (y las máquinas del padre de Schreber):</strong> Finalmente, esta quinta subsección denuncia cómo el psicoanálisis sufre de una ceguera selectiva cada vez que aparece una máquina real en la vida de un paciente. Cuando un paciente sueña con una inyección médica (el sueño de Irma en Freud), escucha el tic-tac de un reloj (el Hombre de los lobos), o mete un <strong>magnetófono (grabadora)</strong> dentro del consultorio del analista, el psicoanálisis enseguida dice «eso es un símbolo del pene o de la madre» para aplastar la máquina y salvar el teatro de Edipo. Pero el caso más escandaloso que rescatan Deleuze y Guattari es el del <strong>padre del presidente Schreber</strong>: cuando Freud analizó los delirios de Schreber sobre las máquinas que le ataban el cuerpo, jamás mencionó que el padre real de Schreber era un famoso médico pedagogo que había inventado y fabricado en la vida real <strong>máquinas sádico-paranoicas de hierro y correas de cuero</strong> (<em>Pangymnastikon</em>, cascos metálicos y cinturones de postura) para atar a los niños y obligarlos a mantenerse derechos. Al ocultar esas máquinas reales, Freud encerró el delirio de Schreber en un drama privado con «la imagen del padre», sin ver que el padre real sólo funcionaba como un transmisor enchufado a toda una máquina social y pedagógica de tortura y disciplinamiento de la época.</li>
                 </ul>
 
-                <div class="summary-box">
+                <div class="recuadro">
                     <h4>Cuadro de Conceptos Clave de la Subsección 5</h4>
                     <ul>
                         <li><strong>La máquina deseante como sistema de cortes (<em>coupures</em>):</strong> Definición literal y no metafórica de la máquina deseante; en ella los cortes no se oponen a la continuidad del flujo, sino que la condicionan y distribuyen a través del binomio inseparable <strong>corte-flujo</strong>.</li>
@@ -901,7 +583,7 @@
 
                 <p>Por eso la gran conclusión ontológica que corona todo el Capítulo I es que <strong>el inconsciente es radicalmente «huérfano»</strong>: no tiene padre ni madre porque es un ciclo inmanente de autoproducción que se engendra a sí mismo a través de sus tres síntesis pasivas. Cuando el psicoanálisis aplasta este inconsciente huérfano y polimorfo bajo el triángulo de Edipo y la amenaza de la castración, no está descubriendo la verdad oculta de nuestros deseos, sino actuando como el policía íntimo del capitalismo encargado de interrumpir el proceso libre de las máquinas deseantes.</p>
 
-                <div class="summary-box">
+                <div class="recuadro">
                     <h4>Cuadro de Conceptos Clave de la Subsección 6</h4>
                     <ul>
                         <li><strong>El Todo producido «al lado de las partes» (<em>à côté des parties</em>):</strong> En la lógica de las multiplicidades del inconsciente, el Todo (el Cuerpo sin Órganos y el sujeto residual) sí existe, pero no unifica ni totaliza los fragmentos en un organismo único, sino que se añade como una pieza suplementaria <em>al lado</em> de las partes para asegurar sus conexiones sin borrar sus diferencias.</li>
@@ -912,37 +594,9 @@
                     </ul>
                 </div>
             </section>
-        </div>
-    </main>
-</div>
-
-<script>
-    let currentFontSize = 20;
-    function changeFontSize(delta) {
-        currentFontSize = Math.min(28, Math.max(15, currentFontSize + delta));
-        document.body.style.fontSize = currentFontSize + 'px';
-    }
-
-    // Resaltado automático en la tabla de contenidos según la sección visible
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.toc-link');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (window.scrollY >= sectionTop - 160) {
-                current = section.getAttribute('id');
-            }
-        });
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active');
-            }
-        });
-    });
-</script>
-
+      </div>
+    </article>
+  </main>
+<script src="../guia.js"></script>
 </body>
 </html>

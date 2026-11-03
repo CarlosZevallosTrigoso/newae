@@ -1,0 +1,150 @@
+/* Estilo común de las guías de lectura de El Anti-Edipo.
+   Misma familia visual que el lector (carloszevallostrigoso.github.io/ae):
+   papel blanco, cromo monoespaciado, cuerpo serif, acento musgo. */
+:root{
+  --paper:#ffffff;
+  --panel:#f7f6f2;
+  --line:#e3dfd3;
+  --ink:#2b2c22;
+  --ink-dim:#6f6f5c;
+  --moss:#586a45;
+  --steel:#4f6b82;
+  --warm:#b06a36;
+  --mono: "Fira Code", ui-monospace, "SF Mono", "DejaVu Sans Mono", Menlo, Consolas, monospace;
+  --serif: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+  --r:2px;
+  --hdr:49px;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:calc(var(--hdr) + 14px)}
+body{margin:0; background:var(--paper); color:var(--ink); font-family:var(--mono); font-size:12px; line-height:1.5}
+
+/* ---- cabecera ---- */
+header.barra{
+  position:sticky; top:0; z-index:5;
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap; row-gap:8px;
+  padding:10px 16px; border-bottom:1px solid var(--line); background:var(--paper);
+}
+#marca{margin:0; font-size:12px; font-weight:600; letter-spacing:.18em; white-space:nowrap}
+#marca a{color:inherit; text-decoration:none}
+#marca a:hover{color:var(--moss)}
+#marca span{font-weight:400; letter-spacing:.04em; color:var(--ink-dim)}
+#estado{color:var(--ink-dim); font-size:11px; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.acciones{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+.btn{
+  font-family:var(--mono); font-size:11px; letter-spacing:.03em; cursor:pointer;
+  border-radius:var(--r); padding:6px 10px; border:1px solid var(--line);
+  background:var(--paper); color:var(--ink); text-decoration:none; display:inline-block;
+}
+.btn:hover{border-color:var(--moss); color:var(--moss)}
+.btn.actual{border-color:var(--moss); color:var(--moss)}
+#toggleToc{display:none}
+
+/* ---- cuerpo: índice + artículo ---- */
+main{display:flex; align-items:flex-start; max-width:1180px; margin:0 auto}
+nav#toc{
+  position:sticky; top:var(--hdr); width:260px; flex:none; max-height:calc(100vh - var(--hdr)); overflow-y:auto;
+  padding:22px 12px 40px 16px; border-right:1px solid var(--line);
+}
+#toc h2{font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); font-weight:500; margin:0 0 10px}
+#toc ol{list-style:none; margin:0; padding:0}
+#toc li{margin:0 0 2px}
+#toc a{display:block; color:var(--ink); text-decoration:none; padding:4px 6px; border-radius:var(--r); line-height:1.35; font-size:11px}
+#toc a:hover{background:var(--panel); color:var(--moss)}
+#toc a.activa{color:var(--moss); background:var(--panel)}
+#toc a .pp{display:block; color:var(--ink-dim); font-size:10px}
+#toc ol ol{margin:2px 0 8px 10px; border-left:1px solid var(--line)}
+#toc ol ol a{font-size:10.5px; color:var(--ink-dim); padding:2px 8px}
+#toc ol ol a:hover, #toc ol ol a.activa{color:var(--moss)}
+#toc .toc-parte{margin:14px 6px 4px; font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--moss); font-weight:600}
+#toc .toc-parte:first-child{margin-top:0}
+
+article{flex:1; min-width:0; padding:28px 40px 120px}
+#doc{max-width:72ch; margin:0 auto; font-family:var(--serif); font-size:17px; line-height:1.7}
+
+/* ---- portada del documento ---- */
+#doc > header{margin:0 0 2.4em; padding-bottom:1.4em; border-bottom:1px solid var(--line)}
+#doc .kicker{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--moss); margin:0 0 .9em}
+#doc h1{font-size:1.9em; line-height:1.15; margin:0 0 .45em; font-weight:600}
+#doc .subtitulo{font-style:italic; color:var(--ink-dim); font-size:1.02em; line-height:1.5; margin:0}
+
+/* ---- secciones ---- */
+#doc section{margin:0}
+#doc .parte, #doc .eje{
+  display:block; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--moss); margin:2.6em 0 -1.9em; padding-top:1.1em; border-top:1px solid var(--line);
+}
+#doc h2{font-size:1.4em; line-height:1.25; margin:2.4em 0 .4em; padding-top:.8em; border-top:1px solid var(--line); font-weight:600}
+#doc .parte + h2, #doc .eje + h2{border-top:0; padding-top:0; margin-top:2.6em}
+#doc > header + section > .parte, #doc > header + section > .eje{border-top:0; padding-top:0; margin-top:0}
+#doc > header + section > h2:first-child{border-top:0; padding-top:0; margin-top:0}
+#doc h3{font-size:1.12em; line-height:1.3; margin:2em 0 .5em; font-weight:600}
+#doc h4{font-family:var(--mono); font-size:10.5px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--moss); margin:1.8em 0 .6em}
+#doc p{margin:0 0 1em; hyphens:auto}
+#doc ul, #doc ol{margin:0 0 1.2em; padding-left:1.3em}
+#doc li{margin:0 0 .45em}
+#doc li > ul, #doc li > ol{margin:.4em 0 .4em}
+#doc em{font-style:italic}
+#doc strong{font-weight:600}
+#doc a{color:var(--steel); text-decoration-thickness:1px; text-underline-offset:2px}
+#doc a:hover{color:var(--warm)}
+#doc blockquote{border-left:2px solid var(--moss); margin:1em 0; padding:.1em 0 .1em 1em; color:var(--ink-dim)}
+#doc hr{border:0; border-top:1px solid var(--line); margin:2.2em 0}
+#doc code{font-family:var(--mono); font-size:.82em; background:var(--panel); padding:.1em .3em; border-radius:var(--r)}
+
+/* recuadros de síntesis */
+#doc .recuadro{border:1px solid var(--line); border-radius:var(--r); background:var(--panel); padding:16px 20px; margin:2em 0}
+#doc .recuadro h4{margin:0 0 .8em}
+#doc .recuadro ul{margin-bottom:0}
+#doc .recuadro li:last-child{margin-bottom:0}
+
+/* tablas */
+#doc .tabla{overflow-x:auto; margin:1.6em 0 2em}
+#doc table{border-collapse:collapse; width:100%; font-size:.86em; line-height:1.5}
+#doc th{
+  font-family:var(--mono); font-size:9.5px; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-dim); text-align:left; padding:8px 10px; border-bottom:1px solid var(--ink); vertical-align:bottom;
+}
+#doc td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+#doc td:first-child, #doc th:first-child{padding-left:0}
+#doc td:last-child, #doc th:last-child{padding-right:0}
+#doc td strong{color:var(--ink)}
+
+/* pie */
+#doc > footer{margin-top:4em; padding-top:1.2em; border-top:1px solid var(--line); font-family:var(--mono); font-size:11px; color:var(--ink-dim); line-height:1.5}
+
+/* ---- índice general (index.html) ---- */
+#indice{max-width:72ch; margin:0 auto; padding:40px 24px 100px; font-family:var(--serif); font-size:17px; line-height:1.6}
+#indice .kicker{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--moss); margin:0 0 .9em}
+#indice h1{font-size:2.2em; line-height:1.1; margin:0 0 .4em; font-weight:600}
+#indice .subtitulo{font-style:italic; color:var(--ink-dim); font-size:1.05em; margin:0 0 2.4em; padding-bottom:1.4em; border-bottom:1px solid var(--line)}
+#indice ol{list-style:none; margin:0; padding:0}
+#indice li{border-bottom:1px solid var(--line)}
+#indice li a{display:grid; grid-template-columns:9.5em 1fr; gap:14px; padding:20px 6px; color:var(--ink); text-decoration:none; border-radius:var(--r)}
+#indice li a:hover{background:var(--panel)}
+#indice .num{font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; white-space:nowrap; text-transform:uppercase; color:var(--moss); padding-top:.45em}
+#indice .titulo{display:block; font-size:1.25em; line-height:1.25; font-weight:600; margin-bottom:.3em}
+#indice li a:hover .titulo{color:var(--moss)}
+#indice .desc{display:block; font-size:.95em; line-height:1.5; color:var(--ink-dim)}
+#indice .nota{margin-top:2.4em; font-family:var(--mono); font-size:11px; color:var(--ink-dim); line-height:1.6}
+#indice .nota a{color:var(--steel); text-decoration:none}
+#indice .nota a:hover{color:var(--warm)}
+
+/* ---- móvil ---- */
+@media (max-width: 900px){
+  #toggleToc{display:inline-block}
+  #estado{display:none}
+  nav#toc{position:fixed; left:0; top:var(--hdr); bottom:0; z-index:4; background:var(--paper); width:min(300px, 86vw); max-height:none; transform:translateX(-100%); transition:transform .15s; box-shadow:2px 0 12px rgba(0,0,0,.06)}
+  body.toc-abierto nav#toc{transform:none}
+  article{padding:22px 16px 100px}
+  #doc{font-size:16.5px}
+  #indice{padding:24px 16px 80px}
+  #indice li a{grid-template-columns:1fr; gap:4px; padding:16px 2px}
+}
+@media (prefers-reduced-motion: reduce){ nav#toc{transition:none} }
+
+@media print{
+  header.barra, nav#toc{display:none}
+  article{padding:0}
+  #doc{max-width:none; font-size:11.5pt}
+}

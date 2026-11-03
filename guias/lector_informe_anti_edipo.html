@@ -1,338 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Anti-Edipo: Informe Sistemático en Cuatro Ejes para la Sesión Inaugural</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --border-color: #000000;
-            --muted-border: #d4d4d4;
-            --hover-bg: #f5f5f5;
-            --font-size-base: 19px;
-            --line-height-base: 1.74;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: var(--font-size-base);
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
-            line-height: var(--line-height-base);
-            display: flex;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Barra de progreso superior de lectura */
-        #progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: #e5e5e5;
-            z-index: 1000;
-        }
-
-        #progress-bar {
-            height: 100%;
-            background: #000000;
-            width: 0%;
-            transition: width 0.1s ease-out;
-        }
-
-        /* Panel lateral: Tabla de Contenidos (Lector) */
-        aside.sidebar {
-            width: 320px;
-            border-right: 1px solid var(--border-color);
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            overflow-y: auto;
-            padding: 2.2rem 1.6rem;
-            background-color: var(--bg-color);
-            z-index: 100;
-        }
-
-        .reader-brand {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.8rem;
-            margin-bottom: 1.2rem;
-            font-weight: 600;
-        }
-
-        .reader-controls {
-            display: flex;
-            gap: 0.4rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--muted-border);
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .reader-controls span {
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-
-        .btn-control {
-            background: #ffffff;
-            color: #000000;
-            border: 1px solid #000000;
-            font-family: 'EB Garamond', serif;
-            font-size: 0.85rem;
-            padding: 0.15rem 0.55rem;
-            cursor: pointer;
-            transition: background 0.15s;
-        }
-
-        .btn-control:hover {
-            background: #000000;
-            color: #ffffff;
-        }
-
-        nav.toc h2 {
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 0.9rem;
-            font-weight: 700;
-        }
-
-        nav.toc ul {
-            list-style: none;
-        }
-
-        nav.toc li {
-            margin-bottom: 0.65rem;
-            line-height: 1.38;
-        }
-
-        nav.toc a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 0.92rem;
-            display: block;
-            padding: 0.3rem 0.5rem;
-            border-left: 2px solid transparent;
-            transition: all 0.15s ease;
-        }
-
-        nav.toc a:hover,
-        nav.toc a.active {
-            border-left: 2px solid var(--border-color);
-            background-color: var(--hover-bg);
-            font-weight: 600;
-        }
-
-        /* Contenedor principal de lectura */
-        main.reader-content {
-            margin-left: 320px;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            padding: 3.5rem 2.5rem 6rem 2.5rem;
-        }
-
-        article.book-page {
-            max-width: 740px;
-            width: 100%;
-        }
-
-        /* Cabecera del informe */
-        header.doc-header {
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 2rem;
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        header.doc-header .doc-kicker {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.16em;
-            margin-bottom: 0.8rem;
-        }
-
-        header.doc-header h1 {
-            font-size: 2.35rem;
-            font-weight: 500;
-            line-height: 1.18;
-            margin-bottom: 1rem;
-        }
-
-        header.doc-header .doc-subtitle {
-            font-size: 1.15rem;
-            font-style: italic;
-            max-width: 640px;
-            margin: 0 auto;
-        }
-
-        /* Secciones y Tipografía */
-        section.chapter {
-            margin-bottom: 4.2rem;
-            padding-top: 1rem;
-        }
-
-        .axis-kicker {
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            font-weight: 700;
-            margin-bottom: 0.35rem;
-            display: inline-block;
-            border: 1px solid #000000;
-            padding: 0.1rem 0.55rem;
-        }
-
-        h2.section-title {
-            font-size: 1.65rem;
-            font-weight: 600;
-            line-height: 1.28;
-            margin-bottom: 1.6rem;
-            padding-bottom: 0.55rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        p {
-            margin-bottom: 1.35rem;
-            text-align: justify;
-            hyphens: auto;
-        }
-
-        /* Tabla sinóptica */
-        .table-wrapper {
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-
-        table.synoptic-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        table.synoptic-table th,
-        table.synoptic-table td {
-            border: 1px solid var(--border-color);
-            padding: 0.85rem 1rem;
-            vertical-align: top;
-            text-align: left;
-        }
-
-        table.synoptic-table th {
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.8rem;
-            background-color: #f4f4f4;
-        }
-
-        footer.doc-footer {
-            margin-top: 4rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.85rem;
-            text-align: center;
-            font-style: italic;
-        }
-
-        /* Responsivo e Impresión */
-        @media (max-width: 960px) {
-            body {
-                flex-direction: column;
-            }
-            aside.sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-                border-right: none;
-                border-bottom: 1px solid var(--border-color);
-            }
-            main.reader-content {
-                margin-left: 0;
-                padding: 2rem 1.25rem;
-            }
-        }
-
-        @media print {
-            aside.sidebar, #progress-container {
-                display: none;
-            }
-            main.reader-content {
-                margin-left: 0;
-                padding: 0;
-            }
-            article.book-page {
-                max-width: 100%;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Anti-Edipo · contextualización</title>
+<link rel="stylesheet" href="../estilo.css">
 </head>
 <body>
-
-    <div id="progress-container">
-        <div id="progress-bar"></div>
+  <header class="barra">
+    <h1 id="marca"><a href="../index.html">EL ANTI-EDIPO</a> <span>· guías</span></h1>
+    <div id="estado">I · Informe de contextualización histórica, biográfica y teórica</div>
+    <div class="acciones">
+      <button id="toggleToc" class="btn" type="button">índice</button>
+      <a class="btn actual" href="lector_informe_anti_edipo.html" title="contextualización">I</a>
+      <a class="btn" href="prolegomenos_anti_edipo_lector.html" title="prolegómenos">II</a>
+      <a class="btn" href="lector_anti_edipo_capitulo_1.html" title="capítulo I">III</a>
+      <a class="btn" href="https://carloszevallostrigoso.github.io/ae/" target="ae-lector" title="Abrir el lector del Anti-Edipo">lector</a>
     </div>
-
-    <aside class="sidebar">
-        <div class="reader-brand">Modo Lector • Seminario Deleuze &amp; Guattari</div>
-        <div class="reader-controls">
-            <span>Cuerpo tipográfico:</span>
-            <div>
-                <button class="btn-control" onclick="adjustFontSize(-1)" title="Reducir texto">A−</button>
-                <button class="btn-control" onclick="adjustFontSize(0)" title="Restaurar tamaño">A</button>
-                <button class="btn-control" onclick="adjustFontSize(1)" title="Aumentar texto">A+</button>
-                <button class="btn-control" onclick="window.print()" title="Imprimir o guardar PDF">⎙</button>
-            </div>
-        </div>
-        <nav class="toc">
-            <h2>Los 4 Ejes de la Sesión</h2>
-            <ul>
-                <li><a href="#eje-1"><strong>Eje I.</strong> El Horizonte Geopolítico Mundial (1968–1972): Descolonización, EE. UU. y Europa <em>[Ítem 4]</em></a></li>
-                <li><a href="#eje-2"><strong>Eje II.</strong> El Laboratorio Francés: Política Pos-Mayo del 68 y Batallas Filosóficas en París <em>[Ítem 3]</em></a></li>
-                <li><a href="#eje-3"><strong>Eje III.</strong> ¿Quiénes fueron Deleuze y Guattari? Vidas Paralelas y Máquina de Escritura <em>[Ítem 1]</em></a></li>
-                <li><a href="#eje-4"><strong>Eje IV.</strong> El Impacto de la «Bomba»: Recepción en Francia, Europa y el Mundo <em>[Ítem 2]</em></a></li>
-                <li><a href="#cuadro-sinoptico"><strong>Anexo.</strong> Cuadro Sinóptico de Apoyo Docente</a></li>
-            </ul>
-        </nav>
-    </aside>
-
-    <main class="reader-content">
-        <article class="book-page">
-            <header class="doc-header">
-                <div class="doc-kicker">Informe Magistral de Contextualización • Primera Sesión del Curso</div>
+  </header>
+  <main>
+    <nav id="toc" aria-label="Secciones"><h2>Secciones</h2><ol id="tocLista"></ol></nav>
+    <article>
+      <div id="doc">
+<header>
+                <div class="kicker">Informe Magistral de Contextualización • Primera Sesión del Curso</div>
                 <h1><em>El Anti-Edipo: Capitalismo y esquizofrenia</em> (1972)</h1>
-                <p class="doc-subtitle">Desarrollo sistemático y conectado en prosa de los cuatro ejes de contextualización: del horizonte geopolítico mundial y las batallas filosóficas en Francia a las biografías cruzadas de Gilles Deleuze y Félix Guattari y la recepción transnacional de la obra</p>
+                <p class="subtitulo">Desarrollo sistemático y conectado en prosa de los cuatro ejes de contextualización: del horizonte geopolítico mundial y las batallas filosóficas en Francia a las biografías cruzadas de Gilles Deleuze y Félix Guattari y la recepción transnacional de la obra</p>
             </header>
 
-            
-            <section id="eje-1" class="chapter">
-                <div class="axis-kicker">Eje de Contextualización I • Pregunta 4 (Macro-Historia Global)</div>
-                <h2 class="section-title">1. El Horizonte Geopolítico Mundial (1968–1972): Descolonización, Antimperialismo y Crisis de los Grandes Bloques</h2>
-                
+
+            <section id="eje-1">
+                <span class="eje">Eje de Contextualización I • Pregunta 4 (Macro-Historia Global)</span>
+                <h2>1. El Horizonte Geopolítico Mundial (1968–1972): Descolonización, Antimperialismo y Crisis de los Grandes Bloques</h2>
+
                 <p>Para presentar <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> (1972) en la sesión inaugural de un curso universitario, el primer paso metodológico consiste en desmontar la ilusión óptica que reduce esta obra a un mero síntoma local de la primavera parisiense de Mayo del 68. Como han demostrado tanto Ian Buchanan como Kristin Ross, ni siquiera el propio acontecimiento de Mayo del 68 resulta inteligible si se lo encierra en el perímetro estudiantil de la Sorbona o del Barrio Latino, desconectándolo de la sacudida geopolítica, anticolonial y económica que reconfiguró el planeta entre mediados de los años cincuenta y mediados de los setenta. Cuando Gilles Deleuze y Félix Guattari postulan que el inconsciente no es un teatro familiar burgués regido por el complejo de Edipo («papá-mamá-yo»), sino una fábrica productiva que inviste de manera inmediata el campo histórico y social, están traduciendo conceptualmente una experiencia histórica concreta: <em>todo delirio posee un contenido directamente histórico-mundial, político, geográfico y racial</em>. Al esquizofrénico o al militante revolucionario no le preocupan las minucias neuróticas de la alcoba paterna, sino las migraciones de los pueblos, la circulación planetaria del dinero, los chinos, los árabes, los panteras negras, Juana de Arco, el Gran Mogol o la guerra colonial. En consecuencia, situar la génesis del libro exige trazar una cartografía narrativa de la crisis mundial en torno a 1968-1972, articulada orgánicamente en tres grandes escenarios conectados entre sí: las luchas de descolonización fuera del Norte Global, la fractura interna y contracultural de los Estados Unidos, y el doble colapso de legitimidad política que atravesaba simultáneamente a Europa del Este y a Europa Occidental.</p>
 
                 <p>El primer movimiento de esta transformación planetaria tuvo su matriz fuera del Norte Global, en el vasto arco de descolonización de África y Asia y en las insurgencias revolucionarias de América Latina. Durante las dos décadas que van desde la derrota francesa en Dien Bien Phu (1954) y la Conferencia de Bandung (1955) hasta el final de la guerra de Vietnam en 1975, el eje rector de la política radical dejó de ser la mera pugna estática Este/Oeste de la Guerra Fría para desplazarse hacia la fractura Norte/Sur, marcada por la lucha contra el neocolonialismo y la división internacional del trabajo. Para la sociedad francesa, el trauma fundacional que abrió esta herida fue la <strong>Guerra de Argelia (1954-1962)</strong>. El empeño sangriento del Estado francés por impedir la independencia argelina mediante el uso sistemático de la tortura, los campos de internamiento y la represión policial dentro de la propia metrópoli produjo una escisión irreparable entre el discurso «humanista» de la República francesa y la brutalidad material de sus prácticas coloniales. Toda una generación de jóvenes trabajadores y estudiantes —incluido Félix Guattari, quien militó activamente en las redes clandestinas de apoyo al Frente de Liberación Nacional (FLN) argelino y en la prensa anticolonial de <em>La Voie communiste</em>— descubrió en Argelia que el Estado moderno y la izquierda institucional cómplice (el Partido Comunista Francés, que había votado los «poderes especiales» en la guerra) operaban como aparatos de opresión imperial. Es precisamente esta experiencia histórica la que explica por qué la psiquiatría anticolonial de <strong>Frantz Fanon</strong> ocupa un lugar estratégico en <em>El Anti-Edipo</em>. Deleuze y Guattari recurren a Fanon para demoler los intentos de la etnopsiquiatría colonial (como el libro <em>Œdipe africain</em> de Marie-Cécile y Edmond Ortigues) por exportar el triángulo edípico a las poblaciones africanas, donde se pretendía interpretar la rebeldía anticolonial como una regresión infantil contra la figura «paterna» del colonizador blanco. Con mordacidad, Deleuze y Guattari señalan que fueron los sueños de los pueblos colonizados los que desenmascararon la impostura familiarista: en los vértices reales del pseudotriángulo colonial, la madre bailaba con el misionero, el padre era vejado por el recaudador de impuestos y el yo era golpeado por el hombre blanco. Como mostró Fanon, el sujeto colonizado jamás se encierra en un drama intrapsíquico privado, porque sus máquinas deseantes están acopladas directamente a las figuras históricas reales de la dominación —el soldado, el policía, el ocupante, el colaborador, el resistente—, confirmando así que <em>Edipo es siempre la colonización proseguida por otros medios</em>.</p>
@@ -344,10 +44,10 @@
                 <p>Finalmente, esta onda de choque entre el Sur Global y la crisis norteamericana encontró su correlato directo en el continente europeo, escindido por la crisis simultánea de los dos modelos que habían administrado la posguerra: el socialismo burocrático soviético en el Este y las democracias capitalistas industriales en el Oeste. En Europa del Este, cualquier ilusión de que el sistema soviético pudiera autorreformarse hacia un «socialismo con rostro humano» quedó sepultada en la noche del <strong>20 al 21 de agosto de 1968</strong>, cuando los tanques del Pacto de Varsovia invadieron Checoslovaquia para aplastar la <strong>Primavera de Praga</strong>. Aquella invasión selló para Deleuze y Guattari la bancarrota definitiva del leninismo de Estado, resumida en la sentencia irónica de <em>El Anti-Edipo</em>: <em>«Todo empieza con Marx, continúa con Lenin y termina con el estribillo: "¡Bienvenido, Sr. Brézhnev!"»</em>, pues el partido bolchevique, al constituirse como un aparato de Estado separado de las masas, terminó importando las mismas jerarquías fabriles y la misma moral represiva del capitalismo. Mientras tanto, en Europa Occidental estallaban revueltas obreras y estudiantiles que rechazaban por igual la explotación capitalista y el control sindical comunista, alcanzando su cima en <strong>Italia</strong> durante el <strong>«Otoño Caliente» (<em>Autunno Caldo</em>) de 1969</strong>, donde los jóvenes trabajadores de la FIAT en Turín declararon huelgas salvajes al margen del PCI bajo el lema <em>«¡Vietnam está en nuestras fábricas!»</em>. Simultáneamente, el final de los años sesenta vio florecer en Europa el movimiento de la <strong>antipsiquiatría</strong>, liderado en Inglaterra por <strong>R. D. Laing</strong> y <strong>David Cooper</strong> y en Italia por <strong>Franco Basaglia</strong>, quienes compartían con Deleuze y Guattari la urgencia de demostrar que la locura y la represión psíquica constituyen el campo de batalla político donde nuestra sociedad decide el destino del deseo.</p>
             </section>
 
-            
-            <section id="eje-2" class="chapter">
-                <div class="axis-kicker">Eje de Contextualización II • Pregunta 3 (Política y Filosofía en Francia)</div>
-                <h2 class="section-title">2. El Laboratorio Francés (1968–1972): Crisis Política Pos-Mayo del 68 y Batallas Filosóficas en París</h2>
+
+            <section id="eje-2">
+                <span class="eje">Eje de Contextualización II • Pregunta 3 (Política y Filosofía en Francia)</span>
+                <h2>2. El Laboratorio Francés (1968–1972): Crisis Política Pos-Mayo del 68 y Batallas Filosóficas en París</h2>
 
                 <p>Una vez establecido el horizonte geopolítico mundial, el segundo eje de nuestra sesión inaugural debe trasladar a los estudiantes al corazón del laboratorio francés entre 1968 y 1972, pues es allí donde las conmociones globales de Argelia, Vietnam, Praga y Turín se condensaron en una crisis política y teórica de una intensidad sin precedentes. Cuando <em>El Anti-Edipo</em> salió de la imprenta en marzo de 1972, Francia no era en absoluto un país pacificado que hubiera dado vuelta la página de la revuelta; a tan solo cuatro años de la primavera de 1968, la sociedad francesa seguía inmersa en una guerra cotidiana de trincheras políticas, huelgas fabriles, motines carcelarios y encendidas polémicas intelectuales. Para comprender por qué Deleuze y Guattari escribieron este libro como un acto de intervención urgente, es necesario mostrar en el aula cómo en el París de aquellos años se anudaban indisolublemente dos problemas: por un lado, el enigma político dejado por el estallido y el posterior reflujo de <strong>Mayo del 68</strong> (la cuestión de la traición burocrática y del «fascismo en nuestras cabezas»); por otro lado, la necesidad filosófica de demoler los tres grandes paradigmas teóricos que gobernaban las universidades y las ciencias humanas francesas de la época: el estructuralismo antropológico, el psicoanálisis lacaniano y el marxismo althusseriano.</p>
 
@@ -360,10 +60,10 @@
                 <p>La <strong>primera ofensiva filosófica</strong> va dirigida contra el psicoanálisis freudiano y la ortodoxia lacaniana, a los que acusan de haber encerrado el descubrimiento del inconsciente dentro del <strong>familiarismo edípico</strong> y de la metafísica platónico-hegeliana del <strong>deseo entendido como carencia o falta (<em>manque</em>)</strong>. En la Francia posterior a 1968, la institución psicoanalítica había mostrado su rostro más conservador, llegando a publicar libros —como <em>L'univers contestationnaire</em> (1969), escrito por Bela Grunberger y Janine Chasseguet-Smirgel bajo el pseudónimo de «André Stéphane»— donde se diagnosticaba la revuelta de Mayo del 68 como una regresión infantil contra la figura paterna de De Gaulle. Frente a esta «policía del diván», Deleuze y Guattari sostienen que al deseo no le falta nada ni gira alrededor del teatro trágico de Edipo; el inconsciente es una <strong>fábrica materialista</strong> compuesta por <strong>máquinas deseantes</strong> (objetos parciales y flujos) que producen directamente lo Real a través de tres síntesis pasivas (conectiva, disyuntiva y conjuntiva) sobre la superficie inmanente del <strong>Cuerpo sin Órganos</strong> (concepto tomado de Antonin Artaud). Respecto al propio Jacques Lacan, declararon que su objetivo era «prestar una ayuda esquizofrénica a Lacan» rescatando la vertiente más subversiva y maquinista de su enseñanza —su concepto del <strong>objeto pequeño <em>a</em> (<em>objet petit a</em>)</strong> como máquina deseante parcial y su categoría de lo <strong>Real</strong>— contra la religión estructuralista del «Gran Significante despótico» y de la castración predicada por sus discípulos. La <strong>segunda ofensiva</strong> apunta contra la antropología estructuralista de <strong>Claude Lévi-Strauss</strong>: apoyándose en la <em>Genealogía de la moral</em> de <strong>Friedrich Nietzsche</strong> y en la etnología política de <strong>Pierre Clastres</strong> (<em>Crónica de los indios guayaquíes</em>, 1972), demuestran en el capítulo tercero que las sociedades primitivas no se fundan en el intercambio recíproco ni en la prohibición edípica del incesto, sino en la codificación territorial y la inscripción cruel de una deuda finita sobre los cuerpos (Salvajes), seguida por la sobrecodificación estatal de la deuda infinita bajo el Imperio despótico (Bárbaros/<em>Urstaat</em>) y por la descodificación generalizada de los flujos bajo la axiomática del Capitalismo (Civilizados). La <strong>tercera ofensiva</strong>, por último, desarticula tanto el marxismo estructuralista de <strong>Louis Althusser</strong> como los intentos «freudo-marxistas» tradicionales que buscaban casar externamente a Marx con Freud: para el <strong>esquizoanálisis</strong>, <strong>la economía política y la economía libidinal son una sola y misma realidad</strong>, pues el deseo forma parte directamente de la infraestructura material.</p>
             </section>
 
-            
-            <section id="eje-3" class="chapter">
-                <div class="axis-kicker">Eje de Contextualización III • Pregunta 1 (Biografías Cruzadas y Escritura)</div>
-                <h2 class="section-title">3. Vidas Paralelas y el Agenciamiento Colectivo de Enunciación: ¿Quiénes fueron Gilles Deleuze y Félix Guattari? (1969–1972)</h2>
+
+            <section id="eje-3">
+                <span class="eje">Eje de Contextualización III • Pregunta 1 (Biografías Cruzadas y Escritura)</span>
+                <h2>3. Vidas Paralelas y el Agenciamiento Colectivo de Enunciación: ¿Quiénes fueron Gilles Deleuze y Félix Guattari? (1969–1972)</h2>
 
                 <p>El tercer eje de nuestra clase inaugural debe responder de manera biográfica y rigurosamente documentada quiénes eran los dos hombres que firmaron <em>El Anti-Edipo</em>, qué estaban haciendo exactamente en el momento en que se conocieron en el verano de 1969 y cómo funcionó en la práctica su célebre «máquina de escritura» durante los casi tres años que duró la redacción de la obra. Como advierte François Dosse en su biografía cruzada (<em>Gilles Deleuze &amp; Félix Guattari: Intersecting Lives</em>), antes de la sacudida de Mayo del 68 Deleuze y Guattari habitaban mundos sociales, profesionales y vitales tan distantes entre sí que resultaba casi impensable que llegaran a encontrarse: el primero era un respetado profesor universitario de cuarenta y cuatro años, autor de diez libros de filosofía de extraordinaria densidad académica; el segundo, cinco años más joven, era un psicoanalista heterodoxo, codirector de una clínica psiquiátrica experimental y agitador político de extrema izquierda que, a sus treinta y nueve años, aún no había publicado un solo libro propio. A lo largo de las últimas décadas, diversos críticos —como Alain Badiou o Slavoj Žižek— han intentado separar artificialmente a ambos pensadores alimentando el falso mito de los «dos Deleuze»: o bien sosteniendo que el militante «esquizo» Guattari corrompió al riguroso filósofo académico arrastrándolo hacia el panfleto político pos-68, o bien afirmando paternalistamente que un Deleuze encerrado en la metafísica utilizó a Guattari como un simple proveedor de casos clínicos para luego darles forma filosófica. Reconstruir en el aula las trayectorias particulares de cada uno hasta junio de 1969 y examinar los archivos genéticos de su colaboración (publicados en 2004 por Stéphane Nadaud bajo el título <em>Écrits pour l'Anti-Œdipe</em>) permite demostrar a los estudiantes por qué ambas leyendas son falsas: cuando se encontraron en 1969, Deleuze ya había llegado por su propia cuenta al problema de la psicosis y del Cuerpo sin Órganos en su ontología filosófica, mientras que Guattari había elaborado ya una teoría original de la máquina contra la estructura que transformó para siempre el pensamiento de Deleuze.</p>
 
@@ -376,10 +76,10 @@
                 <p>El encuentro histórico entre ambos fue propiciado por el doctor <strong>Jean-Pierre Muyard</strong>, psiquiatra en La Borde y a la vez amigo y médico personal de Deleuze (a quien dedicarían <em>El Anti-Edipo</em> como <em>«el verdadero culpable, el instigador de esta empresa perversa»</em>), quien llevó a Guattari en automóvil a visitar a Deleuze en <strong>Saint-Léonard-de-Noblat (Lemosín) a mediados de junio de 1969</strong>. Deleuze quedó fascinado por «Máquina y estructura», por las notas de Guattari sobre el presidente Schreber y por su concepto de <strong>antiproducción</strong>; el <strong>29 de julio de 1969</strong> le propuso trabajar juntos y en agosto se reunieron en Dhuizon, cerca de La Borde, acordando la tesis inaugural de su proyecto: <em>el inconsciente no es un teatro ni una estructura lingüística, sino una máquina</em>. Durante dos años y medio —hasta concluir el manuscrito el 31 de diciembre de 1971—, operaron una inédita máquina de escritura a cuatro manos: mantuvieron siempre el trato formal de <strong>«usted» (<em>vouvoiement</em>)</strong> como política disensual (<em>«amigos, no compinches»</em>); Guattari enviaba por correo su torrente de notas teóricas (sobre Hjelmslev, Marx, Freud o Lacan) y diarios, los cuales eran mecanografiados y ordenados por <strong>Fanny Deleuze</strong>; ambos se reunían todos los <strong>martes por la tarde</strong> en París para discutir los borradores, convocando incluso a los antropólogos Cartry, Adler y Zempléni para revisar el tercer capítulo; y finalmente Deleuze —el «pararrayos» o «tallador de diamantes» frente a las «tormentas eléctricas» de Guattari— redactaba la versión final de cada capítulo en un verdadero agenciamiento colectivo de enunciación semejante a la simbiosis entre <strong>la avispa y la orquídea</strong>.</p>
             </section>
 
-            
-            <section id="eje-4" class="chapter">
-                <div class="axis-kicker">Eje de Contextualización IV • Pregunta 2 (Recepción en Europa y el Mundo)</div>
-                <h2 class="section-title">4. El Impacto de la «Bomba» Teórica: La Recepción de <em>El Anti-Edipo</em> en Francia, Europa y Fuera de Europa</h2>
+
+            <section id="eje-4">
+                <span class="eje">Eje de Contextualización IV • Pregunta 2 (Recepción en Europa y el Mundo)</span>
+                <h2>4. El Impacto de la «Bomba» Teórica: La Recepción de <em>El Anti-Edipo</em> en Francia, Europa y Fuera de Europa</h2>
 
                 <p>El cuarto y último eje de nuestra exposición inaugural debe reconstruir ante los estudiantes qué ocurrió cuando el manuscrito terminado en la víspera de Año Nuevo de 1971 vio finalmente la luz en las librerías de París en los primeros días de <strong>marzo de 1972</strong> bajo el sello de <strong>Les Éditions de Minuit</strong>, dirigido por Jérôme Lindon, y cómo esa onda expansiva viajó por Europa, Estados Unidos, América Latina, Asia y Oceanía. En la historia intelectual del siglo XX, muy pocos libros de alta complejidad filosófica han provocado una conmoción pública tan inmediata, feroz y polarizada como <em>El Anti-Edipo: Capitalismo y esquizofrenia</em>. Pese a sus casi quinientas páginas desprovistas de concesiones didácticas, llenas de neologismos y abiertas con una provocación escatológica que escandalizó al mundo académico tradicional (<em>«Ello funciona en todas partes... Ello respira, ello se calienta, ello come. Ello caga, ello besa»</em>), el libro se convirtió en un fenómeno de ventas fulminante: <strong>la primera tirada se agotó por completo en apenas tres días</strong>, obligando a la editorial a reimprimirlo de urgencia mientras se leía apasionadamente en las aulas, los cafés, el metro y los colectivos militantes. Siguiendo la propuesta analítica de Ian Buchanan, la mejor manera de explicar pedagógicamente en clase la recepción mundial de <em>El Anti-Edipo</em> consiste en trazar una triple estratificación: una <strong>fractura generacional</strong> (la generación mayor de los colegas de Deleuze y Guattari reaccionó a menudo con estupor o recelo, mientras la generación joven de los estudiantes y activistas pos-68 lo abrazó con fervor); una <strong>fractura disciplinaria</strong> (entre la furia del psicoanálisis institucional, el desconcierto de la sociología y el entusiasmo de las vanguardias estéticas y políticas); y, sobre todo, una <strong>paradoja geográfica e histórica</strong>: a medida que Francia entraba a finales de los años setenta en un reflujo conservador que eclipsó temporalmente a Deleuze y Guattari en su propio país, la recepción internacional fuera de Francia convirtió su pensamiento en una de las matrices teóricas y micropolíticas más influyentes del planeta.</p>
 
@@ -393,12 +93,12 @@
             </section>
 
 
-            <section id="cuadro-sinoptico" class="chapter">
-                <div class="axis-kicker">Síntesis de Pizarrón • Herramienta Visual para el Aula</div>
-                <h2 class="section-title">Cuadro Sinóptico de los Cuatro Ejes para la Primera Sesión</h2>
+            <section id="cuadro-sinoptico">
+                <span class="eje">Síntesis de Pizarrón • Herramienta Visual para el Aula</span>
+                <h2>Cuadro Sinóptico de los Cuatro Ejes para la Primera Sesión</h2>
                 <p>El siguiente cuadro condensa las articulaciones históricas, biográficas y conceptuales desarrolladas en prosa a lo largo de los cuatro ejes anteriores para servir de guía rápida en el aula:</p>
-                <div class="table-wrapper">
-                    <table class="synoptic-table">
+                <div class="tabla">
+                    <table>
                         <thead>
                             <tr>
                                 <th>Eje de Contextualización</th>
@@ -432,49 +132,12 @@
                 </div>
             </section>
 
-            <footer class="doc-footer">
+            <footer>
                 Informe académico en cuatro ejes elaborado para el seminario sobre <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> de Gilles Deleuze y Félix Guattari.
             </footer>
-        </article>
-    </main>
-
-    <script>
-        // Ajuste de tamaño tipográfico para comodidad de lectura
-        let currentSize = 19;
-        function adjustFontSize(delta) {
-            if (delta === 0) {
-                currentSize = 19;
-            } else {
-                currentSize = Math.min(26, Math.max(14, currentSize + delta));
-            }
-            document.documentElement.style.setProperty('--font-size-base', currentSize + 'px');
-        }
-
-        // Barra de progreso de lectura y resaltado activo en la Tabla de Contenido
-        const sections = document.querySelectorAll('section.chapter');
-        const navLinks = document.querySelectorAll('nav.toc a');
-
-        window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-            document.getElementById('progress-bar').style.width = progress + '%';
-
-            let currentId = '';
-            sections.forEach(sec => {
-                const top = sec.offsetTop - 140;
-                if (scrollTop >= top && sec.getAttribute('id')) {
-                    currentId = sec.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (currentId && link.getAttribute('href') === '#' + currentId) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    </script>
+      </div>
+    </article>
+  </main>
+<script src="../guia.js"></script>
 </body>
 </html>
