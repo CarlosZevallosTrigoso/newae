@@ -32,7 +32,7 @@
   }
   function texto(el){
     const c = el.cloneNode(true);
-    c.querySelectorAll('.pp').forEach(x => x.remove());
+    c.querySelectorAll('.pp, .volver').forEach(x => x.remove());
     return c.textContent.replace(/\s+/g, ' ').trim();
   }
 
@@ -119,13 +119,23 @@
   const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   const titHtml = s => esc(s.tit);
 
-  // mapa
+  // mapa (las notas para el orador, si las hay, van aparte al pie del mapa)
   const portada = doc.querySelector(':scope > header');
+  const enTexto = secs.filter(s => !s.cont.classList.contains('notas'));
+  const notas = secs.find(s => s.cont.classList.contains('notas'));
   const mapa = document.createElement('nav');
   mapa.className = 'mapa'; mapa.id = 'mapa'; mapa.setAttribute('aria-label', 'Mapa del texto');
-  mapa.innerHTML = '<div class="mapa-tit">En este texto · ' + n + ' partes</div><ol>' +
-    secs.map((s, i) => '<li><a href="#' + s.id + '"><span class="n">' + (s.num || i + 1) + '</span><span>' + titHtml(s) + '</span></a></li>').join('') + '</ol>';
+  mapa.innerHTML = '<div class="mapa-tit">En este texto · ' + enTexto.length + ' partes</div><ol>' +
+    enTexto.map((s, i) => '<li><a href="#' + s.id + '"><span class="n">' + (s.num || i + 1) + '</span><span>' + titHtml(s) + '</span></a></li>').join('') + '</ol>' +
+    (notas ? '<a class="mapa-notas" href="#' + notas.id + '">' + titHtml(notas) + ' ↓<small>los mismos datos, en apuntes</small></a>' : '');
   if (portada) portada.after(mapa); else doc.prepend(mapa);
+
+  // imprimir sólo las notas
+  const bImp = document.getElementById('imprimirNotas');
+  if (bImp){
+    bImp.addEventListener('click', () => { document.body.classList.add('solo-notas'); window.print(); });
+    window.addEventListener('afterprint', () => document.body.classList.remove('solo-notas'));
+  }
 
   // «siguiente» al final de cada sección
   secs.forEach((s, i) => {
