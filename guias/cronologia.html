@@ -46,6 +46,8 @@
   .ent:last-child{margin-bottom:0}
   .ent .f{font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--moss); margin-right:5px; white-space:nowrap}
   .ent .src{display:none; font-family:var(--mono); font-size:9px; color:var(--ink-dim); margin-top:2px}
+  .ent .src a{color:inherit; text-decoration:none; border-bottom:1px dotted currentColor}
+  .ent .src a:hover{color:var(--warm)}
   .ent .src.verif{color:var(--moss)}
   body.con-fuentes .ent .src{display:block}
   #fuentes.activo{border-color:var(--moss); color:var(--moss)}
@@ -89,7 +91,7 @@
     </div>
   </header>
   <main class="matriz">
-    <div id="aviso"><b>Lectura.</b> Cada fila es un lapso: años sueltos, trimestres entre 1968 y 1972, bienios después de 1980. La etiqueta en musgo delante de una entrada precisa el mes cuando la fila es más gruesa que el dato. <b>Fuentes</b> muestra de dónde sale cada entrada; «consenso» marca lo que todavía no se ha contrastado una por una. «s/m»: entrada sin mes conocido, colocada al inicio del año. Los lapsos marcados <em>pendiente</em> no tienen entradas aún.</div>
+    <div id="aviso"><b>Lectura.</b> Cada fila es un lapso: años sueltos, trimestres entre 1968 y 1972, bienios después de 1980. La etiqueta en musgo delante de una entrada precisa el mes (y el año, en los bienios) cuando la fila es más gruesa que el dato. <b>Fuentes</b> muestra de dónde sale cada entrada; las entradas enlazan la página consultada; «sin verificar» marca lo que no pudo contrastarse. «s/m»: entrada sin mes conocido, colocada al inicio del año. Los lapsos marcados <em>pendiente</em> no tienen entradas aún.</div>
     <div id="filtros"><span class="rot">Columnas</span></div>
     <div id="marco"><div id="grid" role="table" aria-label="Matriz cronológica"></div></div>
   </main>
@@ -111,9 +113,23 @@
     const m = fecha.slice(5, 7);
     const filaEsAnual = fila.desde.length === 4;
     const filaEsTrimestre = !filaEsAnual && fila.desde !== fila.hasta;
+    const filaEsBienio = filaEsAnual && fila.desde !== fila.hasta;
+    if (filaEsBienio) return fecha.slice(0, 4) + (m ? ' · ' + MESES[parseInt(m, 10) - 1] : '');
     if (!m) return filaEsTrimestre ? 's/m' : '';
     if (filaEsAnual || filaEsTrimestre) return MESES[parseInt(m, 10) - 1] || '';
     return '';
+  }
+  const verificada = f => !!f && f !== 'consenso' && !/^sin verificar/i.test(f);
+  // «cita — https://…» → cita enlazada; varias citas separadas por «;»
+  function fuenteHtml(f){
+    if (!f) return 'consenso';
+    const esc = t => t.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    return f.split(/;\s+(?=[^h])/).map(parte => {
+      const m = parte.match(/^(.*?)\s*[—–-]?\s*(https?:\/\/\S+)\s*$/);
+      if (!m) return esc(parte.trim());
+      const cita = m[1].trim() || m[2].replace(/^https?:\/\//, '').split('/')[0];
+      return '<a href="' + esc(m[2]) + '" target="_blank" rel="noopener">' + esc(cita) + '</a>';
+    }).join(' · ');
   }
   function rotuloFila(f){
     if (f.rotulo) return f.rotulo;
@@ -157,8 +173,7 @@
         ents.forEach(e => {
           const p = document.createElement('div'); p.className = 'ent';
           const et = etiqueta(e.fecha, f);
-          p.innerHTML = (et ? '<span class="f">' + et + '</span>' : '') + e.texto +
-            '<div class="src' + (e.fuente && e.fuente !== 'consenso' ? ' verif' : '') + '">' + (e.fuente || 'consenso') + '</div>';
+          p.innerHTML = (et ? '<span class="f">' + et + '</span>' : '') + e.texto + '<div class="src' + (verificada(e.fuente) ? ' verif' : '') + '">' + fuenteHtml(e.fuente) + '</div>';
           cel.appendChild(p);
         });
         grid.appendChild(cel);
