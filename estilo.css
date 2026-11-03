@@ -180,3 +180,35 @@ body.ancho #doc{max-width:110ch}
   #doc .flechas span + span{display:none}
   #doc .macro-celda{border-right:0; border-bottom:1px solid var(--line)}
 }
+
+/* ---- navegación por pasos (body.pasos) ---- */
+#doc .mapa{border:1px solid var(--line); border-radius:var(--r); background:var(--panel); padding:14px 18px 12px; margin:0 0 2.6em}
+#doc .mapa-tit{font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:6px}
+#doc .mapa ol{list-style:none; margin:0; padding:0; columns:2; column-gap:28px}
+#doc .mapa li{margin:0; break-inside:avoid}
+#doc .mapa a{display:grid; grid-template-columns:1.8em 1fr; gap:4px; padding:6px 0; color:var(--ink); text-decoration:none; font-size:.9em; line-height:1.35; border-top:1px solid var(--line)}
+#doc .mapa a:hover{color:var(--moss)}
+#doc .mapa .n{font-family:var(--mono); font-size:11px; color:var(--moss); padding-top:.15em}
+#doc .sigue{display:block; margin:2.2em 0 0; padding:12px 14px; border:1px solid var(--line); border-radius:var(--r); text-decoration:none; color:var(--ink); font-size:.95em; line-height:1.35}
+#doc .sigue:hover{border-color:var(--moss); color:var(--moss)}
+#doc .sigue small{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--moss); margin-bottom:3px}
+#paginador{
+  position:fixed; right:14px; bottom:14px; z-index:6; display:flex; align-items:center;
+  background:var(--paper); border:1px solid var(--line); border-radius:var(--r); box-shadow:0 2px 8px rgba(0,0,0,.06);
+  font-family:var(--mono); font-size:11px;
+}
+#paginador button{font-family:var(--mono); font-size:15px; line-height:1; border:0; background:none; color:var(--ink); padding:8px 12px; cursor:pointer}
+#paginador button:hover:not(:disabled){color:var(--moss)}
+#paginador button:disabled{opacity:.3; cursor:default}
+#paginador .cuenta{color:var(--ink-dim); min-width:6ch; text-align:center; font-variant-numeric:tabular-nums}
+
+/* entrada destacada del índice general */
+#indice li.destacada a{background:var(--panel)}
+#indice li.destacada a:hover{background:#efede6}
+#indice li.destacada .num{color:var(--warm)}
+
+@media (max-width: 900px){
+  #doc .mapa ol{columns:1}
+  #paginador{right:10px; bottom:10px}
+}
+@media print{ #paginador, #doc .sigue, #doc .mapa{display:none} }

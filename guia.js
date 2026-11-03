@@ -103,4 +103,83 @@
         document.body.classList.remove('toc-abierto');
     });
   }
+
+  // ---- navegación por pasos (sólo en páginas con body.pasos) ----
+  // mapa de secciones al inicio, «siguiente» al final de cada sección,
+  // paginador fijo y flechas del teclado para pasar de una sección a otra
+  if (!document.body.classList.contains('pasos')) return;
+  const secs = Array.from(doc.querySelectorAll('h2')).map(h => {
+    const sec = h.closest('section');
+    const id = h.id || (sec && sec.id) || idPara(h);
+    const t = texto(h), m = t.match(/^(\d+)\.\s*(.*)$/);
+    return { h, cont: sec || h, id, num: m ? m[1] : '', tit: m ? m[2] : t };
+  });
+  const n = secs.length;
+  if (n < 2) return;
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const titHtml = s => esc(s.tit);
+
+  // mapa
+  const portada = doc.querySelector(':scope > header');
+  const mapa = document.createElement('nav');
+  mapa.className = 'mapa'; mapa.id = 'mapa'; mapa.setAttribute('aria-label', 'Mapa del texto');
+  mapa.innerHTML = '<div class="mapa-tit">En este texto · ' + n + ' partes</div><ol>' +
+    secs.map((s, i) => '<li><a href="#' + s.id + '"><span class="n">' + (s.num || i + 1) + '</span><span>' + titHtml(s) + '</span></a></li>').join('') + '</ol>';
+  if (portada) portada.after(mapa); else doc.prepend(mapa);
+
+  // «siguiente» al final de cada sección
+  secs.forEach((s, i) => {
+    const a = document.createElement('a');
+    a.className = 'sigue';
+    if (i < n - 1){
+      const sig = secs[i + 1];
+      a.href = '#' + sig.id;
+      a.innerHTML = '<small>siguiente · ' + (i + 2) + ' / ' + n + '</small>' + titHtml(sig) + ' →';
+    } else {
+      a.href = '#mapa';
+      a.innerHTML = '<small>fin · ' + n + ' / ' + n + '</small>Volver al mapa del texto ↑';
+    }
+    if (s.cont !== s.h) s.cont.appendChild(a);
+    else {
+      const sig = secs[i + 1];
+      if (sig) sig.h.before(a); else { const pie = doc.querySelector(':scope > footer'); pie ? pie.before(a) : doc.appendChild(a); }
+    }
+  });
+
+  // paginador
+  const pag = document.createElement('div');
+  pag.id = 'paginador';
+  pag.title = 'Flechas ← → del teclado: sección anterior / siguiente';
+  pag.innerHTML = '<button type="button" aria-label="Sección anterior">‹</button><span class="cuenta"></span><button type="button" aria-label="Sección siguiente">›</button>';
+  document.body.appendChild(pag);
+  const [bAnt, bSig] = pag.querySelectorAll('button'), cuenta = pag.querySelector('.cuenta');
+  function actual(){
+    const hdr = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--hdr')) || 49;
+    let k = -1;
+    secs.forEach((s, i) => { if (s.cont.getBoundingClientRect().top <= hdr + 40) k = i; });
+    return k;                                   // -1: todavía en la portada o el mapa
+  }
+  function ir(i){
+    i = Math.max(0, Math.min(n - 1, i));
+    const destino = document.getElementById(secs[i].id) || secs[i].h;
+    destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    try { history.replaceState(null, '', '#' + secs[i].id); } catch(e){}
+  }
+  function pintar(){
+    const k = actual();
+    cuenta.textContent = (k < 0 ? '–' : (k + 1)) + ' / ' + n;
+    bAnt.disabled = k <= 0;
+    bSig.disabled = k >= n - 1;
+  }
+  bAnt.addEventListener('click', () => ir(actual() - 1));
+  bSig.addEventListener('click', () => ir(actual() + 1));
+  document.addEventListener('keydown', e => {
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
+    if (e.key === 'ArrowRight'){ e.preventDefault(); ir(actual() + 1); }
+    else if (e.key === 'ArrowLeft'){ e.preventDefault(); if (actual() > 0) ir(actual() - 1); }
+  });
+  let pend = false;
+  window.addEventListener('scroll', () => { if (!pend){ pend = true; requestAnimationFrame(() => { pend = false; pintar(); }); } }, { passive: true });
+  pintar();
 })();
