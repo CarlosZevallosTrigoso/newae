@@ -1,0 +1,1176 @@
+{
+ "titulo": "Matriz espacio-temporal de El Anti-Edipo, 1960-2000",
+ "columnas": [
+  {
+   "id": "libro",
+   "titulo": "Deleuze & Guattari · el libro",
+   "grupo": "obra"
+  },
+  {
+   "id": "clinica",
+   "titulo": "Psicoanálisis y clínica",
+   "grupo": "obra"
+  },
+  {
+   "id": "fr_pol",
+   "titulo": "Francia · política",
+   "grupo": "francia"
+  },
+  {
+   "id": "fr_int",
+   "titulo": "Francia · vida intelectual",
+   "grupo": "francia"
+  },
+  {
+   "id": "eu_pol",
+   "titulo": "Europa · política",
+   "grupo": "europa"
+  },
+  {
+   "id": "eu_int",
+   "titulo": "Europa · vida intelectual",
+   "grupo": "europa"
+  },
+  {
+   "id": "us_pol",
+   "titulo": "EE. UU. · política",
+   "grupo": "eeuu"
+  },
+  {
+   "id": "us_int",
+   "titulo": "EE. UU. · vida intelectual",
+   "grupo": "eeuu"
+  },
+  {
+   "id": "al",
+   "titulo": "América Latina",
+   "grupo": "sur"
+  },
+  {
+   "id": "sur",
+   "titulo": "Sur global · África, Asia, Medio Oriente",
+   "grupo": "sur"
+  }
+ ],
+ "filas": [
+  {
+   "desde": "1960",
+   "hasta": "1960"
+  },
+  {
+   "desde": "1961",
+   "hasta": "1961"
+  },
+  {
+   "desde": "1962",
+   "hasta": "1962"
+  },
+  {
+   "desde": "1963",
+   "hasta": "1963"
+  },
+  {
+   "desde": "1964",
+   "hasta": "1964"
+  },
+  {
+   "desde": "1965",
+   "hasta": "1965"
+  },
+  {
+   "desde": "1966",
+   "hasta": "1966"
+  },
+  {
+   "desde": "1967",
+   "hasta": "1967"
+  },
+  {
+   "desde": "1968-01",
+   "hasta": "1968-03",
+   "rotulo": "1968 · ene–mar"
+  },
+  {
+   "desde": "1968-04",
+   "hasta": "1968-06",
+   "rotulo": "1968 · abr–jun"
+  },
+  {
+   "desde": "1968-07",
+   "hasta": "1968-09",
+   "rotulo": "1968 · jul–sep"
+  },
+  {
+   "desde": "1968-10",
+   "hasta": "1968-12",
+   "rotulo": "1968 · oct–dic"
+  },
+  {
+   "desde": "1969-01",
+   "hasta": "1969-03",
+   "rotulo": "1969 · ene–mar"
+  },
+  {
+   "desde": "1969-04",
+   "hasta": "1969-06",
+   "rotulo": "1969 · abr–jun"
+  },
+  {
+   "desde": "1969-07",
+   "hasta": "1969-09",
+   "rotulo": "1969 · jul–sep"
+  },
+  {
+   "desde": "1969-10",
+   "hasta": "1969-12",
+   "rotulo": "1969 · oct–dic"
+  },
+  {
+   "desde": "1970-01",
+   "hasta": "1970-03",
+   "rotulo": "1970 · ene–mar"
+  },
+  {
+   "desde": "1970-04",
+   "hasta": "1970-06",
+   "rotulo": "1970 · abr–jun"
+  },
+  {
+   "desde": "1970-07",
+   "hasta": "1970-09",
+   "rotulo": "1970 · jul–sep"
+  },
+  {
+   "desde": "1970-10",
+   "hasta": "1970-12",
+   "rotulo": "1970 · oct–dic"
+  },
+  {
+   "desde": "1971-01",
+   "hasta": "1971-03",
+   "rotulo": "1971 · ene–mar"
+  },
+  {
+   "desde": "1971-04",
+   "hasta": "1971-06",
+   "rotulo": "1971 · abr–jun"
+  },
+  {
+   "desde": "1971-07",
+   "hasta": "1971-09",
+   "rotulo": "1971 · jul–sep"
+  },
+  {
+   "desde": "1971-10",
+   "hasta": "1971-12",
+   "rotulo": "1971 · oct–dic"
+  },
+  {
+   "desde": "1972-01",
+   "hasta": "1972-03",
+   "rotulo": "1972 · ene–mar"
+  },
+  {
+   "desde": "1972-04",
+   "hasta": "1972-06",
+   "rotulo": "1972 · abr–jun"
+  },
+  {
+   "desde": "1972-07",
+   "hasta": "1972-09",
+   "rotulo": "1972 · jul–sep"
+  },
+  {
+   "desde": "1972-10",
+   "hasta": "1972-12",
+   "rotulo": "1972 · oct–dic"
+  },
+  {
+   "desde": "1973",
+   "hasta": "1973"
+  },
+  {
+   "desde": "1974",
+   "hasta": "1974"
+  },
+  {
+   "desde": "1975",
+   "hasta": "1975"
+  },
+  {
+   "desde": "1976",
+   "hasta": "1976"
+  },
+  {
+   "desde": "1977",
+   "hasta": "1977"
+  },
+  {
+   "desde": "1978",
+   "hasta": "1978"
+  },
+  {
+   "desde": "1979",
+   "hasta": "1979"
+  },
+  {
+   "desde": "1980",
+   "hasta": "1980"
+  },
+  {
+   "desde": "1981",
+   "hasta": "1982",
+   "rotulo": "1981–82"
+  },
+  {
+   "desde": "1983",
+   "hasta": "1984",
+   "rotulo": "1983–84"
+  },
+  {
+   "desde": "1985",
+   "hasta": "1986",
+   "rotulo": "1985–86"
+  },
+  {
+   "desde": "1987",
+   "hasta": "1988",
+   "rotulo": "1987–88"
+  },
+  {
+   "desde": "1989",
+   "hasta": "1990",
+   "rotulo": "1989–90"
+  },
+  {
+   "desde": "1991",
+   "hasta": "1992",
+   "rotulo": "1991–92"
+  },
+  {
+   "desde": "1993",
+   "hasta": "1994",
+   "rotulo": "1993–94"
+  },
+  {
+   "desde": "1995",
+   "hasta": "1996",
+   "rotulo": "1995–96"
+  },
+  {
+   "desde": "1997",
+   "hasta": "1998",
+   "rotulo": "1997–98"
+  },
+  {
+   "desde": "1999",
+   "hasta": "2000",
+   "rotulo": "1999–2000"
+  }
+ ],
+ "lotes": [
+  {
+   "rango": "1966–1975",
+   "estado": "cargado",
+   "nota": "Primer lote. Fechas de encuentro, Recherches 12, Schizo-Culture y edición Barral verificadas en línea; el resto es consenso historiográfico pendiente de auditoría."
+  },
+  {
+   "rango": "1960–1965",
+   "estado": "pendiente"
+  },
+  {
+   "rango": "1976–2000",
+   "estado": "pendiente"
+  }
+ ],
+ "entradas": [
+  {
+   "fecha": "1966",
+   "col": "libro",
+   "texto": "Deleuze publica <em>Le bergsonisme</em> (PUF) y enseña en la Universidad de Lyon.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "libro",
+   "texto": "Guattari, en La Borde desde 1955, anima la FGERI (Fédération des groupes d'études et de recherches institutionnelles, 1965) y funda la revista <em>Recherches</em>.",
+   "fuente": "monoskop (Recherches, 1965)"
+  },
+  {
+   "fecha": "1967",
+   "col": "libro",
+   "texto": "Guattari crea el CERFI (Centre d'études, de recherches et de formation institutionnelles), que editará <em>Recherches</em> y será base de sus proyectos colectivos.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "libro",
+   "texto": "Deleuze publica <em>Présentation de Sacher-Masoch</em> (Minuit).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968",
+   "col": "libro",
+   "texto": "Deleuze publica sus dos tesis doctorales, <em>Différence et répétition</em> (PUF) y <em>Spinoza et le problème de l'expression</em> (Minuit).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-05",
+   "col": "libro",
+   "texto": "Guattari participa en las barricadas de París y vuelve a La Borde a movilizar a los pacientes; Deleuze sigue los hechos desde Lyon.",
+   "fuente": "Shatz, LRB 2010"
+  },
+  {
+   "fecha": "1969",
+   "col": "libro",
+   "texto": "Deleuze publica <em>Logique du sens</em> (Minuit). Enfermo de tuberculosis, se le practica una toracoplastia; convalece en el Limousin.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-06",
+   "col": "libro",
+   "texto": "Primer encuentro de Deleuze y Guattari en el Limousin, concertado por Jean-Pierre Muyard, antiguo alumno de Deleuze en Lyon; segundo encuentro en Dhuizon, cerca de La Borde. Empieza la correspondencia de la que saldrá el libro.",
+   "fuente": "Shatz, LRB 2010; Dosse 2007"
+  },
+  {
+   "fecha": "1969",
+   "col": "libro",
+   "texto": "Deleuze es nombrado en el centro experimental de Vincennes (París VIII), invitado por Foucault; por su enfermedad empieza a dictar cursos en 1970.",
+   "fuente": "Shatz, LRB 2010; consenso"
+  },
+  {
+   "fecha": "1970",
+   "col": "libro",
+   "texto": "Deleuze publica <em>Spinoza. Philosophie pratique</em> (PUF). Redacción a dos manos del Anti-Edipo: Guattari escribe por las mañanas y envía; Deleuze reescribe.",
+   "fuente": "consenso; Dosse 2007"
+  },
+  {
+   "fecha": "1971",
+   "col": "libro",
+   "texto": "Año de redacción intensa del manuscrito; Guattari participa a la vez en el CERFI y en los debates de la Escuela Freudiana, de la que se aleja.",
+   "fuente": "Dosse 2007"
+  },
+  {
+   "fecha": "1972-03",
+   "col": "libro",
+   "texto": "Aparece <em>L'Anti-Œdipe. Capitalisme et schizophrénie</em> (Minuit, col. «Critique»). Se agota en días; <em>Le Monde</em> le dedica dos páginas.",
+   "fuente": "Shatz, LRB 2010; Weill, Le Monde 2008"
+  },
+  {
+   "fecha": "1972",
+   "col": "libro",
+   "texto": "Guattari publica <em>Psychanalyse et transversalité</em> (Maspero), sus ensayos de 1955-1970, con prólogo de Deleuze («Trois problèmes de groupe»).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "libro",
+   "texto": "Diálogo Deleuze–Foucault «Les intellectuels et le pouvoir» en <em>L'Arc</em> n.º 49, número dedicado a Deleuze.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "libro",
+   "texto": "Entrevista de Catherine Backès-Clément a Deleuze y Guattari sobre el libro en <em>L'Arc</em>; respuestas a las primeras críticas. Serge Leclaire organiza un debate en Vincennes.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "libro",
+   "texto": "Segunda edición aumentada del Anti-Edipo con el apéndice «Bilan-programme pour machines désirantes». Primera traducción: <em>El Antiedipo</em> (Barral, Barcelona, trad. Francisco Monge).",
+   "fuente": "uloyola.es (ficha Barral 1973); consenso"
+  },
+  {
+   "fecha": "1973-03",
+   "col": "libro",
+   "texto": "<em>Recherches</em> n.º 12, «Trois milliards de pervers. Grande encyclopédie des homosexualités», dirigido por Guattari con el FHAR: el número es prohibido, incautado y destruido.",
+   "fuente": "monoskop.org"
+  },
+  {
+   "fecha": "1974",
+   "col": "libro",
+   "texto": "Juicio a Guattari por el número 12 de <em>Recherches</em>; Foucault testifica a su favor. Guattari es condenado a una multa.",
+   "fuente": "monoskop.org"
+  },
+  {
+   "fecha": "1975",
+   "col": "libro",
+   "texto": "Deleuze y Guattari publican <em>Kafka. Pour une littérature mineure</em> (Minuit); traducción italiana del Anti-Edipo (Einaudi).",
+   "fuente": "Shatz, LRB 2010; consenso"
+  },
+  {
+   "fecha": "1975-11",
+   "col": "libro",
+   "texto": "Coloquio «Schizo-Culture» en Columbia (13-16 nov.), organizado por Sylvère Lotringer y John Rajchman (Semiotext(e)): Deleuze, Guattari, Foucault y Lyotard con Burroughs, Cage, Acker y Giorno. Primer desembarco del libro en EE. UU.",
+   "fuente": "monoskop.org/Schizo-Culture"
+  },
+  {
+   "fecha": "1966",
+   "col": "clinica",
+   "texto": "Lacan publica los <em>Écrits</em> (Seuil, noviembre): el estructuralismo lacaniano llega al gran público.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "clinica",
+   "texto": "Guattari es analizante de Lacan desde 1962 y miembro de la Escuela Freudiana de París (fundada en junio de 1964).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "clinica",
+   "texto": "David Cooper acuña «antipsiquiatría» (<em>Psychiatry and Anti-Psychiatry</em>); congreso «Dialectics of Liberation» en Londres (julio) con Laing, Cooper, Marcuse y Carmichael.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "clinica",
+   "texto": "Lacan propone el «pase» (Proposition du 9 octobre 1967) para la Escuela Freudiana; primeras disidencias internas.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-05",
+   "col": "clinica",
+   "texto": "Mayo del 68 sacude las instituciones psiquiátricas; se crean comités de acción en hospitales y la psiquiatría de sector se politiza.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968",
+   "col": "clinica",
+   "texto": "Franco Basaglia publica <em>L'istituzione negata</em> (Einaudi) sobre la apertura del manicomio de Gorizia.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969",
+   "col": "clinica",
+   "texto": "Se crea el Departamento de Psicoanálisis de Vincennes bajo Serge Leclaire, con aval de Lacan; primer psicoanálisis universitario en Francia.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-10",
+   "col": "clinica",
+   "texto": "Lacan inicia el seminario <em>L'envers de la psychanalyse</em> (los cuatro discursos), en la Facultad de Derecho del Panthéon; en diciembre interviene en Vincennes («Impromptu»).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970",
+   "col": "clinica",
+   "texto": "Maud Mannoni y el movimiento de Bonneuil; Laing y Cooper leídos en Francia; crítica de la institución total (Goffman, trad. 1968).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-03",
+   "col": "clinica",
+   "texto": "Reacción lacaniana al Anti-Edipo: Lacan, enterado del manuscrito, invita a Guattari a cenar para leerlo; tras la publicación impone silencio en la Escuela Freudiana.",
+   "fuente": "Shatz, LRB 2010; Roudinesco"
+  },
+  {
+   "fecha": "1972",
+   "col": "clinica",
+   "texto": "Élisabeth Roudinesco publica una reseña del libro en <em>Les Lettres françaises</em> desafiando el silencio; Serge Leclaire debate con los autores.",
+   "fuente": "Roudinesco, Histoire de la psychanalyse"
+  },
+  {
+   "fecha": "1973",
+   "col": "clinica",
+   "texto": "Lacan: seminario <em>Encore</em> y <em>Télévision</em> (Seuil); en Italia, Psichiatria Democratica (Basaglia) se funda en octubre.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "clinica",
+   "texto": "Janine Chasseguet-Smirgel edita <em>Les chemins de l'Anti-Œdipe</em> (Privat), la respuesta colectiva del psicoanálisis ortodoxo al libro.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "clinica",
+   "texto": "Lacan viaja a EE. UU. (Yale, Columbia, MIT); el lacanismo entra en el circuito universitario norteamericano al mismo tiempo que el Anti-Edipo.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "fr_pol",
+   "texto": "Francia sale del mando integrado de la OTAN (marzo); de Gaulle en Phnom Penh condena la guerra de Vietnam (septiembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "fr_pol",
+   "texto": "Legislativas de marzo: la mayoría gaullista se reduce a un escaño; Pompidou gobierna por ordenanzas.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-03",
+   "col": "fr_pol",
+   "texto": "22 de marzo: ocupación de la torre administrativa de Nanterre (Cohn-Bendit); nace el Mouvement du 22 mars.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-05",
+   "col": "fr_pol",
+   "texto": "3 de mayo: la policía desaloja la Sorbona. Noche de las barricadas (10-11). Huelga general del 13 de mayo; hasta diez millones de huelguistas. Acuerdos de Grenelle (27). Discurso de de Gaulle y manifestación gaullista en los Campos Elíseos (30).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-06",
+   "col": "fr_pol",
+   "texto": "Disolución de los grupos de extrema izquierda (12 de junio). Legislativas del 23-30 de junio: mayoría absoluta gaullista.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-11",
+   "col": "fr_pol",
+   "texto": "Ley Edgar Faure de orientación universitaria (noviembre): autonomía y participación; creación del centro experimental de Vincennes.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-04",
+   "col": "fr_pol",
+   "texto": "Referéndum del 27 de abril sobre regionalización y Senado: «no» del 52 %. De Gaulle renuncia al día siguiente.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-06",
+   "col": "fr_pol",
+   "texto": "Georges Pompidou elegido presidente (15 de junio); Chaban-Delmas primer ministro y la «nueva sociedad».",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-04",
+   "col": "fr_pol",
+   "texto": "Ley «anti-casseurs» (abril) contra las manifestaciones.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-05",
+   "col": "fr_pol",
+   "texto": "Disolución de la Gauche prolétarienne (27 de mayo) y detención de sus dirigentes; Sartre asume la dirección de <em>La Cause du peuple</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-02",
+   "col": "fr_pol",
+   "texto": "Fundación del GIP (Groupe d'information sur les prisons) por Foucault, Domenach y Vidal-Naquet.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-04",
+   "col": "fr_pol",
+   "texto": "Manifiesto de las 343 por el derecho al aborto (<em>Le Nouvel Observateur</em>, 5 de abril).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-06",
+   "col": "fr_pol",
+   "texto": "Congreso de Épinay (11-13 de junio): Mitterrand toma el Partido Socialista.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-03",
+   "col": "fr_pol",
+   "texto": "Nace el FHAR (Front homosexuel d'action révolutionnaire), con el que Guattari editará <em>Recherches</em> 12.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-02",
+   "col": "fr_pol",
+   "texto": "Pierre Overney, militante maoísta, es asesinado por un vigilante de Renault-Billancourt (25 de febrero); funeral de masas.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-06",
+   "col": "fr_pol",
+   "texto": "Programa común de gobierno PS-PCF (27 de junio); Pierre Messmer sustituye a Chaban-Delmas en julio.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "fr_pol",
+   "texto": "Autogestión obrera en Lip (Besançon, junio); legislativas de marzo con avance de la izquierda unida; ley Royer.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "fr_pol",
+   "texto": "Muerte de Pompidou (2 de abril); Giscard d'Estaing vence a Mitterrand (19 de mayo). Mayoría de edad a los 18 años.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "fr_pol",
+   "texto": "Ley Veil despenaliza el aborto (17 de enero); fin de los «treinta gloriosos», primer año de crecimiento negativo de posguerra.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "fr_int",
+   "texto": "Foucault, <em>Les mots et les choses</em>; Lacan, <em>Écrits</em>; Benveniste, <em>Problèmes de linguistique générale</em>; Greimas, <em>Sémantique structurale</em>. Año del estructuralismo.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "fr_int",
+   "texto": "Número «Structuralisme» de <em>Les Temps modernes</em> (noviembre); polémica Sartre–Foucault sobre la muerte del hombre.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "fr_int",
+   "texto": "Derrida publica <em>De la grammatologie</em>, <em>L'écriture et la différence</em> y <em>La voix et le phénomène</em>; Debord, <em>La société du spectacle</em>; Vaneigem, <em>Traité de savoir-vivre</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968",
+   "col": "fr_int",
+   "texto": "Deleuze, <em>Différence et répétition</em>; Althusser y sus discípulos dominan la rue d'Ulm; <em>Tel Quel</em> (Sollers) se acerca al PCF.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-05",
+   "col": "fr_int",
+   "texto": "Sartre en la Sorbona ocupada; Lacan y Foucault (en Túnez) a distancia; eslóganes situacionistas en los muros. Los estructuralistas acusados de haber «ignorado la historia».",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-12",
+   "col": "fr_int",
+   "texto": "Apertura del centro universitario experimental de Vincennes: Foucault dirige filosofía y recluta a Deleuze, Lyotard, Châtelet, Rancière, Badiou, Serres.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-03",
+   "col": "fr_int",
+   "texto": "Foucault, <em>L'archéologie du savoir</em>; Michel Serres, <em>Hermès I</em>; Kristeva, <em>Séméiôtiké</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-01",
+   "col": "fr_int",
+   "texto": "El Ministerio retira al departamento de filosofía de Vincennes la habilitación nacional de sus diplomas (enero).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-12",
+   "col": "fr_int",
+   "texto": "Foucault entra en el Collège de France; lección inaugural <em>L'ordre du discours</em> (2 de diciembre). Barthes, <em>S/Z</em>; Althusser, «Idéologie et appareils idéologiques d'État» (<em>La Pensée</em>, junio).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971",
+   "col": "fr_int",
+   "texto": "Lyotard, <em>Discours, figure</em>; Girard publica en 1972 <em>La violence et le sacré</em>; Clastres prepara <em>La société contre l'État</em> (1974).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-03",
+   "col": "fr_int",
+   "texto": "Recepción del Anti-Edipo: elogios de Lyotard, Châtelet y Foucault; furia del campo psicoanalítico.",
+   "fuente": "Shatz, LRB 2010; consenso"
+  },
+  {
+   "fecha": "1972-07",
+   "col": "fr_int",
+   "texto": "Coloquio de Cerisy «Nietzsche aujourd'hui?» (julio) con Deleuze, Lyotard, Klossowski y Derrida.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "fr_int",
+   "texto": "Baudrillard, <em>Pour une critique de l'économie politique du signe</em>; Lyotard, <em>Dérive à partir de Marx et Freud</em> (1973).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "fr_int",
+   "texto": "Fundación de <em>Libération</em> (Sartre, Serge July); Lyotard, <em>Des dispositifs pulsionnels</em>; Deleuze, «Pensée nomade» en Cerisy.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "fr_int",
+   "texto": "Lyotard, <em>Économie libidinale</em>; Kristeva, <em>La révolution du langage poétique</em>; Irigaray, <em>Speculum</em>; Clastres, <em>La société contre l'État</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "fr_int",
+   "texto": "Foucault, <em>Surveiller et punir</em>; Barthes, <em>Roland Barthes par Roland Barthes</em>; Deleuze y Guattari, <em>Kafka</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "eu_pol",
+   "texto": "Gran coalición en la RFA (Kiesinger–Brandt) y nacimiento de la oposición extraparlamentaria (APO).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "eu_pol",
+   "texto": "Golpe de los coroneles en Grecia (21 de abril). Muerte de Benno Ohnesorg en Berlín Oeste (2 de junio), detonante del movimiento estudiantil alemán.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-01",
+   "col": "eu_pol",
+   "texto": "Dubček secretario general en Checoslovaquia (5 de enero): comienza la Primavera de Praga. En Italia, ocupaciones universitarias y batalla de Valle Giulia (1 de marzo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-04",
+   "col": "eu_pol",
+   "texto": "Atentado contra Rudi Dutschke en Berlín (11 de abril); disturbios en toda la RFA.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-08",
+   "col": "eu_pol",
+   "texto": "Invasión soviética de Checoslovaquia (20-21 de agosto); fin de la Primavera de Praga.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-01",
+   "col": "eu_pol",
+   "texto": "Jan Palach se inmola en Praga (16 de enero).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-10",
+   "col": "eu_pol",
+   "texto": "Willy Brandt canciller (octubre): comienza la Ostpolitik. «Otoño caliente» de huelgas en Italia.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-12",
+   "col": "eu_pol",
+   "texto": "Bomba de Piazza Fontana en Milán (12 de diciembre): inicio de la «estrategia de la tensión»; muerte de Pinelli.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-05",
+   "col": "eu_pol",
+   "texto": "Liberación de Andreas Baader (14 de mayo): nace la RAF (Fracción del Ejército Rojo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-12",
+   "col": "eu_pol",
+   "texto": "Brandt se arrodilla ante el monumento del gueto de Varsovia (7 de diciembre). Revueltas obreras en Polonia reprimidas; cae Gomułka.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-01",
+   "col": "eu_pol",
+   "texto": "Domingo Sangriento en Derry (30 de enero): el conflicto norirlandés en su punto más violento.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-06",
+   "col": "eu_pol",
+   "texto": "Detención de Baader, Meinhof y Ensslin (junio).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-09",
+   "col": "eu_pol",
+   "texto": "Atentado de Septiembre Negro durante los Juegos Olímpicos de Múnich (5 de septiembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "eu_pol",
+   "texto": "Crisis del petróleo (octubre) tras la guerra de Yom Kipur; fin del ciclo de crecimiento de posguerra en Europa occidental.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "eu_pol",
+   "texto": "Revolución de los Claveles en Portugal (25 de abril); caída de la dictadura griega (julio); Brandt dimite por el caso Guillaume (mayo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "eu_pol",
+   "texto": "Muerte de Franco (20 de noviembre); Acta final de Helsinki (agosto). Juicio de Stammheim contra la RAF.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "eu_int",
+   "texto": "Adorno, <em>Dialéctica negativa</em>; Mario Tronti, <em>Operai e capitale</em>, texto fundador del obrerismo italiano.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "eu_int",
+   "texto": "Marcuse, lecturas en Berlín (julio): «El fin de la utopía». Habermas y la polémica con los estudiantes sobre el «fascismo de izquierda».",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968",
+   "col": "eu_int",
+   "texto": "Habermas, <em>Conocimiento e interés</em>; Negri y Tronti en <em>Contropiano</em>; ocupación de la Escuela de Fráncfort.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-08",
+   "col": "eu_int",
+   "texto": "Muerte de Adorno (6 de agosto); fin de la primera Escuela de Fráncfort. Nace Potere Operaio y Lotta Continua en Italia.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970",
+   "col": "eu_int",
+   "texto": "Basaglia y la crítica institucional italiana; Dario Fo, <em>Muerte accidental de un anarquista</em>; Kristeva y Sollers viajan a China (1974).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "eu_int",
+   "texto": "Informe Meadows, <em>Los límites del crecimiento</em> (Club de Roma); Negri, <em>Crisi dello Stato-piano</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "eu_int",
+   "texto": "Disolución de Potere Operaio: comienza la Autonomia operaia, que leerá el Anti-Edipo en Bolonia y Padua.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "eu_int",
+   "texto": "Traducción italiana del Anti-Edipo (Einaudi, trad. Fontana); Bifo y Radio Alice preparan el 77 boloñés.",
+   "fuente": "Shatz, LRB 2010"
+  },
+  {
+   "fecha": "1966",
+   "col": "us_pol",
+   "texto": "Fundación del Partido Pantera Negra en Oakland (octubre); Stokely Carmichael lanza el «Black Power».",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "us_pol",
+   "texto": "Revueltas de Newark y Detroit (julio); marcha sobre el Pentágono (21 de octubre); «verano del amor» en San Francisco.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-01",
+   "col": "us_pol",
+   "texto": "Ofensiva del Tet en Vietnam (30 de enero); Johnson renuncia a la reelección (31 de marzo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-04",
+   "col": "us_pol",
+   "texto": "Asesinato de Martin Luther King (4 de abril) y revueltas en cien ciudades; ocupación de Columbia (abril).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-06",
+   "col": "us_pol",
+   "texto": "Asesinato de Robert Kennedy (5 de junio).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-08",
+   "col": "us_pol",
+   "texto": "Convención demócrata de Chicago: represión policial televisada (agosto).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-11",
+   "col": "us_pol",
+   "texto": "Nixon elegido presidente (5 de noviembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-06",
+   "col": "us_pol",
+   "texto": "Disturbios de Stonewall (28 de junio): inicio del movimiento gay moderno. SDS se escinde; nacen los Weathermen.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-12",
+   "col": "us_pol",
+   "texto": "La policía de Chicago mata a Fred Hampton (4 de diciembre); festival de Altamont.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-04",
+   "col": "us_pol",
+   "texto": "Invasión de Camboya (30 de abril).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-05",
+   "col": "us_pol",
+   "texto": "Matanza de Kent State (4 de mayo) y huelga estudiantil nacional.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-06",
+   "col": "us_pol",
+   "texto": "Papeles del Pentágono (junio).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-08",
+   "col": "us_pol",
+   "texto": "Nixon suspende la convertibilidad del dólar en oro (15 de agosto): fin de Bretton Woods.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971-09",
+   "col": "us_pol",
+   "texto": "Motín de la prisión de Attica (9-13 de septiembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-02",
+   "col": "us_pol",
+   "texto": "Nixon en China (21-28 de febrero).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-06",
+   "col": "us_pol",
+   "texto": "Allanamiento del Watergate (17 de junio).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972-11",
+   "col": "us_pol",
+   "texto": "Nixon reelegido (7 de noviembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "us_pol",
+   "texto": "Acuerdos de París (enero); <em>Roe v. Wade</em> (22 de enero); ocupación de Wounded Knee (febrero-mayo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "us_pol",
+   "texto": "Nixon renuncia (9 de agosto).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "us_pol",
+   "texto": "Caída de Saigón (30 de abril): fin de la guerra de Vietnam. Crisis fiscal de Nueva York.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "us_int",
+   "texto": "Coloquio de Johns Hopkins «The Languages of Criticism and the Sciences of Man» (octubre): Derrida, Lacan y Barthes en EE. UU.; nace la «French Theory».",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "us_int",
+   "texto": "Laing, <em>The Politics of Experience</em>; Guy Debord traducido al inglés en 1970; contracultura y LSD (Leary).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968",
+   "col": "us_int",
+   "texto": "Norman O. Brown, <em>Love's Body</em> (1966) y Marcuse como referentes del movimiento; Chomsky, «The Responsibility of Intellectuals» (1967).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969",
+   "col": "us_int",
+   "texto": "Marcuse, <em>An Essay on Liberation</em>; Theodore Roszak, <em>The Making of a Counter Culture</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970",
+   "col": "us_int",
+   "texto": "Kate Millett, <em>Sexual Politics</em>; Shulamith Firestone, <em>The Dialectic of Sex</em>: la familia bajo crítica feminista.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971",
+   "col": "us_int",
+   "texto": "Rawls, <em>A Theory of Justice</em>; Foucault debate con Chomsky en televisión holandesa (noviembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "us_int",
+   "texto": "Bateson, <em>Steps to an Ecology of Mind</em>, fuente del «plateau» de Mil mesetas; Thomas Szasz y la antipsiquiatría americana.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "us_int",
+   "texto": "Geertz, <em>The Interpretation of Cultures</em>; Daniel Bell, <em>The Coming of Post-Industrial Society</em>; la APA retira la homosexualidad del DSM (diciembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "us_int",
+   "texto": "Lotringer funda <em>Semiotext(e)</em> en Columbia; Jameson y Said preparan la recepción de la teoría francesa.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975-11",
+   "col": "us_int",
+   "texto": "«Schizo-Culture» (Columbia, 13-16 nov.): Deleuze, Guattari, Foucault y Lyotard con Burroughs, Cage y Acker. Lacan en Yale ese mismo año.",
+   "fuente": "monoskop.org/Schizo-Culture"
+  },
+  {
+   "fecha": "1966",
+   "col": "al",
+   "texto": "Golpe de Onganía en Argentina (28 de junio) y «noche de los bastones largos» en la universidad. Conferencia Tricontinental en La Habana (enero).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "al",
+   "texto": "Ernesto Guevara ejecutado en Bolivia (9 de octubre). Régis Debray, <em>¿Revolución en la revolución?</em>, preso en Camiri.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-08",
+   "col": "al",
+   "texto": "II Conferencia del CELAM en Medellín (agosto-septiembre): opción por los pobres, matriz de la teología de la liberación. Paulo Freire escribe <em>Pedagogía del oprimido</em> en Chile.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-10",
+   "col": "al",
+   "texto": "Matanza de Tlatelolco en México (2 de octubre). Golpe de Velasco Alvarado en Perú (3 de octubre): reforma agraria y nacionalismo militar.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-12",
+   "col": "al",
+   "texto": "En Brasil, el Acto Institucional n.º 5 (13 de diciembre) cierra el régimen militar.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-05",
+   "col": "al",
+   "texto": "Cordobazo en Argentina (29 de mayo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969",
+   "col": "al",
+   "texto": "Cardoso y Faletto, <em>Dependencia y desarrollo en América Latina</em>.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-09",
+   "col": "al",
+   "texto": "Allende gana en Chile (4 de septiembre); Unidad Popular y «vía chilena al socialismo».",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971",
+   "col": "al",
+   "texto": "Gustavo Gutiérrez, <em>Teología de la liberación</em> (Lima); Galeano, <em>Las venas abiertas de América Latina</em>; caso Padilla en Cuba.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "al",
+   "texto": "Masacre de Trelew (agosto); en Chile, paro de octubre contra Allende.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "al",
+   "texto": "Golpe en Uruguay (27 de junio); golpe de Pinochet en Chile (11 de septiembre). Perón vuelve a la presidencia (octubre). Primera edición castellana del Anti-Edipo en Barcelona.",
+   "fuente": "consenso; uloyola.es"
+  },
+  {
+   "fecha": "1974",
+   "col": "al",
+   "texto": "Muerte de Perón (1 de julio); la Triple A. Montoneros y ERP en la clandestinidad.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "al",
+   "texto": "Fundación de la Operación Cóndor (noviembre); Morales Bermúdez desplaza a Velasco en Perú (agosto).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1966",
+   "col": "sur",
+   "texto": "Mao lanza la Revolución Cultural (mayo-agosto); Guardias Rojos. Golpe contra Nkrumah en Ghana (febrero).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1967",
+   "col": "sur",
+   "texto": "Guerra de los Seis Días (5-10 de junio); ocupación de Cisjordania, Gaza, Sinaí y Golán. Guerra de Biafra (julio).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-01",
+   "col": "sur",
+   "texto": "Ofensiva del Tet (30 de enero): el Frente de Liberación ataca Saigón y Huế; vuelco de la opinión occidental.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1968-05",
+   "col": "sur",
+   "texto": "Inicio de las conversaciones de paz de París sobre Vietnam (13 de mayo), en plena huelga general francesa.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-09",
+   "col": "sur",
+   "texto": "Gadafi derroca la monarquía libia (1 de septiembre); muerte de Ho Chi Minh (2 de septiembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1969-02",
+   "col": "sur",
+   "texto": "Arafat preside la OLP (febrero).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1970-09",
+   "col": "sur",
+   "texto": "Septiembre Negro en Jordania; muerte de Nasser (28 de septiembre).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1971",
+   "col": "sur",
+   "texto": "Guerra de liberación de Bangladesh (marzo-diciembre); China entra en la ONU (octubre); muerte de Lin Biao.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1972",
+   "col": "sur",
+   "texto": "Nixon y Mao se reúnen en Pekín (febrero); masacre de Múnich por Septiembre Negro.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1973",
+   "col": "sur",
+   "texto": "Guerra de Yom Kipur (6-25 de octubre) y embargo petrolero de la OPEP: el Sur global impone el precio de la energía.",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1974",
+   "col": "sur",
+   "texto": "Revolución etíope derroca a Haile Selassie (septiembre); independencia de Guinea-Bisáu; Nueva Orden Económica Internacional en la ONU (mayo).",
+   "fuente": "consenso"
+  },
+  {
+   "fecha": "1975",
+   "col": "sur",
+   "texto": "Toma de Phnom Penh por los Jemeres Rojos (17 de abril) y de Saigón (30 de abril); independencia de Mozambique (junio) y Angola (noviembre); guerra civil en el Líbano.",
+   "fuente": "consenso"
+  }
+ ]
+}

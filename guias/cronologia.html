@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Anti-Edipo · cronología</title>
+<link rel="stylesheet" href="../estilo.css">
+<style>
+  /* la matriz ocupa toda la hoja: se anula el ancho máximo de las guías */
+  main.matriz{display:block; max-width:none; margin:0}
+  #aviso{margin:14px 16px 0; font-family:var(--mono); font-size:11px; color:var(--ink-dim); border:1px solid var(--line); border-radius:var(--r); padding:8px 12px; background:var(--panel); line-height:1.5}
+  #aviso b{color:var(--ink); font-weight:600}
+
+  /* filtros de columnas */
+  #filtros{display:flex; flex-wrap:wrap; gap:6px; align-items:center; padding:10px 16px 6px}
+  #filtros .rot{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin-right:4px}
+  #filtros .btn{padding:4px 8px; font-size:10.5px}
+  #filtros .btn.off{opacity:.45; text-decoration:line-through}
+
+  /* la cuadrícula */
+  #marco{overflow:auto; max-height:calc(100vh - var(--hdr) - 110px); border-top:1px solid var(--line); margin-top:8px}
+  #grid{display:grid; grid-auto-rows:minmax(44px, auto); font-family:var(--serif); font-size:13.5px; line-height:1.45; width:max-content; min-width:100%}
+  .celda{border-bottom:1px solid var(--line); border-right:1px solid var(--line); padding:8px 10px; background:var(--paper); min-width:220px; max-width:320px}
+  .celda.vacia{background:var(--paper)}
+  .cab{
+    position:sticky; top:0; z-index:3; background:var(--panel); border-bottom:1px solid var(--ink);
+    font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim); font-weight:600;
+    padding:10px 10px 8px; display:flex; align-items:flex-end;
+  }
+  .cab.g-obra{color:var(--moss)}
+  .cab.g-francia{color:var(--warm)}
+  .cab.g-europa{color:var(--steel)}
+  .cab.g-eeuu{color:var(--steel)}
+  .cab.g-sur{color:var(--warm)}
+  .tiempo{
+    position:sticky; left:0; z-index:2; background:var(--panel); border-right:1px solid var(--ink);
+    font-family:var(--mono); font-size:11px; color:var(--ink); font-weight:600; letter-spacing:.04em;
+    min-width:11em; max-width:11em; padding:8px 10px; font-variant-numeric:tabular-nums;
+  }
+  .tiempo.esquina{z-index:4; top:0}
+  .tiempo.fina{color:var(--moss)}
+  .tiempo.pendiente{color:var(--ink-dim); font-weight:400}
+  .tiempo.pendiente::after{content:"pendiente"; display:block; font-size:8.5px; letter-spacing:.12em; text-transform:uppercase; opacity:.7; margin-top:2px}
+  .tiempo .lustro{display:block; font-size:9px; color:var(--ink-dim); font-weight:400; letter-spacing:.1em; margin-top:2px}
+  .ent{margin:0 0 7px; hyphens:auto}
+  .ent:last-child{margin-bottom:0}
+  .ent .f{font-family:var(--mono); font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--moss); margin-right:5px; white-space:nowrap}
+  .ent .src{display:none; font-family:var(--mono); font-size:9px; color:var(--ink-dim); margin-top:2px}
+  .ent .src.verif{color:var(--moss)}
+  body.con-fuentes .ent .src{display:block}
+  #fuentes.activo{border-color:var(--moss); color:var(--moss)}
+  .ent em{font-style:italic}
+
+  /* columnas apagadas */
+  .col-off{display:none !important}
+
+  /* resaltado de la fila bajo el cursor */
+  .celda:hover, .tiempo:hover{background:#f3f1ea}
+
+  /* compactar */
+  body.compacta #grid{font-size:12px; line-height:1.35}
+  body.compacta .celda{padding:5px 8px; min-width:180px; max-width:260px}
+  #compacta.activo{border-color:var(--moss); color:var(--moss)}
+
+  @media (max-width:900px){
+    #marco{max-height:calc(100vh - var(--hdr) - 150px)}
+    .tiempo{min-width:7.5em; max-width:7.5em; font-size:10px}
+  }
+  @media print{
+    #filtros, #aviso{display:none}
+    #marco{max-height:none; overflow:visible}
+    #grid{font-size:9pt}
+    .celda{min-width:0; max-width:none}
+  }
+</style>
+</head>
+<body>
+  <header class="barra">
+    <h1 id="marca"><a href="../index.html">EL ANTI-EDIPO</a> <span>· guías</span></h1>
+    <div id="estado">IV · Cronología: matriz espacio-temporal del libro, 1960-2000</div>
+    <div class="acciones">
+      <a class="btn" href="lector_informe_anti_edipo.html" title="contextualización">I</a>
+      <a class="btn" href="prolegomenos_anti_edipo_lector.html" title="prolegómenos">II</a>
+      <a class="btn" href="lector_anti_edipo_capitulo_1.html" title="capítulo I">III</a>
+      <a class="btn actual" href="cronologia.html" title="cronología">IV</a>
+      <button id="fuentes" class="btn" type="button" title="Mostrar la fuente de cada entrada">fuentes</button>
+      <button id="compacta" class="btn" type="button" title="Letra menor, más columnas en pantalla">compacta</button>
+      <a class="btn" href="https://carloszevallostrigoso.github.io/ae/" target="ae-lector" title="Abrir el lector del Anti-Edipo">lector</a>
+    </div>
+  </header>
+  <main class="matriz">
+    <div id="aviso"><b>Lectura.</b> Cada fila es un lapso: años sueltos, trimestres entre 1968 y 1972, bienios después de 1980. La etiqueta en musgo delante de una entrada precisa el mes cuando la fila es más gruesa que el dato. <b>Fuentes</b> muestra de dónde sale cada entrada; «consenso» marca lo que todavía no se ha contrastado una por una. «s/m»: entrada sin mes conocido, colocada al inicio del año. Los lapsos marcados <em>pendiente</em> no tienen entradas aún.</div>
+    <div id="filtros"><span class="rot">Columnas</span></div>
+    <div id="marco"><div id="grid" role="table" aria-label="Matriz cronológica"></div></div>
+  </main>
+<script>
+(function(){
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const barra = document.querySelector('header.barra');
+  function medirBarra(){ if (barra) document.documentElement.style.setProperty('--hdr', barra.offsetHeight + 'px'); }
+  medirBarra(); window.addEventListener('resize', medirBarra);
+
+  // claves comparables: "1969-06" → "1969-06", "1969" → "1969-00" (inicio) / "1969-99" (fin)
+  const ini = f => f.length === 4 ? f + '-00' : f;
+  const fin = f => f.length === 4 ? f + '-99' : f;
+
+  function etiqueta(fecha, fila){
+    // sólo cuando la entrada es más precisa que la fila
+    const m = fecha.slice(5, 7);
+    const filaEsAnual = fila.desde.length === 4;
+    const filaEsTrimestre = !filaEsAnual && fila.desde !== fila.hasta;
+    if (!m) return filaEsTrimestre ? 's/m' : '';
+    if (filaEsAnual || filaEsTrimestre) return MESES[parseInt(m, 10) - 1] || '';
+    return '';
+  }
+  function rotuloFila(f){
+    if (f.rotulo) return f.rotulo;
+    return f.desde;
+  }
+
+  fetch('cronologia.json').then(r => r.json()).then(d => {
+    const cols = d.columnas, filas = d.filas, grid = $('grid');
+    grid.style.gridTemplateColumns = '11em ' + cols.map(() => 'minmax(220px, 320px)').join(' ');
+
+    // cabecera
+    const esq = document.createElement('div'); esq.className = 'tiempo esquina cab'; esq.textContent = '1960 → 2000'; grid.appendChild(esq);
+    cols.forEach(c => {
+      const h = document.createElement('div'); h.className = 'cab g-' + c.grupo + ' c-' + c.id; h.textContent = c.titulo; grid.appendChild(h);
+    });
+
+    // reparto de entradas por fila y columna
+    const porFila = filas.map(() => ({}));
+    d.entradas.forEach(e => {
+      const k = e.fecha;
+      let i = filas.findIndex(f => k >= ini(f.desde) && k <= fin(f.hasta));
+      if (i < 0) i = filas.findIndex(f => k.slice(0,4) >= f.desde.slice(0,4) && k.slice(0,4) <= f.hasta.slice(0,4));
+      if (i < 0) return;
+      (porFila[i][e.col] = porFila[i][e.col] || []).push(e);
+    });
+
+    // lapsos todavía no cargados: los de los lotes marcados «pendiente»
+    const pendientes = (d.lotes || []).filter(l => l.estado === 'pendiente').map(l => l.rango.split(/[–-]/).map(x => parseInt(x, 10)));
+    const esPendiente = f => { const a = parseInt(f.desde, 10); return pendientes.some(([x, y]) => a >= x && a <= y); };
+
+    filas.forEach((f, i) => {
+      const t = document.createElement('div');
+      t.className = 'tiempo' + (f.desde.length > 4 ? ' fina' : '') + (esPendiente(f) ? ' pendiente' : '');
+      t.textContent = rotuloFila(f);
+      grid.appendChild(t);
+      cols.forEach(c => {
+        const cel = document.createElement('div');
+        cel.className = 'celda c-' + c.id;
+        const ents = (porFila[i][c.id] || []).slice().sort((a, b) => a.fecha < b.fecha ? -1 : 1);
+        if (!ents.length) cel.classList.add('vacia');
+        ents.forEach(e => {
+          const p = document.createElement('div'); p.className = 'ent';
+          const et = etiqueta(e.fecha, f);
+          p.innerHTML = (et ? '<span class="f">' + et + '</span>' : '') + e.texto +
+            '<div class="src' + (e.fuente && e.fuente !== 'consenso' ? ' verif' : '') + '">' + (e.fuente || 'consenso') + '</div>';
+          cel.appendChild(p);
+        });
+        grid.appendChild(cel);
+      });
+    });
+
+    // filtros de columnas
+    const filtros = $('filtros');
+    cols.forEach(c => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'btn'; b.textContent = c.titulo.replace(' · ', ' · ');
+      b.addEventListener('click', () => {
+        b.classList.toggle('off');
+        const off = b.classList.contains('off');
+        grid.querySelectorAll('.c-' + c.id).forEach(x => x.classList.toggle('col-off', off));
+        grid.style.gridTemplateColumns = '11em ' + cols.filter(k => !filtros.querySelector('[data-col="' + k.id + '"]').classList.contains('off')).map(() => 'minmax(220px, 320px)').join(' ');
+      });
+      b.dataset.col = c.id;
+      filtros.appendChild(b);
+    });
+
+    $('fuentes').addEventListener('click', () => { document.body.classList.toggle('con-fuentes'); $('fuentes').classList.toggle('activo'); });
+    $('compacta').addEventListener('click', () => { document.body.classList.toggle('compacta'); $('compacta').classList.toggle('activo'); });
+  }).catch(err => {
+    $('grid').innerHTML = '<div style="padding:16px;font-family:var(--mono);font-size:11px;color:var(--ink-dim)">No se pudo cargar cronologia.json (' + err + ').</div>';
+  });
+})();
+</script>
+</body>
+</html>
