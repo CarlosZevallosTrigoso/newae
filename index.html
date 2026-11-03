@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Anti-Edipo · Índice de Guías de Lectura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #000000;
+            --muted-border: #d0d0d0;
+            --hover-bg: #f5f5f5;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 4rem 1.5rem;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            font-size: 20px;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            justify-content: center;
+        }
+
+        main {
+            width: 100%;
+            max-width: 720px;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 2.2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 0.6rem;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            line-height: 1.15;
+            margin: 0 0 0.75rem 0;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            font-style: italic;
+            margin: 0;
+        }
+
+        .guide-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .guide-item {
+            border-bottom: 1px solid var(--muted-border);
+        }
+
+        .guide-item:last-child {
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .guide-link {
+            display: block;
+            padding: 1.6rem 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: background-color 0.15s ease;
+        }
+
+        .guide-link:hover,
+        .guide-link:focus-visible {
+            background-color: var(--hover-bg);
+            outline: none;
+        }
+
+        .guide-number {
+            display: block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .guide-title {
+            display: block;
+            font-size: 1.45rem;
+            font-weight: 600;
+            line-height: 1.25;
+            margin-bottom: 0.4rem;
+        }
+
+        .guide-link:hover .guide-title {
+            text-decoration: underline;
+        }
+
+        .guide-desc {
+            display: block;
+            font-size: 1rem;
+            color: #222222;
+            margin: 0;
+        }
+
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 2.5rem 1.2rem;
+                font-size: 18px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .guide-link {
+                padding: 1.3rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <header>
+            <div class="kicker">Cuadernos de Estudio · Deleuze &amp; Guattari</div>
+            <h1><em>El Anti-Edipo</em></h1>
+            <p class="subtitle">Índice de guías de lectura y contextualización</p>
+        </header>
+
+        <nav aria-label="Índice de documentos">
+            <ol class="guide-list">
+                <li class="guide-item">
+                    <a class="guide-link" href="./guias/lector_informe_anti_edipo.html">
+                        <span class="guide-number">I. Contextualización</span>
+                        <span class="guide-title">Informe de Contextualización Histórica, Biográfica y Teórica</span>
+                        <span class="guide-desc">Horizonte geopolítico global (1968-1972), debates filosóficos en Francia, biografías cruzadas de Deleuze y Guattari y recepción internacional de la obra.</span>
+                    </a>
+                </li>
+
+                <li class="guide-item">
+                    <a class="guide-link" href="./guias/prolegomenos_anti_edipo_lector.html">
+                        <span class="guide-number">II. Prolegómenos</span>
+                        <span class="guide-title">Prolegómenos a <em>El Anti-Edipo</em>: Psicoanálisis, Marxismo y Economía Política</span>
+                        <span class="guide-desc">Dos ensayos pedagógicos sobre los fundamentos de psicoanálisis (Freud, Klein, Lacan) y de crítica de la economía política marxista indispensables para la lectura.</span>
+                    </a>
+                </li>
+
+                <li class="guide-item">
+                    <a class="guide-link" href="./guias/lector_anti_edipo_capitulo_1.html">
+                        <span class="guide-number">III. Guía Analítica</span>
+                        <span class="guide-title">Capítulo Primero: «Las máquinas deseantes»</span>
+                        <span class="guide-desc">Estudio sistemático, mapa conceptual y guía de lectura paso a paso por las seis subsecciones del primer capítulo.</span>
+                    </a>
+                </li>
+            </ol>
+        </nav>
+
+        <footer>
+            Seminario sobre <em>El Anti-Edipo: Capitalismo y esquizofrenia</em>
+        </footer>
+    </main>
+
+</body>
+</html>
