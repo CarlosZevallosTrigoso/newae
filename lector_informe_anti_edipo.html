@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Anti-Edipo: Informe de Contextualización Histórica, Biográfica y Teórica</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #000000;
+            --muted-border: #d4d4d4;
+            --hover-bg: #f5f5f5;
+            --font-size-base: 19px;
+            --line-height-base: 1.72;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: var(--font-size-base);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'EB Garamond', Garamond, 'Times New Roman', serif;
+            line-height: var(--line-height-base);
+            display: flex;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Barra de progreso superior de lectura */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #e5e5e5;
+            z-index: 1000;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: #000000;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Panel lateral: Tabla de Contenidos (Lector) */
+        aside.sidebar {
+            width: 320px;
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding: 2.2rem 1.6rem;
+            background-color: var(--bg-color);
+            z-index: 100;
+        }
+
+        .reader-brand {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .reader-controls {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--muted-border);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .reader-controls span {
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+
+        .btn-control {
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+            font-family: 'EB Garamond', serif;
+            font-size: 0.85rem;
+            padding: 0.15rem 0.55rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-control:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        nav.toc h2 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        nav.toc ul {
+            list-style: none;
+        }
+
+        nav.toc li {
+            margin-bottom: 0.45rem;
+            line-height: 1.35;
+        }
+
+        nav.toc a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: block;
+            padding: 0.2rem 0.4rem;
+            border-left: 2px solid transparent;
+            transition: all 0.15s ease;
+        }
+
+        nav.toc a:hover,
+        nav.toc a.active {
+            border-left: 2px solid var(--border-color);
+            background-color: var(--hover-bg);
+            font-weight: 600;
+        }
+
+        nav.toc .toc-sub {
+            padding-left: 0.9rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.6rem;
+        }
+
+        nav.toc .toc-sub a {
+            font-size: 0.82rem;
+            font-style: italic;
+        }
+
+        /* Contenedor principal de lectura */
+        main.reader-content {
+            margin-left: 320px;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 3.5rem 2.5rem 6rem 2.5rem;
+        }
+
+        article.book-page {
+            max-width: 740px;
+            width: 100%;
+        }
+
+        /* Cabecera del informe */
+        header.doc-header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        header.doc-header .doc-kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            margin-bottom: 0.8rem;
+        }
+
+        header.doc-header h1 {
+            font-size: 2.35rem;
+            font-weight: 500;
+            line-height: 1.18;
+            margin-bottom: 1rem;
+        }
+
+        header.doc-header .doc-subtitle {
+            font-size: 1.15rem;
+            font-style: italic;
+            max-width: 620px;
+            margin: 0 auto;
+        }
+
+        /* Secciones y Tipografía */
+        section.chapter {
+            margin-bottom: 4rem;
+            padding-top: 1rem;
+        }
+
+        .block-banner {
+            border-top: 2px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.9rem 0;
+            margin: 3.5rem 0 2rem 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        h2.section-title {
+            font-size: 1.65rem;
+            font-weight: 600;
+            line-height: 1.28;
+            margin-bottom: 1.4rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        h3.subsection-title {
+            font-size: 1.28rem;
+            font-weight: 600;
+            font-style: italic;
+            margin-top: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        ul.academic-list, ol.academic-list {
+            margin: 1.2rem 0 1.5rem 1.8rem;
+        }
+
+        ul.academic-list li, ol.academic-list li {
+            margin-bottom: 0.9rem;
+            text-align: justify;
+        }
+
+        blockquote {
+            margin: 1.6rem 0;
+            padding: 0.8rem 1.5rem;
+            border-left: 3px solid var(--border-color);
+            font-style: italic;
+            background-color: #fafafa;
+        }
+
+        /* Tabla sinóptica */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table.synoptic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        table.synoptic-table th,
+        table.synoptic-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1rem;
+            vertical-align: top;
+            text-align: left;
+        }
+
+        table.synoptic-table th {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.8rem;
+            background-color: #f4f4f4;
+        }
+
+        hr.divider {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 3rem 0;
+        }
+
+        footer.doc-footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* Responsivo e Impresión */
+        @media (max-width: 960px) {
+            body {
+                flex-direction: column;
+            }
+            aside.sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            main.reader-content {
+                margin-left: 0;
+                padding: 2rem 1.25rem;
+            }
+        }
+
+        @media print {
+            aside.sidebar, #progress-container {
+                display: none;
+            }
+            main.reader-content {
+                margin-left: 0;
+                padding: 0;
+            }
+            article.book-page {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <aside class="sidebar">
+        <div class="reader-brand">Modo Lector • Seminario Deleuze &amp; Guattari</div>
+        <div class="reader-controls">
+            <span> Cuerpo tipográfico:</span>
+            <div>
+                <button class="btn-control" onclick="adjustFontSize(-1)" title="Reducir texto">A−</button>
+                <button class="btn-control" onclick="adjustFontSize(0)" title="Restaurar tamaño">A</button>
+                <button class="btn-control" onclick="adjustFontSize(1)" title="Aumentar texto">A+</button>
+                <button class="btn-control" onclick="window.print()" title="Imprimir o guardar PDF">⎙</button>
+            </div>
+        </div>
+        <nav class="toc">
+            <h2>Tabla de Contenido</h2>
+            <ul>
+                <li><a href="#introduccion">Diseño Metodológico y Orden Pedagógico</a></li>
+                <li>
+                    <a href="#bloque-1">BLOQUE I: Del Horizonte Mundial al Laboratorio Francés</a>
+                    <ul class="toc-sub">
+                        <li><a href="#sec-1">1. El horizonte geopolítico mundial (1968-1972) [Ítem 4]</a></li>
+                        <li><a href="#sec-1a">A. Fuera del Norte Global: Descolonización y el «Edipo colonial»</a></li>
+                        <li><a href="#sec-1b">B. Estados Unidos: Crisis liberal y eclosión contracultural</a></li>
+                        <li><a href="#sec-1c">C. Europa del Este y Occidental: De Praga al «Otoño Caliente»</a></li>
+                        <li><a href="#sec-2">2. El laboratorio francés (1968-1972) [Ítem 3]</a></li>
+                        <li><a href="#sec-2a">A. Mayo del 68, traición burocrática y el «fascismo en nuestras cabezas»</a></li>
+                        <li><a href="#sec-2b">B. Batallas filosóficas en París: Estructuralismo, Lacan y Marx</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#bloque-2">BLOQUE II: Vidas Paralelas, Escritura y Recepción Mundial</a>
+                    <ul class="toc-sub">
+                        <li><a href="#sec-3">3. ¿Quiénes fueron Gilles Deleuze y Félix Guattari? [Ítem 1]</a></li>
+                        <li><a href="#sec-3a">A. Gilles Deleuze (1925-1995): Ontología de la diferencia pura</a></li>
+                        <li><a href="#sec-3b">B. Félix Guattari (1930-1992): La Borde, Lacan y la militancia</a></li>
+                        <li><a href="#sec-3c">C. El encuentro de 1969 y la «máquina de escritura» (1969-1972)</a></li>
+                        <li><a href="#sec-4">4. El impacto de la «bomba»: Recepción mundial [Ítem 2]</a></li>
+                        <li><a href="#sec-4a">A. Recepción en Francia: Éxito, censura de Lacan y «años de invierno»</a></li>
+                        <li><a href="#sec-4b">B. Recepción en Europa: El laboratorio italiano de 1977 y España</a></li>
+                        <li><a href="#sec-4c">C. Fuera de Europa: EE. UU., América Latina, Japón y Australia</a></li>
+                    </ul>
+                </li>
+                <li><a href="#cuadro-sinoptico">Cuadro Sinóptico Docente (Sesión Inaugural)</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="reader-content">
+        <article class="book-page">
+            <header class="doc-header">
+                <div class="doc-kicker">Informe Magistral de Contextualización • Primera Sesión del Curso</div>
+                <h1><em>El Anti-Edipo: Capitalismo y esquizofrenia</em> (1972)</h1>
+                <p class="doc-subtitle">Horizonte geopolítico global, debates filosóficos en Francia, biografías cruzadas de Gilles Deleuze y Félix Guattari y recepción transnacional de la obra</p>
+            </header>
+
+            <section id="introduccion" class="chapter">
+                <h2 class="section-title">Arquitectura Pedagógica: De lo Macro-Histórico a la Micro-Escritura</h2>
+                <p>Para una primera sesión de curso universitario, resulta pedagógicamente mucho más eficaz e inmersivo invertir el embudo expositivo tradicional: partir de las condiciones históricas y geopolíticas globales (el mundo en ebullición de los años sesenta y setenta), descender luego al laboratorio político y filosófico francés (la crisis del estructuralismo, el lacanismo y el estallido de Mayo del 68), presentar entonces las trayectorias vitales de Gilles Deleuze y Félix Guattari como dos líneas heterogéneas que colisionan en ese preciso paisaje histórico para engendrar su «máquina de escritura», y cerrar el recorrido con la onda expansiva que provocó la publicación del libro en la primavera de 1972 tanto en Europa como fuera de ella.</p>
+                <p>El presente informe se estructura en dos grandes bloques continuos que desarrollan de manera exhaustiva y con datos rigurosamente verificados las cuatro interrogantes fundamentales para introducir la lectura de <em>El Anti-Edipo</em>:</p>
+                <ol class="academic-list">
+                    <li><strong>Sección 1 (Ítem 4): El horizonte geopolítico mundial (1968-1972).</strong> La crisis de las formas tradicionales de soberanía, imperialismo y representación política en el Sur Global, los Estados Unidos y los dos bloques europeos.</li>
+                    <li><strong>Sección 2 (Ítem 3): El laboratorio francés pos-Mayo del 68 y las batallas filosóficas en París.</strong> El cuestionamiento radical del Estado gaullista y del Partido Comunista Francés (PCF), la pregunta spinoziana-reichiana sobre la servidumbre voluntaria y el asalto al estructuralismo, al marxismo althusseriano y al psicoanálisis lacaniano.</li>
+                    <li><strong>Sección 3 (Ítem 1): Vidas paralelas y agenciamiento colectivo: ¿Quiénes fueron Gilles Deleuze y Félix Guattari?</strong> Sus biografías particulares, qué estaban haciendo exactamente cuando se conocieron en el verano de 1969 y el funcionamiento material de su máquina de escritura hasta 1972.</li>
+                    <li><strong>Sección 4 (Ítem 2): El acontecimiento editorial y su recepción transnacional.</strong> La recepción en Francia, Europa (Italia, España, Alemania, Reino Unido) y fuera de Europa (Estados Unidos, América Latina —Brasil, Argentina, Chile y México—, Japón y Australia).</li>
+                </ol>
+            </section>
+
+            <div id="bloque-1" class="block-banner">
+                BLOQUE I: Del Horizonte Geopolítico Mundial al Laboratorio Francés (Ítems 4 y 3)
+            </div>
+
+            <section id="sec-1" class="chapter">
+                <h2 class="section-title">1. El horizonte geopolítico mundial (1968-1972): Descolonización, antimperialismo y crisis de los grandes bloques (Ítem 4)</h2>
+                <p>Abordar <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> (1972) únicamente como un síntoma local de la primavera parisiense de Mayo del 68 constituye una reducción historiográfica que traiciona la naturaleza misma de la obra. Como han demostrado con agudeza tanto Ian Buchanan como Kristin Ross, incluso el acontecimiento de Mayo del 68 resultaría ininteligible si se lo aislara en las barricadas del Barrio Latino y de la Sorbona, desconectándolo de las profundas fracturas geopolíticas, coloniales y económicas que sacudieron el planeta desde mediados de la década de 1950 hasta mediados de los años setenta. Para Gilles Deleuze y Félix Guattari, el inconsciente jamás está encerrado en las paredes del cuarto de los niños ni en el teatro íntimo de la familia burguesa («papá-mamá-yo»), sino que inviste de manera inmediata el campo social, económico y planetario: <em>«Todo delirio tiene un contenido histórico-mundial, político, racial»</em>. Al esquizofrénico no le preocupan las minucias edípicas de sus progenitores, sino los rusos, los arios y los judíos, Juana de Arco y el Gran Mogol, la circulación mundial del dinero y las conspiraciones del poder. Por ello, comprender la génesis de <em>El Anti-Edipo</em> exige reconstruir en primer lugar el convulso escenario internacional en el que fue concebido, un paisaje articulado en torno a tres grandes ejes: las luchas de liberación nacional fuera del Norte Global, la crisis estructural y contracultural de los Estados Unidos, y la doble fractura política que atravesaba a Europa Occidental y al bloque soviético.</p>
+
+                <h3 id="sec-1a" class="subsection-title">A. Fuera del Norte Global: Descolonización, el eje Norte/Sur y el «Edipo colonial»</h3>
+                <p>La transformación de la subjetividad política que desembocó en las rupturas teóricas de finales de los años sesenta tuvo su matriz originaria fuera de las metrópolis occidentales, específicamente en los procesos de descolonización de África y Asia y en los movimientos revolucionarios de América Latina. Durante el arco temporal de veinte años que se extiende desde la derrota francesa en Dien Bien Phu (1954) y la Conferencia de Bandung (1955) hasta el final de la guerra de Vietnam en 1975, el eje geopolítico fundamental para la intelectualidad crítica dejó de ser la mera oposición Este/Oeste de la Guerra Fría para desplazarse hacia el eje Norte/Sur, determinado por la división internacional del trabajo y la lucha contra el neocolonialismo. En este periodo, como señalaba Jean-Paul Sartre en 1964, la irrupción política de los pueblos colonizados de África, Asia y América Latina («los condenados de la tierra») constituyó el acontecimiento histórico más decisivo de la segunda mitad del siglo XX.</p>
+                <p>El primer gran catalizador de esta fractura fue la <strong>Guerra de Argelia (1954-1962)</strong>. El intento brutal del régimen francés por negar la independencia argelina mediante el uso sistemático de la tortura y la represión militar y policial abrió una grieta irreparable entre el discurso «humanista» oficial de la República francesa y su praxis colonial e imperialista. Para toda una generación de estudiantes, trabajadores y militantes —entre ellos el propio Félix Guattari, quien participó activamente en las redes clandestinas de apoyo al Frente de Liberación Nacional (FLN) argelino y en la resistencia al servicio militar—, Argelia deslegitimó por completo las estructuras del Estado moderno y la actitud cómplice de la izquierda institucional (el Partido Comunista Francés, bautizado por Sartre como <em>la gauche respectueuse</em>). En <em>El Anti-Edipo</em>, la experiencia colonial argelina y la obra psiquiátrica y política de <strong>Frantz Fanon</strong> desempeñan un papel teórico central: Deleuze y Guattari recurren explícitamente a Fanon para demostrar que la colonización no puede explicarse ni reducirse jamás a una triangulación edípica. Frente a los intentos de la etnopsiquiatría colonial por exportar e imponer el complejo de Edipo a las poblaciones africanas —representando al colonizador como el «padre» y al colonizado como el «niño»—, Deleuze y Guattari denuncian con mordacidad que fueron precisamente los sueños de los pueblos colonizados los que revelaron la impostura del triángulo familiar:</p>
+                <blockquote>«Es extraño que hayamos tenido que esperar a los sueños de los pueblos colonizados para ver que, en los vértices del pseudotriángulo, mamá bailaba con el misionero, papá era jodido por el recaudador de impuestos, mientras el yo era golpeado por el hombre blanco.»</blockquote>
+                <p>Como mostró Fanon, el sujeto colonizado está acoplado directamente a los elementos de su situación histórica real —el soldado, el policía, el ocupante, el colaborador, el resistente, la esposa del patrón—, figuras que rompen toda triangulación familiar e impiden que la opresión social sea interiorizada como un mero conflicto intrapsíquico.</p>
+                <p>El segundo gran epicentro del Sur Global que sobredeterminó la atmósfera de 1968-1972 fue la <strong>Guerra de Vietnam</strong>. La escalada militar estadounidense en Indochina a partir de 1965 unificó a nivel planetario las luchas anticapitalistas y antimperialistas. Vietnam reveló ante los ojos de la juventud mundial dos verdades simultáneas: por un lado, la violencia extrema y genocida a la que estaba dispuesto a llegar el superestado capitalista postmoderno para preservar la hegemonía del mercado mundial; por otro, la vulnerabilidad de esa misma superpotencia frente a una «revolución desde abajo» sostenida por guerrillas campesinas. De hecho, desde un punto de vista estrictamente histórico, el estallido mismo del Mayo francés de 1968 fue detonado por Vietnam: el incidente que dio origen al <strong>Movimiento del 22 de Marzo</strong> en la Universidad de Nanterre —en el que Guattari participó directamente y cuyo nombre evocaba deliberadamente el «Movimiento 26 de Julio» de Fidel Castro y el Che Guevara en Cuba— fue la detención de militantes que habían roto las ventanas del edificio de American Express en la rue Scribe de París el 20 de marzo de 1968 durante una manifestación contra la guerra de Vietnam organizada por los Comités Vietnam Nacionales (CVN, de orientación trotskista) y los Comités Vietnam de Base (CVB, de orientación maoísta).</p>
+                <p>Al mismo tiempo, la <strong>Revolución Cultural China</strong> (iniciada en agosto de 1966) y la ruptura sino-soviética ofrecían a los movimientos radicales de todo el mundo la promesa —idealizada en aquel entonces— de un socialismo revolucionario alternativo al modelo burocrático y estalinista de la Unión Soviética, poniendo en el centro del debate la abolición de la división entre el trabajo manual y el trabajo intelectual. En París, la legendaria librería <em>La Joie de Lire</em> y la editorial de <strong>François Maspero</strong> (quien publicaría en 1972 <em>Psicoanálisis y transversalidad</em> de Guattari) funcionaban como el puente intelectual donde los textos de Fanon, Mao Zedong, el Che Guevara, Amílcar Cabral, Vo Nguyen Giap, Mehdi Ben Barka y Malcolm X demostraban que la teoría revolucionaria ya no se producía exclusivamente en Europa, sino en las tricontinentales del Tercer Mundo. Era la época en que las revoluciones llamaban a la puerta desde Cuba hasta Vietnam, pasando por las luchas en Bolivia o el despertar de los movimientos de liberación en África y Medio Oriente, y en la que los debates sobre el desarrollo del Tercer Mundo llevaban a Deleuze y Guattari a preguntarse en <em>El Anti-Edipo</em> si la vía revolucionaria consistía en retirarse del mercado mundial —como aconsejaba el economista tercermundista Samir Amin— o, por el contrario, en ir aún más lejos en el movimiento de descodificación y desterritorialización de los flujos para hacer estallar la axiomática capitalista desde dentro.</p>
+
+                <h3 id="sec-1b" class="subsection-title">B. Estados Unidos: Crisis del paradigma liberal-tecnocrático y eclosión contracultural</h3>
+                <p>Mientras el imperialismo estadounidense libraba su guerra en el sudeste asiático, el propio corazón de la superpotencia norteamericana atravesaba, hacia finales de la década de 1960 e inicios de la de 1970, una crisis orgánica de legitimidad sin precedentes. Como detalla François Cusset, esta crisis del bloque occidental se manifestó en Estados Unidos con una crudeza aún más directa que en Europa porque no estaba amortiguada por la mediación de grandes partidos comunistas o sindicatos tradicionales. Se trataba de una quiebra múltiple: una <strong>crisis del funcionalismo sociológico</strong> y de la investigación de mercados, acusados de cuantificar el <em>socius</em> y profundizar las desigualdades; una <strong>crisis del legalismo formal</strong>, desmentido cotidianamente tanto por las marchas por los derechos civiles de la población afroamericana —que exigían en las calles lo que la ley les negaba— y la radicalización del movimiento <em>Black Power</em> (incluyendo figuras como George Jackson, citado con admiración en <em>El Anti-Edipo</em>), como por la brutalidad bélica en Vietnam; una <strong>crisis de la legitimidad tecnocrática y de la razón administrativa</strong>, percibidas por la nueva generación estudiantil como maquinarias alienantes desprovistas de toda decisión autónoma; una <strong>crisis del mesianismo liberal</strong> de los Padres Fundadores; y una <strong>crisis política e institucional</strong> encarnada en la presidencia de Richard Nixon, que pronto desembocaría en el escándalo Watergate.</p>
+                <p>En el plano económico global, este periodo coincidió con las primeras grandes sacudidas de la globalización financiera e industrial: la apertura forzosa de los mercados locales a la competencia multinacional estadounidense, el fin de la convertibilidad del dólar en oro en agosto de 1971 (que liberó los flujos monetarios de todo patrón extrínseco para operar bajo una pura axiomática financiera) y las reestructuraciones industriales que amenazaban directamente el sustento de los trabajadores a ambos lados del Atlántico, preparando el terreno para lo que Guattari conceptualizaría más tarde como el Capitalismo Mundial Integrado (CMI), un sistema en el que las estructuras productivas de bienes y servicios se articulan cada vez más con la producción mediática y publicitaria de signos y subjetividades estandarizadas. En respuesta a esta asfixia social, emergieron en Estados Unidos los movimientos contraculturales, el feminismo de segunda ola, el movimiento de liberación homosexual y una poderosa corriente de literatura anglosajona (desde D. H. Lawrence y Henry Miller hasta la <em>Beat Generation</em> de Jack Kerouac, Allen Ginsberg y William S. Burroughs) que ejercerá una fascinación decisiva sobre Deleuze y Guattari, quienes verán en los escritores norteamericanos e ingleses una comprensión mucho más profunda de las líneas de fuga, los flujos esquizofrénicos y la ruptura de los códigos edípicos que en toda la literatura psicoanalítica francesa.</p>
+
+                <h3 id="sec-1c" class="subsection-title">C. Europa Occidental y el Bloque del Este: De la Primavera de Praga al «Otoño Caliente» italiano</h3>
+                <p>En el continente europeo, el periodo 1968-1972 estuvo marcado por la simultánea bancarrota moral del «socialismo realmente existente» en el Este y la irrupción de luchas obreras y antiautoritarias autónomas en el Oeste. En Europa del Este, cualquier ilusión reformista que hubiera sobrevivido a la invasión soviética de Hungría (1956) o a los juicios contra los escritores disidentes Yuli Daniel y Andréi Siniavski en Moscú (1965-1966) quedó definitivamente sepultada en <strong>agosto de 1968 con la invasión militar de Checoslovaquia por las tropas del Pacto de Varsovia</strong>, que aplastó por la fuerza la <strong>Primavera de Praga</strong>. Incluso pensadores como Sartre y Simone de Beauvoir denunciaron la intervención soviética como un «crimen de guerra», concluyendo que el sistema burocrático soviético era irreformable. Deleuze y Guattari sintetizaron esta degeneración burocrática del leninismo en una célebre y lapidaria fórmula de <em>El Anti-Edipo</em>:</p>
+                <blockquote>«Todo empieza con Marx, continúa con Lenin y termina con el estribillo: "¡Bienvenido, Sr. Brézhnev!"»</blockquote>
+                <p>Para ellos, como explicaba Guattari, la «gran ruptura leninista» de 1917 había sido traicionada desde el momento mismo en que el partido bolchevique se transformó en un aparato de Estado embrionario que se sustituyó a las masas, adoptó la ideología de la coexistencia pacífica y la competencia económica con Occidente, e importó en suelo soviético las mismas estructuras fabriles, jerarquías técnicas y divisiones entre trabajo manual e intelectual propias del capitalismo.</p>
+                <p>Paralelamente, en Europa Occidental, la onda expansiva de las revueltas estudiantiles y obreras desbordó las fronteras francesas, alcanzando su punto más álgido en <strong>Italia</strong> y <strong>Alemania Occidental</strong>. En Italia, donde las convulsiones provocadas por las primeras fases de la globalización industrial se sintieron con una intensidad extrema, las huelgas masivas de los trabajadores de la FIAT en Turín —durante el llamado <em>Autunno Caldo</em> (Otoño Caliente) de 1969 y el posterior surgimiento del movimiento de la <em>Autonomia</em>— enarbolaron la consigna <em>«¡Vietnam está en nuestras fábricas!»</em>, conectando directamente la explotación fabril con el imperialismo global y rechazando la tutela tanto del Estado como del Partido Comunista Italiano y los sindicatos. Al mismo tiempo, en Alemania Occidental, la Nueva Izquierda estudiantil, inicialmente nutrida por la lectura apasionada de la Escuela de Fráncfort (Adorno y, sobre todo, Herbert Marcuse), comenzaba a chocar con los límites del pragmatismo socialdemócrata y con las tentaciones vanguardistas que llevarían a sectores minoritarios hacia la lucha armada, mientras otros buscaban alternativas antiautoritarias y micropolíticas. Finalmente, en el ámbito de la salud mental europea, el final de los años sesenta fue testigo del auge internacional del movimiento de la <strong>antipsiquiatría</strong>, encabezado por <strong>R. D. Laing</strong> y <strong>David Cooper</strong> en Inglaterra y por <strong>Franco Basaglia</strong> en Italia. Aunque Deleuze y Guattari mantuvieron una alianza crítica y tensa con la antipsiquiatría anglosajona e italiana, compartían con ella el cuestionamiento radical del manicomio como institución de encierro legal y la urgencia de politizar la locura, preparando así el terreno europeo sobre el cual estallaría la propuesta del esquizoanálisis.</p>
+            </section>
+
+            <section id="sec-2" class="chapter">
+                <h2 class="section-title">2. El laboratorio francés (1968-1972): Crisis política pos-Mayo del 68 y batallas filosóficas en París (Ítem 3)</h2>
+                <p>Si el contexto mundial proporcionó la materia prima histórica y geopolítica de <em>El Anti-Edipo</em>, la situación interna de Francia entre 1968 y 1972 constituyó el laboratorio inmediato donde se fraguaron sus armas conceptuales. En la primavera de 1972, cuando el libro vio la luz, Francia distaba mucho de haber retornado a la calma burguesa: a solo cuatro años de Mayo del 68, la agitación política e intelectual seguía al rojo vivo en las calles, las fábricas, las cárceles y las universidades. Para entender qué discutían y contra quiénes combatían Deleuze y Guattari en cada página de su obra, es preciso examinar las dos dimensiones inseparables del escenario francés: la encrucijada política pos-Mayo del 68 y la guerra teórica contra los paradigmas hegemónicos de la filosofía y las ciencias humanas en París.</p>
+
+                <h3 id="sec-2a" class="subsection-title">A. El problema político en Francia: El acontecimiento de Mayo del 68, la traición burocrática y el enigma del «fascismo en nuestras cabezas»</h3>
+                <p>Entre mayo y junio de 1968, Francia vivió el mayor movimiento de masas de su historia moderna, la huelga general más vasta jamás registrada en el movimiento obrero francés —con cerca de nueve millones de trabajadores en paro— y la única insurrección general que el mundo capitalista sobredesarrollado conoció tras la Segunda Guerra Mundial. Como subraya Kristin Ross, la potencia inaudita de Mayo del 68 residió en que no se limitó a una protesta estudiantil ni a una demanda salarial corporativa, sino que operó una «crisis en el funcionalismo» y una desclasificación generalizada: los estudiantes dejaron de funcionar como estudiantes, los obreros como obreros y los campesinos como campesinos, produciendo un encuentro transversal y una «contaminación cultural» entre grupos heterogéneos que sincronizaron sus temporalidades al margen de toda representación estatal o partidaria. Para Deleuze y Guattari, Mayo del 68 fue un «acontecimiento puro», libre de toda causalidad normativa, un fenómeno colectivo de sentido en el que la sociedad percibió de golpe lo intolerable y gritó: <em>«Dadme algo posible, o me asfixio»</em>, engendrando así una nueva subjetividad.</p>
+                <p>Sin embargo, el punto de partida directo de <em>El Anti-Edipo</em> en 1969 fue la profunda perplejidad, la incertidumbre e incluso la angustia de ambos autores ante el modo en que ese inmenso flujo de deseo revolucionario fue contenido, reprimido y liquidado tras junio de 1968. Esa liquidación no fue obra exclusiva del régimen del general Charles de Gaulle y de la policía, sino también —y de manera decisiva— de los grandes aparatos burocráticos de la izquierda tradicional: el <strong>Partido Comunista Francés (PCF)</strong>, liderado por figuras como Georges Marchais, y la <strong>Confederación General del Trabajo (CGT)</strong> de Georges Séguy. Durante toda la crisis de Mayo, la lógica policial del Estado y la burocracia sindical trabajaron de consuno para impedir el contacto físico y político entre los estudiantes radicalizados y los obreros en las fábricas (como ocurrió en la batalla de la fábrica de Flins en junio de 1968), desmovilizando las huelgas mediante los acuerdos de Grenelle y aliándose de facto con las fuerzas gaullistas del orden. Para Deleuze, Guattari y toda la izquierda no comunista, el PCF y la CGT quedaron desenmascarados como fuerzas profundamente conservadoras y contrarrevolucionarias, «perros guardianes» integrados en las relaciones de producción capitalistas y empeñados en alcanzar el poder estatal mediante alianzas electorales como el «Programa Común» de la Unión de la Izquierda firmado con los socialistas en 1972.</p>
+                <p>Al mismo tiempo, los años que transcurrieron entre 1968 y 1972 estuvieron marcados por la efervescencia del llamado <strong>izquierdismo (<em>gauchisme</em>)</strong> y el surgimiento de nuevos movimientos micropolíticos. Por un lado, las organizaciones maoístas —como la <em>Union des jeunesses communistes marxistes-léninistes</em> (UJCML), surgida en 1966 entre los discípulos de Althusser en la rue d'Ulm, y más tarde la <strong>Gauche Prolétarienne (GP)</strong> liderada por Benny Lévy y Alain Geismar, cuyo periódico <em>La Cause du peuple</em> fue dirigido y defendido en las calles por el propio Jean-Paul Sartre— impulsaron el movimiento de los <em>établis</em> (intelectuales y estudiantes que abandonaban la universidad para proletarizarse trabajando en las cadenas de montaje de las fábricas). La tensión entre la militancia maoísta y la represión patronal y estatal alcanzó su clímax dramático el <strong>25 de febrero de 1972</strong>, apenas unos días antes de la puesta en venta de <em>El Anti-Edipo</em>, cuando el joven obrero maoísta <strong>Pierre Overney</strong> fue asesinado a tiros por un guardia de seguridad en las puertas de la fábrica Renault-Billancourt; su funeral en París, el <strong>4 de marzo de 1972</strong>, congregó a doscientas mil personas y demostró la vitalidad persistente de la contestación radical. Por otro lado, la imposibilidad de subsumir todas las formas de opresión bajo el lenguaje marxista-leninista tradicional provocó la implosión de grupos antijerárquicos como <em>Vive la Révolution!</em> (1969-1971) y dio a luz a movimientos autónomos radicalmente nuevos: el <strong>Movimiento de Liberación de las Mujeres (MLF)</strong>, el <strong>Frente Homosexual de Acción Revolucionaria (FHAR)</strong> —en el que Guattari participó activamente—, las luchas antipsiquiátricas y el <strong>Grupo de Información sobre las Prisiones (GIP)</strong>, fundado en 1971 por <strong>Michel Foucault</strong> con la participación activa de Gilles Deleuze.</p>
+                <p>Esta experiencia en el GIP llevó a Deleuze y Foucault, en su célebre diálogo de 1972 («Los intelectuales y el poder»), a reformular por completo el papel del intelectual: frente al «intelectual clásico o universal» sartriano que pretendía hablar como conciencia representativa de las masas, Deleuze afirmó —retomando una fórmula de Guattari— que <em>«todos somos grupúsculos»</em>, y que la teoría ya no es una totalización sino una «caja de herramientas» local y un sistema de relevos dentro de una multiplicidad de luchas contra el poder. No obstante, Deleuze y Guattari miraban con extrema desconfianza la deriva de muchos grupúsculos maoístas, trotskistas y leninistas pos-68, los cuales, obsesionados con «tomar el poder del Estado» o con exigir absurdas sesiones de autocrítica masoquista a los profesores universitarios, reproducían en su interior el mismo centralismo burocrático, el mismo culto al líder y el mismo ascetismo militante que el estalinismo.</p>
+                <p>De esta doble constatación —la sumisión de las masas a las burocracias sindicales y partidarias en 1968, y la reproducción del autoritarismo dentro de los propios grupos revolucionarios— nació el problema político fundamental de <em>El Anti-Edipo</em>. Retomando la pregunta que Spinoza había planteado en la filosofía política y que Wilhelm Reich había reactualizado frente al ascenso del nazismo, Deleuze y Guattari interrogan: <strong>¿Cómo es posible que el deseo actúe en contra de los intereses de quienes desean? ¿Por qué los hombres combaten por su servidumbre tan tenazmente como si se tratara de su salvación?</strong> La respuesta de <em>El Anti-Edipo</em> distingue rigurosamente entre el <em>interés</em> (preconsciente, de clase) y el <em>deseo</em> (inconsciente, libidinal): una organización política puede ser revolucionaria por sus intereses conscientes de clase y, sin embargo, seguir siendo reaccionaria, paranoica y fascista en el nivel de sus inversiones libidinales e inconscientes. Por eso, como destacó magistralmente Michel Foucault en su prefacio de 1977 a la edición inglesa de la obra, el objetivo primordial de <em>El Anti-Edipo</em> fue combatir no solo el fascismo histórico de Hitler y Mussolini, sino también <strong>«el fascismo que está en todos nosotros, en nuestras cabezas y en nuestra conducta cotidiana, el fascismo que nos hace amar el poder, desear esa misma cosa que nos domina y nos explota»</strong> —lo que Deleuze y Guattari denominaron el <em>microfascismo</em> o fascismo molecular—.</p>
+
+                <h3 id="sec-2b" class="subsection-title">B. Las batallas filosóficas y teóricas en París: Contra el estructuralismo, el lacanismo piadoso y el freudo-marxismo</h3>
+                <p>Para llevar a cabo esta crítica micropolítica del deseo, Deleuze y Guattari tuvieron que librar una batalla frontal en el corazón del campo filosófico e intelectual parisiense de finales de los años sesenta. En la década comprendida entre el final de la guerra de Argelia (1962) y el estallido de 1968, el panorama teórico francés había experimentado el desplazamiento de la fenomenología existencialista y humanista de Jean-Paul Sartre y Maurice Merleau-Ponty por la hegemonía triunfante del <strong>estructuralismo</strong>. Encabezado por figuras magistrales como <strong>Claude Lévi-Strauss</strong> en la antropología, <strong>Jacques Lacan</strong> en el psicoanálisis, <strong>Louis Althusser</strong> en el marxismo y <strong>Roland Barthes</strong> en la semiología, el paradigma estructuralista había ofrecido una potente crítica del sujeto humanista («descentrando» la conciencia individual en favor de sistemas inconscientes de reglas lingüísticas y simbólicas), pero había pagado un altísimo precio político y ontológico: al privilegiar la estructura sincrónica cerrada, las oposiciones binarias, la invariancia formal y el «imperialismo del significante» por encima del acontecimiento histórico, del devenir y de la producción real, el estructuralismo ofrecía una visión ahistórica del mundo justo cuando las posibilidades de transformación social parecían bloqueadas.</p>
+                <p><em>El Anti-Edipo</em> fue concebido explícitamente como una <strong>«máquina de guerra contra el estructuralismo»</strong> destinada a demoler este paradigma desde dentro, oponiendo el concepto dinámico y productivo de <strong>máquina</strong> al concepto estático y representacional de <strong>estructura</strong>, y la lógica de las <strong>multiplicidades</strong> a los binarismos estructuralistas. En esta ofensiva, el libro intervino directamente en cuatro grandes debates filosóficos que dividían a la intelectualidad francesa de 1972:</p>
+                <ol class="academic-list">
+                    <li><strong>La crítica de la antropología estructuralista del intercambio (Lévi-Strauss) mediante la genealogía nietzscheana de la deuda y la etnología política:</strong> En el extenso tercer capítulo de <em>El Anti-Edipo</em> («Salvajes, bárbaros, civilizados»), Deleuze y Guattari rechazan la tesis estructuralista de Claude Lévi-Strauss según la cual la sociedad primitiva se funda en el intercambio recíproco (de mujeres, bienes y signos) y en la prohibición del incesto como paso de la naturaleza a la cultura. Apoyándose en la <em>Genealogía de la moral</em> de <strong>Friedrich Nietzsche</strong>, en la noción de gasto improductivo (<em>dépense</em>) de <strong>Georges Bataille</strong> y en las investigaciones antropológicas contemporáneas de <strong>Pierre Clastres</strong> sobre las sociedades «contra el Estado», los autores demuestran que el <em>socius</em> primitivo no funciona por intercambio sino por la inscripción cruel de códigos sobre los cuerpos (territorialización y deuda finita), mientras que el Imperio bárbaro o despótico introduce el aparato de Estado (<em>Urstaat</em>), la sobrecodificación y la deuda infinita, preparando el terreno histórico para el capitalismo, el cual funciona de una manera inédita en la historia universal: no mediante códigos ni sobrecodificaciones, sino mediante una <strong>axiomática de flujos descodificados y desterritorializados</strong> (el capital financiero abstracto y la fuerza de trabajo libre).</li>
+                    <li><strong>El ajuste de cuentas con el psicoanálisis freudiano y la ortodoxia lacaniana:</strong> Durante los años sesenta, el psicoanálisis había alcanzado en Francia un prestigio inmenso gracias a la enseñanza de <strong>Jacques Lacan</strong>, quien había releído a Freud a través de la lingüística estructural de Saussure y Jakobson («el inconsciente está estructurado como un lenguaje»). Sin embargo, tras Mayo del 68, gran parte de la institución psicoanalítica francesa había mostrado su rostro más conservador y normalizador, llegando a interpretar la revuelta estudiantil y obrera como una simple regresión neurótica e infantil contra la autoridad del Padre (tal como hicieron los psicoanalistas Bela Grunberger y Janine Chasseguet-Smirgel bajo el pseudónimo de «André Stéphane» en <em>L'univers contestationnaire</em> de 1969). Deleuze y Guattari lanzan en <em>El Anti-Edipo</em> un ataque devastador contra dos pilares sagrados del psicoanálisis: el <strong>complejo de Edipo</strong> (el «familiarismo» que aplasta o rebaja [<em>rabattement</em>] todo deseo social e histórico sobre el estrecho triángulo burgués papá-mamá-yo) y la concepción platónico-hegeliana y lacaniana del <strong>deseo como carencia (<em>manque</em>)</strong>, castración y sumisión a la Ley trascendente del Gran Otro.<br><br>
+                    Su relación con el propio Lacan fue sumamente sutil y estratégica: Deleuze y Guattari declararon que su objetivo era «prestarle una ayuda esquizofrénica a Lacan» rescatando el lado más radical de su pensamiento —su teoría de lo <strong>Real</strong> y de los objetos parciales (el <em>objet petit a</em> entendido como máquina deseante)— contra la piadosa ortodoxia de sus discípulos en la Escuela Freudiana, quienes habían reducido lo Real a un mero «hueco» o impasse interno dentro del orden Simbólico. Dado que para el propio Lacan la psicosis (la esquizofrenia) era el estado que se hallaba en contacto directo con lo Real al estar «forcluida» del orden simbólico edípico, Deleuze y Guattari tomaron la esquizofrenia —entendida como proceso de producción y no como entidad clínica— como el verdadero modelo del inconsciente: <strong>el inconsciente no es un teatro donde se representa eternamente la tragedia griega de Edipo y Hamlet, sino una fábrica, un taller incansable de producción deseante</strong>.</li>
+                    <li><strong>La superación del «marxismo científico» de Althusser y de las síntesis freudo-marxistas:</strong> En el campo marxista francés, <strong>Louis Althusser</strong> había intentado salvar la cientificidad del marxismo mediante un antihumanismo teórico estructuralista que, tras 1968, derivó en su influyente pero profundamente pesimista teoría de los «Aparatos Ideológicos del Estado» (según la cual los individuos son interpelados como sujetos única y exclusivamente «por y para su sujeción», dejando escaso margen para la ruptura revolucionaria). Simultáneamente, diversos pensadores de la época intentaban construir un <strong>freudo-marxismo</strong> (al estilo de Wilhelm Reich, Herbert Marcuse o Jean Baudrillard) tratando de articular externamente la economía política de Marx con la psicología de Freud mediante el concepto puente de «ideología» o de «circulación e intercambio». Deleuze y Guattari rompen de raíz con todas estas tentativas: para el esquizoanálisis, no hay que tender puentes artificiales entre Marx y Freud porque <strong>la economía libidinal y la economía política son una sola y misma cosa</strong>. Leyendo a Freud a través de los <em>Grundrisse</em> de Marx, argumentan que así como Adam Smith y David Ricardo descubrieron la esencia subjetiva abstracta de la riqueza en el <em>trabajo en general</em>, pero volvieron a alienarla inmediatamente en la propiedad privada del capital, del mismo modo Freud tuvo la genialidad de descubrir la esencia subjetiva abstracta del deseo en la <em>libido</em>, pero volvió a alienarla y reterritorializarla inmediatamente en la propiedad privada de la familia nuclear (el complejo de Edipo). Bajo el capitalismo, el triángulo edípico cumple una función estrictamente política y económica: cuando la máquina capitalista descodifica todos los flujos sociales tradicionales y empuja a la sociedad hacia su límite exterior absoluto (la esquizofrenia como libre flujo del deseo), el capitalismo necesita desesperadamente inventar un <strong>límite interior artificial</strong> —la familia nuclear privatizada y el Edipo— para reterritorializar a los sujetos, neutralizar la potencia revolucionaria del deseo y mantenerlos dóciles ante la explotación económica.</li>
+                    <li><strong>La constelación posestructuralista de las filosofías de la diferencia, el poder y la economía libidinal:</strong> Finalmente, la escritura de <em>El Anti-Edipo</em> se nutrió de un intenso diálogo —y a la vez de una clara diferenciación— con la nueva generación de filósofos franceses que estaban demoliendo la dialéctica hegeliana y la fenomenología: la genealogía del poder y la antipsiquiatría histórica de <strong>Michel Foucault</strong> (cuya <em>Historia de la locura</em> y su perspectiva antihumanista y nietzscheana de la voluntad de poder convergían estrechamente con Deleuze); la economía pulsional de <strong>Jean-François Lyotard</strong> (quien rechazaba también la primacía del significante en favor de las intensidades energéticas); la deconstrucción del logocentrismo y del falocentrismo de <strong>Jacques Derrida</strong>, <strong>Hélène Cixous</strong>, <strong>Luce Irigaray</strong> y <strong>Julia Kristeva</strong>; y la vitalidad de la recién fundada <strong>Universidad experimental de París-VIII en Vincennes</strong> (diciembre de 1968), donde Deleuze, Foucault, Lyotard y François Châtelet enseñaban ante aulas abarrotadas de estudiantes militantes, extranjeros y trabajadores sin título de bachillerato, convirtiendo la filosofía misma en un campo de experimentación política directa.</li>
+                </ol>
+            </section>
+
+            <div id="bloque-2" class="block-banner">
+                BLOQUE II: Vidas Paralelas, el Agenciamiento de Escritura y la Recepción Mundial (Ítems 1 y 2)
+            </div>
+
+            <section id="sec-3" class="chapter">
+                <h2 class="section-title">3. Vidas paralelas y el agenciamiento colectivo de enunciación: ¿Quiénes fueron Gilles Deleuze y Félix Guattari? (Ítem 1)</h2>
+                <p>En la primavera de 1968, Gilles Deleuze y Félix Guattari habitaban universos sociales, institucionales e intelectuales tan radicalmente heterogéneos que, como señala su biógrafo François Dosse, existían muy pocas probabilidades estadísticas de que sus caminos llegaran a cruzarse alguna vez. Deleuze era ya un filósofo universitario consagrado de cuarenta y tres años, autor de una decena de monografías rigurosas que habían renovado la historia de la filosofía en Francia; Guattari, cinco años menor, era un psicoanalista militante, activista de extrema izquierda y codirector de una clínica psiquiátrica experimental que, a sus treinta y nueve años, aún no había publicado un solo libro propio. Durante décadas, la crítica hostil o reduccionista —desde comentaristas tempranos hasta lecturas contemporáneas como las de Alain Badiou o Slavoj Žižek— ha intentado explicar esta alianza mediante el falso mito de los «dos Deleuze»: o bien lamentando que el activista «esquizo» Guattari hubiera corrompido y desviado al «buen» filósofo académico hacia el delirio político pos-68, o bien sosteniendo paternalistamente que un Deleuze elitista y encerrado en la metafísica necesitaba la «materia bruta» militante y clínica de Guattari para luego «sobrecodificarla» con su estilo filosófico. Un examen riguroso de las biografías particulares de ambos autores, de lo que estaban haciendo exactamente entre 1968 y 1969 y de los archivos genéticos de la obra demuestra que ambas caricaturas son insostenibles: como subraya Ian Buchanan, la columna vertebral teórica de <em>El Anti-Edipo</em> prolongaba directamente la ontología desarrollada por Deleuze en sus obras previas, mientras que Guattari aportaba una sofisticada conceptualización propia del inconsciente maquínico y de la historia universal que transformó por igual el pensamiento de ambos.</p>
+
+                <h3 id="sec-3a" class="subsection-title">A. Gilles Deleuze (1925-1995): Del «hermano del héroe» a la ontología de la diferencia pura</h3>
+                <p>Nacido en París el 18 de enero de 1925 en el seno de una familia burguesa, conservadora y de derechas (su padre, Louis Deleuze, era ingeniero, y su madre, Odette Camaüer, provenía de la burguesía acomodada), la infancia y primera juventud de Gilles Deleuze estuvieron marcadas por una herida familiar imborrable que François Dosse sintetiza bajo la figura de «el hermano del héroe». Cuando estalló la Segunda Guerra Mundial en septiembre de 1939, sus padres enviaron a Gilles, de catorce años, junto con su hermano mayor, Georges, a un internado en Bretaña instalado en un hotel de Deauville; durante la Ocupación alemana, mientras Gilles regresaba a París para cursar el bachillerato en el Liceo Carnot, su hermano Georges se unió a la Resistencia francesa, fue arrestado por los nazis y murió durante su deportación hacia el campo de concentración de Auschwitz. Mientras sus padres veneraban la memoria heroica del primogénito caído, el joven Gilles encontró su propia línea de fuga vital en el descubrimiento apasionado de la filosofía. En 1941-1942 trabó una estrecha amistad con Michel Tournier —quien lo introdujo en las clases de Maurice de Gandillac en el Liceo Pasteur— y en 1943, en su último año en el Liceo Carnot, quedó deslumbrado por las lecciones de filosofía del profesor M. Vial, descubriendo que los conceptos filosóficos poseían una vida tan intensa y dramática como los personajes de una novela. En 1943 asistió junto a Tournier a los encuentros culturales y clandestinos organizados por Marie-Magdeleine Davy en el castillo de La Fortrelle, donde entró en contacto con figuras como Gaston Bachelard, Jean Paulhan, Michel Leiris, Jean Wahl y Jean Hyppolite.</p>
+                <p>Tras cursar las exigentes clases preparatorias (<em>hypokhâgne</em> y <em>khâgne</em>) en el prestigioso Liceo Louis-le-Grand bajo la tutela de dos maestros antagónicos pero decisivos —el cartesiano <strong>Ferdinand Alquié</strong> y el gran introductor de Hegel en Francia, <strong>Jean Hyppolite</strong>— y entablar amistad con su condiscípulo Claude Lanzmann, Deleuze no logró aprobar el examen de ingreso a la Escuela Normal Superior (ENS), pero obtuvo una beca para preparar la <em>agrégation</em> de filosofía en la Sorbona (que aprobó brillantemente en 1948), donde estudió con <strong>Georges Canguilhem</strong>, <strong>Gaston Bachelard</strong> y <strong>Maurice de Gandillac</strong>, quien sería su director de tesis. Entre 1948 y 1957 inició su legendaria carrera docente como profesor de filosofía en liceos de provincia (Amiens entre 1948 y 1952, donde a veces tocaba la sierra musical para sus alumnos cuando se sentía fatigado, luego Orléans y finalmente el Liceo Louis-le-Grand en París), mientras vivía durante siete años en una modesta habitación alquilada en el Hôtel de la Paix, en la Île Saint-Louis, con las paredes enteramente tapizadas de reproducciones pictóricas. En agosto de 1956 contrajo matrimonio con Denise Paul «Fanny» Grandjouan —traductora al francés de D. H. Lawrence, cuya presencia sería fundamental tanto en su vida como en la gestación material de <em>El Anti-Edipo</em>—, pasando luego a enseñar en la Sorbona (1957-1960), a investigar en el CNRS (1960-1964) y a ejercer como profesor en la Universidad de Lyon (1964-1969).</p>
+                <p>Durante las décadas de 1950 y 1960, en una atmósfera universitaria francesa aplastada por la escolástica hegeliana, la fenomenología existencialista y el marxismo ortodoxo, Deleuze concibió la historia de la filosofía como un «arte del retrato» (y más tarde como una suerte de «sodomía filosófica» o <em>enculage</em>, consistente en llegar por la espalda de un autor clásico y hacerle engendrar un hijo monstruoso pero propio). A través de una serie de monografías magistrales sobre pensadores «heterodoxos» o malditos de la tradición occidental —<em>Empirismo y subjetividad</em> sobre David Hume (1953), <em>Nietzsche y la filosofía</em> (1962), <em>La filosofía crítica de Kant</em> (1963), <em>Proust y los signos</em> (1964), <em>El bergsonismo</em> (1966), <em>Presentación de Sacher-Masoch: Lo frío y lo cruel</em> (1967) y <em>Spinoza y el problema de la expresión</em> (1968)—, Deleuze construyó un frente vitalista e inmanentista apoyado en la tríada <strong>Nietzsche-Bergson-Spinoza</strong>.</p>
+                <p><strong>¿Qué estaba haciendo exactamente Deleuze entre 1968 y el verano de 1969, cuando conoció a Guattari?</strong> En ese momento preciso, Deleuze atravesaba una doble encrucijada intelectual y biológica decisiva. En el plano intelectual y político, había participado con entusiasmo en los acontecimientos de Mayo del 68 en la Universidad de Lyon y acababa de publicar, entre finales de 1968 y principios de 1969, las dos obras cumbres donde por fin hablaba «en su propio nombre»: su tesis doctoral principal, <strong><em>Diferencia y repetición</em></strong> (1968, dirigida por Gandillac), su tesis complementaria sobre Spinoza (dirigida por Alquié) y <strong><em>Lógica del sentido</em></strong> (1969). En <em>Diferencia y repetición</em>, Deleuze liberaba los conceptos de diferencia y repetición de su subordinación platónica, aristotélica y hegeliana a la Identidad y la Representación, introduciendo además la teoría de las tres síntesis pasivas del tiempo y la relación diferencial <em>dy/dx</em> que servirían de armazón a <em>El Anti-Edipo</em>; en <em>Lógica del sentido</em>, exploraba ya de frente el problema de la esquizofrenia y la psicosis a través de Lewis Carroll y del lenguaje de las profundidades corporales de Antonin Artaud, introduciendo por primera vez en su obra los conceptos de «objetos parciales» y de «Cuerpo sin Órganos». Sin embargo, en el plano físico, Deleuze se hallaba al borde del agotamiento: tras haber sufrido de tuberculosis desde su juventud, en 1968 tuvo que someterse a una gravísima operación quirúrgica de toracoplastia en la que se le extirpó un pulmón, justo después de defender su doctorado. En el verano de 1969, recién nombrado profesor para el curso siguiente en la flamante y contestataria <strong>Universidad experimental de París-VIII en Vincennes</strong> (por invitación de Michel Foucault y François Châtelet), Deleuze se encontraba retirado y convaleciente en su pequeña casa de campo en <strong>Saint-Léonard-de-Noblat</strong>, en la región rural del Lemosín (<em>Limousin</em>), tratando de recuperar el aliento y buscando una salida práctica y conceptual para que la filosofía dejara de ser un discurso meramente académico.</p>
+
+                <h3 id="sec-3b" class="subsection-title">B. Félix Guattari (1930-1992): La psicoterapia institucional en La Borde, el lacanismo y la militancia revolucionaria</h3>
+                <p>En las antípodas de la carrera universitaria de Deleuze se situaba la vida turbulenta y polifónica de Pierre-Félix Guattari. Nacido el 30 de abril de 1930 en <strong>La Garenne-Colombes</strong>, un suburbio obrero e industrial del noroeste de París (en el número 92 de la rue de l'Aigle, como recordaría en sus seminarios y sueños), Guattari creció en el seno de una familia pequeño-burguesa cuya pequeña fábrica de chocolates había sido fundada por su abuelo Louis Guattari en 1934. Su despertar político y vital estuvo ligado desde la adolescencia al movimiento de los <em>Auberges de jeunesse</em> (albergues juveniles) en la posguerra y a la decisiva influencia de dos hermanos oriundos de su mismo suburbio: <strong>Fernand Oury</strong>, su maestro en la escuela secundaria e impulsor de la «pedagogía institucional», y <strong>Jean Oury</strong>, joven psiquiatra apasionado por el surrealismo y el psicoanálisis lacaniano. Fue Jean Oury quien convenció al brillante pero disperso joven Guattari de abandonar sus estudios inconclusos de farmacia y filosofía en la Sorbona para sumergirse de lleno en dos mundos que definirían toda su existencia: la psiquiatría institucional y el seminario de <strong>Jacques Lacan</strong> en París, al que Guattari asistió asiduamente desde sus inicios en la década de 1950, llegando a analizarse personalmente en el diván del maestro.</p>
+                <p>Desde mediados de los años cincuenta hasta finales de los sesenta, la vida de Guattari estuvo dividida en grandes territorios simultáneos:</p>
+                <ol class="academic-list">
+                    <li><strong>El laboratorio clínico y micropolítico de La Borde:</strong> En 1953, Jean Oury fundó la clínica psiquiátrica experimental de <strong>La Borde</strong> en el castillo de Cour-Cheverny (en la región de Loir-et-Cher, cerca de Blois), inspirada en la «psicoterapia institucional» que el psiquiatra catalán republicano y marxista <strong>François Tosquelles</strong> había desarrollado durante la guerra en el hospital de Saint-Alban (cuyo principio rector era que no se puede curar a los enfermos mentales sin «curar» y psicoanalizar simultáneamente a la propia institución hospitalaria que los encierra). Guattari se instaló de forma permanente en La Borde en 1955 —salvando incluso a la clínica de una bancarrota de treinta millones de francos a los veinticinco años gracias a su capacidad de persuasión ante un banquero de Blois— y se convirtió en el eje organizativo y político de esta «máquina bicéfala» junto a Oury. Con el objetivo de «abolir el imaginario de casta» y la jerarquía médico-paciente, Guattari organizó la vida cotidiana de la clínica (que trataba mayoritariamente a pacientes psicóticos y esquizofrénicos) mediante comités autogestionados en «La Rotonda» y mediante la creación de <strong>«La Parrilla» (<em>La Grille</em>)</strong>: un sistema rotativo de horarios y tareas en el que médicos, psicoanalistas, enfermeros, cocineros, limpiadoras y pacientes participaban por igual tanto en el mantenimiento material del hospital (limpieza, cocina, lavandería) como en las actividades terapéuticas, teatrales y culturales. De esta experiencia clínica directa con la psicosis —en la que descubrió que los esquizofrénicos no encajaban en la transferencia dual del diván neurótico sino que requerían agenciamientos colectivos— nacieron los conceptos fundamentales que Guattari formuló en sus artículos de los años sesenta: la <strong>transversalidad</strong> (1964) y la oposición entre <strong>grupos sometidos (<em>groupes assujettis</em>)</strong> —que reciben su ley desde el exterior y se protegen mediante jerarquías paranoicas— y <strong>grupos-sujeto (<em>groupes-sujets</em>)</strong> —que asumen su propia finitud, su no-sentido y su capacidad de autoinstitución revolucionaria—.</li>
+                    <li><strong>La militancia en la extrema izquierda y el activismo grupuscular:</strong> Paralelamente a La Borde, Guattari fue durante dos décadas un militante político incansable. Ingresó muy joven en el Partido Comunista Francés (PCF), del que fue expulsado por sus posiciones trotskistas (vinculadas a la corriente de Michel Pablo), participando luego en la creación del periódico disidente <strong><em>La Voie communiste</em></strong> (1958-1965) —donde apoyó activamente la lucha anticolonial del FLN argelino—, en la <em>Opposition de Gauche</em>, en las protestas contra la guerra de Vietnam y, en la primavera de 1968, en el corazón mismo del <strong>Movimiento del 22 de Marzo</strong> y en la ocupación del Teatro del Odéon en París. Además, Guattari llevó a La Borde a toda una «invasión bárbara» de jóvenes estudiantes militantes de filosofía y ciencias humanas de la Sorbona —su «banda», que incluía a futuros grandes antropólogos como <strong>Lucien Sebag</strong>, <strong>Pierre Clastres</strong>, <strong>Michel Cartry</strong> y <strong>Alfred Adler</strong>—, tejiendo una red interdisciplinaria que cristalizó en 1965 en la creación de la <strong>FGERI</strong> (Federación de Grupos de Estudio e Investigación Institucional), su revista <strong><em>Recherches</em></strong> y el <strong>CERFI</strong> (Centro de Estudios, Investigación y Formación Institucional), un colectivo autogestionado de sociólogos, urbanistas, psiquiatras, economistas y militantes que investigaba las formas de poder institucional con fondos de contratos estatales que ellos mismos desviaban para financiar la militancia revolucionaria.</li>
+                </ol>
+                <p><strong>¿Qué estaba haciendo exactamente Guattari en el momento en que conoció a Deleuze en 1969?</strong> En ese preciso instante, Guattari acababa de ser nombrado finalmente <em>analyste membre</em> de la <strong>Escuela Freudiana de París (EFP)</strong> dirigida por Jacques Lacan (en 1969), pero su relación personal y teórica con Lacan había entrado en una crisis profunda e irreversible. Guattari veía con amargura cómo Lacan y su círculo más estrecho (encabezado por su yerno Jacques-Alain Miller y el grupo de los <em>Cahiers pour l'Analyse</em>) estaban transformando la EFP en una institución jerárquica y dogmática, despolitizando el psicoanálisis mediante un culto estructuralista al Significante y rechazando las investigaciones colectivas de La Borde. Precisamente para un congreso de la Escuela Freudiana de París en <strong>abril de 1969</strong>, Guattari había redactado una ponencia explosiva titulada <strong>«Máquina y estructura» (<em>Machine et structure</em>)</strong>, en la que utilizaba por primera vez los conceptos recién publicados por Gilles Deleuze en <em>Diferencia y repetición</em> y <em>Lógica del sentido</em> para atacar el estructuralismo lacaniano, sosteniendo que mientras la «estructura» pertenece al orden de la representación general y el significante, la <strong>«máquina»</strong> pertenece al orden de la producción repetitiva, singular y deseante. Al mismo tiempo, sus amigos y colegas en La Borde —como Jean Oury y el joven médico <strong>Jean-Pierre Muyard</strong>— veían con preocupación que Guattari se dispersaba en mil reuniones políticas en París sin lograr sentarse a escribir un libro que sistematizara sus brillantes intuiciones teóricas.</p>
+
+                <h3 id="sec-3c" class="subsection-title">C. El encuentro del verano de 1969 y el funcionamiento de la «máquina de escritura» (1969-1972)</h3>
+                <p>El eslabón humano que conectó estos dos universos fue el doctor <strong>Jean-Pierre Muyard</strong>, médico psiquiatra que trabajaba con Guattari en La Borde y que era a la vez amigo y antiguo alumno de Gilles Deleuze en la Universidad de Lyon (además de ser quien atendía médicamente a Deleuze por su afección pulmonar). Muyard concibió la idea de poner en contacto a ambos pensadores con un doble propósito: sacar a Deleuze de su aislamiento posoperatorio conectándolo con la psiquiatría viva y la militancia, y obligar a un hiperactivo Guattari a concentrarse en el trabajo teórico junto a un filósofo riguroso. Por ello, cuando <em>El Anti-Edipo</em> se publicó en 1972, los autores estamparon en la primera página una dedicatoria conjunta a Muyard: <em>«A Jean-Pierre, el verdadero culpable, el instigador de esta empresa perversa»</em>.</p>
+                <p>Tras un primer intercambio epistolar en abril, mayo y junio de 1969, el encuentro histórico tuvo lugar a <strong>mediados de junio de 1969</strong> en la casa de vacaciones de Deleuze en <strong>Saint-Léonard-de-Noblat (Lemosín)</strong>, adonde Guattari viajó en automóvil acompañado por Muyard y François Fourquet. Como recordaría el propio Guattari, el punto de partida de aquella larga conversación inaugural no fue la puesta en común de un saber previo ya constituido, sino <em>«la acumulación de nuestras incertidumbres, e incluso un cierto desconcierto y malestar ante el giro que habían tomado los acontecimientos de Mayo del 68»</em>. Deleuze quedó fascinado de inmediato por la ponencia de Guattari «Máquina y estructura», por sus notas clínicas sobre las <em>Memorias de un neurópata</em> del presidente Daniel Paul Schreber y por su concepto de <strong>antiproducción</strong>. En una carta decisiva fechada el <strong>29 de julio de 1969</strong>, antes de viajar en agosto a visitar a Guattari en el <strong>castillo de Vaujoin en Dhuizon</strong> (una propiedad alquilada por Guattari cerca de La Borde en el Loir-et-Cher), Deleuze le escribió expresándole su entusiasmo por la coherencia del concepto de antiproducción y proponiéndole formalmente trabajar juntos: ante la pregunta de Deleuze sobre qué mecanismos eran capaces de afectar directamente al inconsciente sin pasar por la representación familiar, Guattari respondió con la tesis que abriría el libro: <strong>el inconsciente no es un teatro ni una estructura lingüística, sino una máquina</strong>.</p>
+                <p>Durante casi tres años ininterrumpidos, desde el verano de 1969 hasta finalizar el manuscrito el 31 de diciembre de 1971, mientras Deleuze comenzaba a impartir sus célebres seminarios de los martes por la mañana en la Universidad de París-VIII Vincennes y Guattari continuaba dividiendo su semana entre la clínica de La Borde y sus grupos militantes en París, ambos pusieron en marcha un dispositivo de creación colectiva sin precedentes en la historia de la filosofía moderna. Gracias a la publicación en 2004 de los archivos de Guattari depositados en el IMEC (<em>Écrits pour l'Anti-Œdipe</em>, editados por Stéphane Nadaud) y a las declaraciones de ambos autores, hoy conocemos con exactitud verificada cómo operó esta «máquina de escritura»:</p>
+                <ol class="academic-list">
+                    <li><strong>La política disensual del «Usted» (<em>vouvoiement</em>):</strong> Aunque en los ambientes izquierdistas pos-68 todo el mundo se tuteaba de inmediato como «camaradas», Deleuze y Guattari mantuvieron durante más de veinte años el trato formal de «usted» (<em>vous</em>) tanto en persona como en toda su correspondencia. Como explicó Guattari, lejos de ser una coquetería burguesa, aquel <em>vouvoiement</em> respondía a una verdadera «política disensual» y a una «cultura de la heterogeneidad» que les permitía preservar la singularidad y la distancia productiva del otro sin fundirse en una falsa identificación: <em>«Gilles es mi amigo, no mi compinche [mon ami, non mon copain]»</em>.</li>
+                    <li><strong>El protocolo epistolar y el papel crucial de Fanny Deleuze:</strong> Al inicio de la colaboración, dado que Guattari se sentía intimidado para escribir textos largos de filosofía frente a un autor consagrado, Deleuze le propuso un método epistolar singular: Guattari debía escribir todo lo que le pasara por la cabeza —notas teóricas relámpago, fichas de lectura (sobre el lingüista danés Louis Hjelmslev, el antropólogo André Leroi-Gourhan, Marx, Freud, Lacan o el propio Spinoza de Deleuze), esquemas conceptuales, sueños nocturnos y entradas de su diario íntimo de 1971-1972— y enviárselo por correo a Deleuze sin preocuparse por el estilo ni la ortografía. En este engranaje, <strong>Fanny Deleuze</strong> desempeñó un papel de intermediaria y transcriptora absolutamente fundamental: ella recibía los manuscritos a menudo caóticos de Guattari, los pasaba a máquina (<em>tapuscrits</em>), los ordenaba e intercalaba según las instrucciones de Félix (<em>«Fanny, por favor: para intercalar en el diario»</em>) y se los entregaba a Gilles.</li>
+                    <li><strong>El «pararrayos» y la «tormenta», los martes en París y los antropólogos del capítulo 3:</strong> Deleuze describía a Guattari como un «diamante en bruto» o como una tormenta eléctrica que producía saltos conceptuales y diagramas a una velocidad vertiginosa, mientras que él mismo se veía como un «tallador de diamantes» o un «pararrayos» que enterraba esas chispas en la tierra filosófica para hacerlas rebotar y darles consistencia sistemática. Además del intercambio postal, ambos se reunían todos los <strong>martes por la tarde</strong> en el apartamento de Deleuze en París para discutir y confrontar sus borradores como en un cuadrilátero de boxeo. La redacción final de cada capítulo —lo que Guattari llamaba «el trabajo más grande y más ingrato de finalización»— recaía sobre Deleuze, quien articulaba los materiales de ambos con su inconfundible elegancia estilística (sustituyendo sistemáticamente cualquier «yo» por el impersonal «se» [<em>on</em>]) y luego enviaba el capítulo mecanografiado a Guattari para una nueva ronda de correcciones y adiciones. Más aún, el proceso fue verdaderamente colectivo y transdisciplinario: como demuestran las carpetas del Fondo Guattari para el Capítulo 3 («Salvajes, bárbaros, civilizados»), una vez que Deleuze redactó la primera versión, Guattari convocó a sus amigos antropólogos africanistas del CNRS —<strong>Michel Cartry</strong>, <strong>Alfred Adler</strong> y <strong>Andras Zempléni</strong>— para leer el capítulo en voz alta línea por línea, enviando luego a Deleuze las observaciones etnológicas de todos ellos (sobre los Gourmantché de Níger, las teorías de Marcel Griaule, Meyer Fortes o Edmund Leach, y las investigaciones de Pierre Clastres sobre los indios guayaquíes) para matizar y enriquecer el texto definitivo.</li>
+                    <li><strong>La avispa y la orquídea:</strong> En última instancia, como explicaron al abrir <em>Mil Mesetas</em>, escribir a dos no consistió en sumar dos sujetos individuales, sino en formar un <strong>agenciamiento colectivo de enunciación</strong> (<em>«Hemos escrito El Anti-Edipo a dúo. Como cada uno de nosotros era varios, en total ya éramos muchos»</em>). Al escribir entre dos sobre la locura y la sociedad, lograron romper la dualidad tradicional de los libros de psiquiatría —donde siempre se distingue quién es el médico cuerdo que habla sobre el enfermo y quién es el loco—, produciendo una simbiosis de «captura de código» idéntica a la que el biólogo suizo Bertil Kullenberg estudiaba entre <strong>la avispa y la orquídea</strong>: un devenir cruzado donde Deleuze-se-volvía-Guattari al tiempo que Guattari-se-volvía-Deleuze.</li>
+                </ol>
+            </section>
+
+            <section id="sec-4" class="chapter">
+                <h2 class="section-title">4. El impacto de la «bomba» teórica: La recepción de <em>El Anti-Edipo</em> en Francia, Europa y el resto del mundo (Ítem 2)</h2>
+                <p>Cuando <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> apareció en los escaparates de las librerías francesas en <strong>marzo de 1972</strong> bajo el prestigioso sello de <strong>Les Éditions de Minuit</strong> (dirigido por Jérôme Lindon), su efecto en la vida intelectual y política fue descrito unánimemente como la caída de una bomba. Nadie —ni siquiera sus propios autores o su editor— había previsto que un tratado filosófico de casi quinientas páginas, plagado de neologismos complejos y desprovisto de concesiones pedagógicas, se convertiría de la noche a la mañana en un <em>best-seller</em> masivo: <strong>la primera tirada se agotó por completo en apenas tres días</strong>, obligando a la editorial a reimprimirlo de urgencia mientras jóvenes estudiantes, militantes, psiquiatras y lectores de toda condición lo devoraban en el metro y en los cafés. Como ha señalado Ian Buchanan, para comprender rigurosamente la historia de la recepción de esta obra es necesario estratificarla según tres criterios: una <strong>división intergeneracional</strong> (los contemporáneos de Deleuze y Guattari tendieron a reaccionar con mayor frialdad, recelo o escándalo que la generación joven de sus estudiantes y militantes, que lo abrazó con fervor); una <strong>división geográfica</strong> (a medida que el prestigio del libro se eclipsaba en París a finales de los años setenta, su influencia crecía exponencialmente en el extranjero); y una <strong>división disciplinaria</strong> entre la filosofía, el psicoanálisis, los estudios literarios y las ciencias sociales.</p>
+
+                <h3 id="sec-4a" class="subsection-title">A. La recepción en Francia: Entre el entusiasmo libertario, la censura de Lacan y el eclipse de los «años de invierno»</h3>
+                <p>En los meses posteriores a marzo de 1972, la prensa francesa y las grandes revistas intelectuales se volcaron apasionadamente sobre el libro, divididas entre la fascinación por su aliento libertario y el estupor ante su violencia iconoclasta y su lenguaje deliberadamente escatológico (que abría su primera línea diciendo: <em>«Ello funciona en todas partes... Ello respira, ello se calienta, ello come. Ello caga, ello besa»</em>):</p>
+                <ul class="academic-list">
+                    <li><strong>El impacto en la prensa cultural y la ruptura de viejas amistades:</strong> El 28 de abril de 1972, el diario <em>Le Monde</em> dedicó una doble página histórica a la obra: en ella, el escritor <strong>Rafaël Pividal</strong> y el filósofo <strong>François Châtelet</strong> —quien tituló su artículo <em>«El combate de un nuevo Lucrecio»</em>, celebrando el libro como el gran tratado materialista e inmanentista que liberaba a la humanidad de los nuevos dioses del temor y de la culpa psicoanalítica— se enfrentaron al virulento ataque del psiquiatra <strong>Cyrille Koupernik</strong>, quien lo descalificó como <em>«Un delirio inteligente pero gratuito»</em>. Mientras Claude Mauriac lo reseñaba en <em>Le Figaro</em> (1 de abril de 1972), el semanario <em>L'Express</em> (bajo la pluma de Madeleine Chapsal) se preguntaba alarmado si los autores se habían vuelto locos. El tono irreverente y la crítica radical del libro provocaron incluso rupturas personales dolorosas: el filósofo <strong>Kostas Axelos</strong>, íntimo amigo de Deleuze desde mediados de los años cincuenta, publicó el 8 de abril de 1972 en <em>Le Monde</em> un artículo hostil titulado «Siete preguntas a un filósofo», escandalizado de que un «honorable profesor universitario» se rebajara a utilizar palabras obscenas y a cortejar al izquierdismo juvenil; tras aquella publicación, como reconoció el propio Axelos, su amistad con Deleuze quedó rota para siempre. Poco después, la revista <strong><em>L'Arc</em></strong> publicó su célebre número especial 49 dedicado a Deleuze, y en junio de 1972 <strong><em>La Quinzaine Littéraire</em></strong> (n.º 143) organizó una gran mesa redonda titulada «Deleuze y Guattari se explican», con la participación de François Châtelet, el antropólogo Pierre Clastres, el psicoanalista lacaniano Serge Leclaire, Maurice Nadeau, Rafaël Pividal y el psiquiatra Horace Torrubia.</li>
+                    <li><strong>La furia del psicoanálisis ortodoxo y la «ley del silencio» de Jacques Lacan:</strong> Donde la bomba causó mayores estragos fue, comprensiblemente, en el mundo psicoanalítico. En el bando de la Asociación Psicoanalítica Internacional (IPA) y del freudismo ortodoxo, la reacción fue de indignación absoluta: <strong>André Green</strong> atacó ferozmente el libro desde la <em>Revue Française de Psychanalyse</em>, y en 1974 <strong>Janine Chasseguet-Smirgel</strong> coordinó un volumen colectivo contra los autores (<em>Les chemins de l'Anti-Œdipe</em>) acusándolos de promover la regresión psicótica y la destrucción de la familia y la realidad. Sin embargo, la reacción más dramática fue la de <strong>Jacques Lacan</strong>. Antes de que el libro saliera de la imprenta, Lacan —alarmado por los rumores sobre lo que su discípulo Guattari estaba escribiendo con Deleuze— invitó a Guattari a cenar en un restaurante parisiense para exigirle ver el manuscrito; al leer el ataque frontal al Edipo, a la castración y al imperialismo del significante (y al ver que varios conceptos de sus propios seminarios eran desviados hacia una lectura maquínica), Lacan optó por la estrategia más implacable: <strong>decretó una prohibición absoluta de hablar o escribir sobre <em>El Anti-Edipo</em> dentro de la Escuela Freudiana de París</strong>, ordenando a sus discípulos: <em>«Sobre todo no hablen de ello, se desinflará solo»</em>. Aunque la joven historiadora y psicoanalista <strong>Élisabeth Roudinesco</strong> rompió el silencio publicando una reseña irónica en <em>Les Lettres Françaises</em> en abril de 1972 y <strong>Serge Leclaire</strong> debatió públicamente con los autores en <em>La Quinzaine Littéraire</em>, la orden de Lacan aisló a Guattari dentro de su propia escuela analítica. Más paradójico aún fue lo ocurrido en la propia clínica de <strong>La Borde</strong>: como recordaron más tarde tanto <strong>Jean Oury</strong> —quien, fiel a Lacan, recelaba del entusiasmo antipsiquiátrico despertado por el libro— como la doctora <strong>Nicole Guillet</strong>, en la clínica el libro casi no se discutió porque muchos cuidadores lo encontraron excesivamente complejo y abstracto.</li>
+                    <li><strong>Los debates filosóficos y sociológicos (Lyotard, Girard, Foucault, Castel y Donzelot):</strong> En las grandes revistas teóricas, la recepción dio lugar a ensayos de altísimo vuelo. En noviembre de 1972, la revista <strong><em>Critique</em></strong> (n.º 306) dedicó un dossier memorable a la obra con dos extensos artículos de <strong>Jean-François Lyotard</strong> y <strong>René Girard</strong>. Lyotard (en su ensayo «Capitalisme énergumène») celebró con entusiasmo el libro como un «pantógrafo» que transformaba la energía eléctrica en movimiento afirmativo, destacando cómo Deleuze y Guattari subvertían el marxismo desde dentro al barrer cadáveres teóricos y demostrar que el capitalismo mismo funciona disolviendo todos los códigos previos; Girard (en «Système du délire»), aunque elogió el intento de los autores por romper la alternativa entre lo Simbólico y lo Imaginario, les reprochó no haber dado cabida a su teoría del deseo mimético y temió que recayeran en una fragmentación imaginaria. En diciembre de 1972, la revista <strong><em>Esprit</em></strong> dedicó otro gran debate al libro con textos de <strong>Jacques Donzelot</strong> («Une anti-sociologie») y <strong>Jean-Marie Domenach</strong> («Œdipe à l'usine»), mientras que en 1973 el sociólogo <strong>Robert Castel</strong> (estrecho colaborador de Foucault y amigo de Guattari) publicó en la editorial Maspero <em>Le psychanalysme</em> (<em>El psicoanalismo</em>), una obra fundamental que prolongaba sociológicamente la tesis de <em>El Anti-Edipo</em> demostrando cómo el psicoanálisis ejercía un poder de normalización y despolitización social bajo la máscara de la neutralidad clínica. Por su parte, <strong>Michel Foucault</strong> apoyó calurosamente la obra, la citó en sus cursos del Collège de France y escribió en 1977 el célebre prefacio a la edición estadounidense donde consagró a <em>El Anti-Edipo</em> como el gran libro de ética antifascista de su generación (comparándolo con lo que fue San Francisco de Sales en el siglo XVII: una <em>Introducción a la vida no fascista</em> frente a los «ascetas políticos, los militantes tristes y los terroristas de la teoría»).</li>
+                    <li><strong>La apropiación militante, la censura estatal y el giro de finales de los setenta:</strong> En la calle y en los movimientos contraculturales, el libro fue recibido como un manifiesto de liberación inmediata. El <strong>Frente Homosexual de Acción Revolucionaria (FHAR)</strong> se apropió de inmediato de la teoría de las máquinas deseantes y del deseo transindividual: el joven filósofo y activista <strong>Guy Hocquenghem</strong> publicó en 1972 <em>El deseo homosexual</em> (<em>Le désir homosexuel</em>) aplicando directamente las categorías de <em>El Anti-Edipo</em>, mientras que otro activista del FHAR, <strong>Michel Cressole</strong>, publicó en 1973 un libro sobre Deleuze en el que lo interpelaba acerbamente por la contradicción entre sus tesis revolucionarias y su vida de profesor casado y con uñas largas, a lo que Deleuze respondió con su célebre, irónica y demoledora <strong>«Carta a un crítico severo»</strong> (<em>Lettre à un critique sévère</em>). En marzo de 1973, la revista <strong><em>Recherches</em></strong> del CERFI, bajo la responsabilidad formal de Guattari y con la participación de Deleuze, Foucault, Sartre y Genet, publicó el explosivo número colectivo <strong><em>Trois milliards de pervers: Grande encyclopédie des homosexualités</em></strong>; el gobierno francés ordenó de inmediato el secuestro policial de todos los ejemplares y procesó judicialmente a Guattari por «ultraje a las buenas costumbres», condenándolo al pago de una multa en un juicio que se convirtió en un escándalo político. Sin embargo, a partir de 1976-1977 (con la irrupción mediática de los llamados <strong>«Nuevos Filósofos»</strong> [<em>Nouveaux Philosophes</em>] como Bernard-Henri Lévy y André Glucksmann, a quienes Deleuze atacó con dureza en un panfleto famoso por su pensamiento reaccionario, victimista y publicitario), Francia entró en lo que Guattari llamó «los años de invierno»: un periodo de reflujo conservador, retorno al sujeto moral y despolitización que hizo que, cuando apareció el segundo tomo de <em>Capitalismo y esquizofrenia</em>, <strong><em>Mil Mesetas</em></strong>, en <strong>1980</strong>, fuera recibido en Francia con un silencio casi sepulcral, hasta que una segunda generación de filósofos franceses (como François Zourabichvili, Éric Alliez, Anne Sauvagnargues, Guillaume Sibertin-Blanc y David Lapoujade) reactivó vigorosamente su estudio a partir de los años noventa y dos mil.</li>
+                </ul>
+
+                <h3 id="sec-4b" class="subsection-title">B. La recepción en el resto de Europa: El laboratorio italiano de 1977 y las lecturas europeas</h3>
+                <p>Si en Francia el clima intelectual se enfriaba hacia finales de los años setenta, en el resto de Europa —y muy particularmente en <strong>Italia</strong>— <em>El Anti-Edipo</em> vivió una auténtica edad de oro política y social:</p>
+                <ul class="academic-list">
+                    <li><strong>Italia y el «Movimiento del 77»:</strong> El diálogo con Italia comenzó muy pronto: ya en <strong>mayo de 1973</strong>, Deleuze y Guattari participaron en Milán en el histórico coloquio sobre «Psicoanálisis y Política» organizado por Armando Verdiglione (donde Deleuze pronunció sus «Cuatro proposiciones sobre el psicoanálisis» y debatió con el antipsiquiatra italiano Giovanni Jervis). Publicado en italiano por la editorial Einaudi en 1975 (traducido por Alessandro Fontana), <em>El Anti-Edipo</em> se convirtió, en palabras de Giorgio Passerone, en el verdadero «libro-herramienta» del <strong>Movimiento de 1977</strong> en Italia y de la corriente de la <strong><em>Autonomia Operaia</em></strong>. Toda una generación de jóvenes autónomos, «indios metropolitanos», colectivos feministas, psiquiatras democráticos vinculados a la experiencia de Franco Basaglia en Trieste, periódicos alternativos (<em>A/traverso</em>) y emisoras de radio libres —como la legendaria <strong>Radio Alice</strong> en Bolonia, animada por <strong>Franco «Bifo» Berardi</strong>, estrecho amigo y colaborador de Guattari— adoptaron el vocabulario de las máquinas deseantes, la desterritorialización y la revolución molecular para romper tanto con el capitalismo como con el «compromiso histórico» del Partido Comunista Italiano (mientras intelectuales más tradicionales como Umberto Eco, en <em>L'Espresso</em> del 1 de mayo de 1977, lamentaban la influencia de Deleuze y Guattari sobre la juventud italiana acusándolos de confundir los símbolos con los hechos). Cuando el Estado italiano desató la feroz ola represiva de 1977-1979 contra el movimiento autónomo —encarcelando a miles de activistas, entre ellos al filósofo <strong>Antonio «Toni» Negri</strong>—, Guattari encabezó la protesta intelectual europea y Deleuze publicó el 10 de mayo de 1979 su célebre «Carta abierta a los jueces de Negri» en el diario <em>La Repubblica</em>; años después, tras exiliarse en Francia gracias a la «doctrina Mitterrand», Negri escribiría a cuatro manos con Guattari <em>Los nuevos espacios de libertad</em> (<em>Les nouveaux espaces de liberté</em>, 1985) y desarrollaría con Michael Hardt las tesis de <em>Imperio</em> bajo la huella directa de <em>Capitalismo y esquizofrenia</em>.</li>
+                    <li><strong>España, Alemania y Gran Bretaña:</strong> En <strong>España</strong>, aún bajo los últimos años de la dictadura franquista, la recepción fue extraordinariamente temprana: apenas un año después de la edición francesa, en <strong>1973</strong>, <strong>Barral Editores</strong> publicó en Barcelona la traducción castellana realizada por <strong>Francisco Monge</strong> (reeditada posteriormente por Paidós), la cual se convirtió en la puerta de entrada del texto para todo el mundo hispanohablante y alimentó los movimientos contraculturales, antipsiquiátricos y libertarios de la Transición española. En cambio, en <strong>Alemania Occidental</strong> y en <strong>Gran Bretaña</strong>, la recepción académica inicial estuvo marcada por la resistencia de dos tradiciones hegemónicas opuestas: en Alemania —pese al entusiasmo de editores alternativos como el sello berlinés Merve Verlag y la traducción de Suhrkamp—, los herederos de la Escuela de Fráncfort (Jürgen Habermas) y de la hermenéutica como <strong>Manfred Frank</strong> (<em>Was ist Neostrukturalismus?</em>, 1983) atacaron a Deleuze y Guattari acusándolos de «irracionalismo» vitalista nietzscheano; en el Reino Unido, la izquierda marxista clásica representada por <strong>Perry Anderson</strong> criticó con escepticismo el abandono de la centralidad de la lucha de clases tradicional, hasta que en la década de 1990 una nueva generación de filósofos británicos y continentales (en torno a revistas como <em>Angelaki</em> o <em>Radical Philosophy</em> y pensadores como Nick Land, Keith Ansell-Pearson, Ian Buchanan o Claire Colebrook) situó a Deleuze y Guattari en el centro mismo de la filosofía contemporánea.</li>
+                </ul>
+
+                <h3 id="sec-4c" class="subsection-title">C. La recepción fuera de Europa: Estados Unidos, América Latina, Japón y Australia</h3>
+                <p>Tal como advierten François Dosse, François Cusset e Ian Buchanan, fue la explosiva recepción internacional fuera de Europa la que transformó la obra de Deleuze y Guattari en un fenómeno verdaderamente global, aunque siguiendo caminos radicalmente distintos en el Norte anglosajón y en el Sur Global o el Extremo Oriente:</p>
+                <ol class="academic-list">
+                    <li><strong>Estados Unidos (De la contracultura neoyorquina a la hegemonía de la <em>French Theory</em>):</strong> La entrada de Deleuze y Guattari en Estados Unidos tuvo una fecha y un escenario fundacionales: <strong>noviembre de 1975</strong>, cuando el crítico francés <strong>Sylvère Lotringer</strong> organizó en la Universidad de Columbia, en Nueva York, el mítico coloquio <strong><em>Schizo-Culture</em></strong> («Esquizocultura»). En aquel encuentro tempestuoso —donde se dieron cita Gilles Deleuze, Félix Guattari, Michel Foucault, Jean-François Lyotard y R. D. Laing junto a figuras de la vanguardia artística, literaria y musical neoyorquina como William S. Burroughs, John Cage, Philip Glass y activistas feministas y radicales—, Deleuze pronunció en francés una intervención sobre el rizoma y los árboles genealógicos mientras Guattari chocaba con las tácticas paranoicas de ciertos grupos políticos estadounidenses. Dos años después, en <strong>1977</strong>, la editorial Viking Press publicó en Nueva York la traducción al inglés de <strong><em>Anti-Oedipus</em></strong> (realizada por Robert Hurley, Mark Seem y Helen R. Lane, y reeditada en 1983 por University of Minnesota Press) acompañada del famoso prefacio de Michel Foucault, al tiempo que Lotringer lanzaba el número especial de la revista <strong><em>Semiotext(e)</em></strong> dedicado a <em>El Anti-Edipo</em>. Como explica Fredric Jameson, en el mundo anglosajón la obra penetró inicialmente a través de los departamentos universitarios de Francés, Literatura Comparada y Estudios Culturales —donde se despolitizó parcialmente al integrarse en el canon académico de la llamada <em>French Theory</em>—, hasta que entre finales de los años ochenta y los años noventa las traducciones y estudios sistemáticos de <strong>Brian Massumi</strong> (traductor de <em>Mil Mesetas</em> en 1987 y autor de <em>A User's Guide to Capitalism and Schizophrenia</em> en 1992), <strong>Constantin Boundas</strong> (organizador del primer gran congreso deleuziano en la Universidad de Trent en mayo de 1992), <strong>Eugene W. Holland</strong>, <strong>Charles Stivale</strong>, <strong>Ronald Bogue</strong>, <strong>Michael Hardt</strong> y <strong>Daniel W. Smith</strong> consolidaron a Deleuze y Guattari en el centro de los departamentos de filosofía, arquitectura y teoría política norteamericanos.</li>
+                    <li><strong>América Latina (Brasil, Argentina, Chile y México: micropolítica y resistencias frente al «teoricismo» estadounidense):</strong> A diferencia de los Estados Unidos, donde la recepción fue predominantemente literaria y textualista, en América Latina —donde las ciencias sociales y la urgencia de las luchas políticas contra las dictaduras militares y el neoliberalismo marcaban el pulso intelectual— la obra de Deleuze y Guattari fue leída como una herramienta de intervención clínica, micropolítica y social directa:<br><br>
+                    • En <strong>Brasil</strong> se produjo la mayor experimentación deleuzo-guattariana del continente americano. Invitado por la psicoanalista brasileña <strong>Suely Rolnik</strong> (quien se había exiliado en París durante la dictadura militar y había trabajado con Guattari en La Borde y asistido a las clases de Deleuze en Vincennes), Guattari realizó siete viajes a Brasil a partir de <strong>1979</strong>, justo cuando comenzaba la apertura democrática y el resurgimiento de los movimientos sociales, feministas, negros y sindicales. Fruto de sus recorridos por todo el país fue el libro coescrito con Suely Rolnik <strong><em>Micropolítica: Cartografías del deseo</em></strong> (publicado en portugués en 1986), así como una estrecha amistad y diálogo político con el entonces líder sindical metalúrgico y fundador del Partido de los Trabajadores (PT), <strong>Luiz Inácio «Lula» da Silva</strong>. Gracias a la labor de traductores, clínicos y filósofos como Suely Rolnik, <strong>Peter Pál Pelbart</strong> (quien creó en São Paulo una compañía teatral con pacientes psicóticos inspirada en La Borde) y <strong>André Parente</strong>, se fundaron en Brasil institutos pluridisciplinarios de acción social y lucha antimanicomial como el <em>Instituto Félix Guattari</em> en Belo Horizonte.<br><br>
+                    • En <strong>Argentina</strong>, país caracterizado por sus estrechos lazos culturales con Europa y por poseer el campo psicoanalítico más vasto y vital de América Latina, la recepción de Deleuze y Guattari cobró una fuerza extraordinaria tras el fin de la dictadura militar en 1983, articulándose tanto con las corrientes heterodoxas del psicoanálisis grupal e institucional (que buscaban romper el monopolio del lacanismo ortodoxo) como con la filosofía política y las ciencias sociales (destacando figuras como el filósofo <strong>Tomás Abraham</strong> en Buenos Aires o el sociólogo <strong>Martín Hopenhayn</strong>, quien realizó su tesis doctoral bajo la dirección del propio Deleuze en París). En <strong>Chile</strong>, asimismo, psiquiatras y analistas institucionales como <strong>Miguel Norambuena</strong> mantuvieron un vínculo directo con Guattari durante los años ochenta.<br><br>
+                    • En <strong>México</strong>, en cambio, aunque el país fue pionero en la edición en español de la teoría francesa gracias a la labor histórica de Arnaldo Orfila Reynal al frente del Fondo de Cultura Económica y luego de la editorial <strong>Siglo XXI</strong> (que publicó ya en 1975 la traducción castellana de <em>Psicoanálisis y transversalidad</em> de Guattari), el predominio académico del marxismo estructuralista de Althusser, de la escuela histórica de Fernand Braudel y, más tarde, la implantación dogmática del lacanismo dificultaron una difusión masiva inicial, concentrándose la influencia de Guattari —quien visitó México a comienzos de los años ochenta— en valiosos enclaves de psicología social e intervención institucional como el programa de posgrado fundado por <strong>Fernando González</strong> en la Universidad Autónoma Metropolitana (UAM-Xochimilco) y la Asociación Mexicana de Psicoterapia Analítica de Grupo (AMPAG).</li>
+                    <li><strong>Japón («La tierra elegida» en Asia) y Australia:</strong> Fuera del mundo occidental y latinoamericano, el caso de <strong>Japón</strong> reviste una importancia excepcional. En una cultura cuya tradición filosófica —desde el budismo zen hasta la Escuela de Kioto de Kitaro Nishida— había rechazado secularmente los dualismos metafísicos occidentales (sujeto/objeto, mente/cuerpo, naturaleza/cultura), el pensamiento de la inmanencia y el concepto de «Cuerpo sin Órganos» de Deleuze y Guattari encontraron una resonancia inmediata y profundísima. El puente directo lo tendieron los estudiantes japoneses que asistieron a los cursos de Deleuze en París-VIII Vincennes en los años setenta y ochenta: <strong>Hidenobu Suzuki</strong> (quien grabó pacientemente en cintas magnetofónicas los cursos de Deleuze entre 1979 y 1987, salvando para la posteridad ese archivo oral) y <strong>Kuniichi Uno</strong>, quien redactó su tesis doctoral sobre Antonin Artaud bajo la dirección de Deleuze en 1980, tradujo al japonés <em>Mil Mesetas</em>, <em>Foucault</em> y <em>El Pliegue</em>, y a quien Deleuze dirigió en julio de 1984 su célebre carta <em>«Cómo hemos trabajado a dúo»</em>. Junto al profesor <strong>Kouichi Toyosaki</strong> (traductor de <em>Rizoma</em>), al militante del 68 <strong>Masaaki Sugimura</strong> (traductor de <em>La revolución molecular</em>) y a la influyente revista filosófica <strong><em>Gendai-Shiso</em></strong>, la publicación japonesa de <em>El Anti-Edipo</em> a mediados de los años ochenta desató un verdadero fenómeno cultural en Japón: el joven filósofo <strong>Akira Asada</strong> vendió más de cien mil ejemplares de su tratado <em>Estructura y poder</em> (<em>Kozo to chikara</em>, 1983), en el que utilizaba el esquizoanálisis de Deleuze y Guattari para criticar el «capitalismo infantil» japonés; el crítico <strong>Kojin Karatani</strong> y diversos arquitectos de vanguardia (como <strong>Shin Takamatsu</strong>, a quien Guattari dedicó textos entusiastas durante sus viajes a Tokio en los años ochenta) adoptaron las nociones de máquina y rizoma, e incluso la crítica cultural japonesa recurrió a la esquizo-ciencia deleuzo-guattariana para analizar fenómenos como el manga, la subcultura <em>otaku</em> y el cine de <em>Godzilla</em>. Finalmente, en el hemisferio sur, <strong>Australia</strong> se convirtió proporcionalmente en el país más «deleuzificado» del mundo anglosajón: a finales de los años setenta, un grupo de brillantes jóvenes investigadores australianos —encabezados por <strong>Paul Patton</strong> (futuro traductor al inglés de <em>Diferencia y repetición</em>), <strong>Rosi Braidotti</strong>, <strong>Meaghan Morris</strong>, <strong>Anna Gibbs</strong> y <strong>Stephen Muecke</strong>— viajaron a París para estudiar con Deleuze en Vincennes y, a su regreso a Sídney y Melbourne en los años ochenta, tradujeron sus textos y transformaron las universidades australianas en uno de los focos más dinámicos de irradiación internacional del pensamiento de Deleuze y Guattari.</li>
+                </ol>
+            </section>
+
+            <section id="cuadro-sinoptico" class="chapter">
+                <h2 class="section-title">Cuadro Sinóptico de Apoyo Docente para la Primera Sesión del Curso</h2>
+                <p>El siguiente cuadro condensa las cuatro coordenadas maestras desarrolladas en el informe para facilitar su exposición en el aula durante la sesión inaugural:</p>
+                <div class="table-wrapper">
+                    <table class="synoptic-table">
+                        <thead>
+                            <tr>
+                                <th>Coordenada de Contextualización</th>
+                                <th>Ejes Históricos, Biográficos y Conceptuales Verificados</th>
+                                <th>Función Pedagógica en la Clase Inaugural</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. El Mundo (1968-1972)</strong><br><em>(Ítem 4)</em></td>
+                                <td>• <strong>Sur Global:</strong> Guerra de Argelia (1954-1962) y Frantz Fanon (crítica al «Edipo colonial»); Guerra de Vietnam como detonante global y del Movimiento 22 de Marzo; Revolución Cultural China y luchas tricontinentales.<br>• <strong>EE. UU.:</strong> Crisis del funcionalismo liberal y tecnocrático, fin del patrón dólar-oro (1971), <em>Black Power</em>, contracultura y literatura anglosajona (Lawrence, Miller, <em>Beat Generation</em>).<br>• <strong>Europa:</strong> Invasión soviética de Praga (agosto 1968: bancarrota del leninismo de Estado) vs. <em>Autunno Caldo</em> italiano (1969) y auge de la antipsiquiatría (Laing, Cooper, Basaglia).</td>
+                                <td>Demostrar a los estudiantes que <em>El Anti-Edipo</em> no es un libro encerrado en París: para Deleuze y Guattari, el inconsciente delira directamente las razas, las colonias, los imperios y la economía mundial.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Francia (1968-1972)</strong><br><em>(Ítem 3)</em></td>
+                                <td>• <strong>Política:</strong> El acontecimiento de Mayo del 68 y su traición por el PCF (Marchais) y la CGT (Séguy); agitación maoísta (<em>Gauche Prolétarienne</em>, asesinato de Pierre Overney en Renault en febrero de 1972) y surgimiento del GIP (Foucault/Deleuze), MLF y FHAR.<br>• <strong>El problema rector (Spinoza/Reich):</strong> ¿Por qué las masas desean su propia represión? Crítica del <em>microfascismo</em>.<br>• <strong>Filosofía:</strong> Asalto al <strong>estructuralismo</strong> (Lévi-Strauss, Althusser, Lacan), al <strong>familiarismo edípico</strong>, al deseo como <strong>carencia (<em>manque</em>)</strong> y al freudo-marxismo clásico (identidad entre economía política y libidinal).</td>
+                                <td>Explicar contra quiénes discute el libro en cada página: por qué el inconsciente deja de ser un «teatro» estructuralista o familiar para ser pensado como una <strong>fábrica</strong> materialista.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Los Autores y la Escritura</strong><br><em>(Ítem 1)</em></td>
+                                <td>• <strong>Gilles Deleuze (1925-1995):</strong> Profesor universitario, autor de la tríada vitalista (Nietzsche, Bergson, Spinoza) y de <em>Diferencia y repetición</em> (1968) y <em>Lógica del sentido</em> (1969); convaleciente de una extirpación pulmonar en el Lemosín en 1969.<br>• <strong>Félix Guattari (1930-1992):</strong> Psicoanalista formado con Lacan, codirector junto a Jean Oury de la clínica <strong>La Borde</strong> (psicoterapia institucional, «La Parrilla», transversalidad) y militante de extrema izquierda (CERFI, 22 de Marzo), autor de «Máquina y estructura» (1969).<br>• <strong>La máquina de escritura (1969-1972):</strong> Presentados por Jean-Pierre Muyard en junio de 1969; trato de «usted» (<em>vouvoiement</em>); cartas y diarios de Guattari mecanografiados por Fanny Deleuze; reuniones de los martes y redacción final de Deleuze (la avispa y la orquídea).</td>
+                                <td>Desmontar el falso mito de «los dos Deleuze» (Badiou/Žižek) y enseñar cómo el concepto mismo de <em>agenciamiento colectivo de enunciación</em> fue puesto en práctica en la fabricación material del libro.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. La Recepción Mundial</strong><br><em>(Ítem 2)</em></td>
+                                <td>• <strong>Francia (1972):</strong> Éxito fulminante (agotado en 3 días); elogios de Lyotard, Châtelet y Foucault («libro de ética antifascista») frente a la prohibición de hablar del libro dictada por <strong>Lacan</strong> y el ataque de la IPA (André Green); posterior eclipse en París con los <em>Nouveaux Philosophes</em> (1977-1980).<br>• <strong>Europa:</strong> Fenómeno político de masas en la <strong>Italia</strong> de la <em>Autonomia</em> y el Movimiento del 77 (Bifo, Radio Alice, Negri); traducción española en 1973 (Barral, trad. F. Monge).<br>• <strong>Fuera de Europa:</strong> <strong>EE. UU.</strong> (coloquio <em>Schizo-Culture</em> en Columbia en 1975, <em>Semiotext(e)</em> y traducción en 1977); <strong>América Latina</strong> (impacto micropolítico y clínico masivo en <strong>Brasil</strong> con Suely Rolnik, Pelbart y Lula; <strong>Argentina</strong>, <strong>Chile</strong> y <strong>México</strong>); <strong>Japón</strong> (Uno, Asada, arquitectura y budismo) y <strong>Australia</strong> (Patton, Braidotti).</td>
+                                <td>Mostrar la paradoja geopolítica del texto: cómo un libro silenciado por el lacanismo y eclipsado en la Francia conservadora de los años ochenta reinventó la teoría crítica, la clínica y la micropolítica en Italia, América Latina, Japón y el mundo anglosajón.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <footer class="doc-footer">
+                Informe académico elaborado para el seminario sobre <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> de Gilles Deleuze y Félix Guattari.
+            </footer>
+        </article>
+    </main>
+
+    <script>
+        // Ajuste de tamaño tipográfico para comodidad de lectura
+        let currentSize = 19;
+        function adjustFontSize(delta) {
+            if (delta === 0) {
+                currentSize = 19;
+            } else {
+                currentSize = Math.min(26, Math.max(14, currentSize + delta));
+            }
+            document.documentElement.style.setProperty('--font-size-base', currentSize + 'px');
+        }
+
+        // Barra de progreso de lectura y resaltado activo en la Tabla de Contenido
+        const sections = document.querySelectorAll('section.chapter, h3.subsection-title, div.block-banner');
+        const navLinks = document.querySelectorAll('nav.toc a');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            document.getElementById('progress-bar').style.width = progress + '%';
+
+            let currentId = '';
+            sections.forEach(sec => {
+                const top = sec.offsetTop - 120;
+                if (scrollTop >= top && sec.getAttribute('id')) {
+                    currentId = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (currentId && link.getAttribute('href') === '#' + currentId) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

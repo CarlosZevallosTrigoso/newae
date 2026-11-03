@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prolegómenos a El Anti-Edipo: Psicoanálisis, Marxismo y Economía Política</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --border-color: #000000;
+            --muted-border: #d0d0d0;
+            --hover-bg: #f5f5f5;
+            --sidebar-width: 320px;
+            --reader-max-width: 740px;
+            --base-font-size: 19px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: var(--base-font-size);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'EB Garamond', Georgia, 'Times New Roman', serif;
+            line-height: 1.72;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Reading Progress Bar */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #eeeeee;
+            z-index: 1000;
+        }
+
+        #progress-bar {
+            height: 100%;
+            background: #000000;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Layout Structure */
+        .reader-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar / Table of Contents */
+        .sidebar {
+            width: var(--sidebar-width);
+            border-right: 1px solid var(--muted-border);
+            padding: 2.2rem 1.6rem;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            overflow-y: auto;
+            background-color: var(--bg-color);
+            z-index: 900;
+            transition: transform 0.25s ease;
+        }
+
+        .sidebar-header {
+            padding-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sidebar-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            margin: 0 0 0.3rem 0;
+        }
+
+        .sidebar-subtitle {
+            font-size: 0.85rem;
+            font-style: italic;
+            margin: 0;
+            color: #333333;
+        }
+
+        /* Reader Controls inside Sidebar */
+        .reader-controls {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 1.4rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--muted-border);
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .controls-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .control-btn {
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+            font-family: 'EB Garamond', serif;
+            font-size: 0.85rem;
+            padding: 0.15rem 0.55rem;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .control-btn:hover {
+            background: #000000;
+            color: #ffffff;
+        }
+
+        /* TOC List */
+        .toc-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-part {
+            margin-bottom: 1.2rem;
+        }
+
+        .toc-part-link {
+            display: block;
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.25rem 0;
+            border-bottom: 1px dotted transparent;
+        }
+
+        .toc-part-link:hover,
+        .toc-sublink:hover {
+            text-decoration: underline;
+        }
+
+        .toc-sublist {
+            padding-left: 0.9rem !important;
+            margin-top: 0.3rem !important;
+            border-left: 1px solid var(--muted-border);
+        }
+
+        .toc-sublink {
+            display: block;
+            font-size: 0.86rem;
+            color: #222222;
+            text-decoration: none;
+            padding: 0.2rem 0 0.2rem 0.6rem;
+            line-height: 1.35;
+        }
+
+        .toc-link.active {
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* Main Content Area */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            flex: 1;
+            padding: 3.5rem 2.5rem 6rem 2.5rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .book-column {
+            max-width: var(--reader-max-width);
+            width: 100%;
+        }
+
+        /* Mobile / Toggle Button */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 1100;
+            background: #ffffff;
+            color: #000000;
+            border: 1px solid #000000;
+            font-family: 'EB Garamond', serif;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        /* Book Title Header */
+        .book-header {
+            text-align: center;
+            padding-bottom: 2.8rem;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid #000000;
+        }
+
+        .book-kicker {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            margin-bottom: 0.8rem;
+        }
+
+        .book-title {
+            font-size: 2.35rem;
+            font-weight: 600;
+            line-height: 1.18;
+            margin: 0 0 1rem 0;
+        }
+
+        .book-subtitle {
+            font-size: 1.25rem;
+            font-style: italic;
+            font-weight: 400;
+            margin: 0 auto 1.5rem auto;
+            max-width: 620px;
+            line-height: 1.45;
+        }
+
+        .book-meta {
+            font-size: 0.9rem;
+            letter-spacing: 0.04em;
+            border-top: 1px solid var(--muted-border);
+            padding-top: 1rem;
+            display: inline-block;
+        }
+
+        /* Typography & Sections */
+        section.essay-block {
+            margin-bottom: 4.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #000000;
+        }
+
+        section.essay-block:last-of-type {
+            border-bottom: none;
+        }
+
+        .part-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        h2.essay-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.25;
+            margin: 0 0 1.8rem 0;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid var(--muted-border);
+        }
+
+        h3.section-heading {
+            font-size: 1.35rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin: 2.6rem 0 1rem 0;
+        }
+
+        h4.subsection-heading {
+            font-size: 1.12rem;
+            font-weight: 600;
+            font-style: italic;
+            margin: 1.8rem 0 0.7rem 0;
+        }
+
+        p {
+            margin: 0 0 1.25rem 0;
+            text-align: justify;
+            hyphens: auto;
+        }
+
+        /* Drop cap for first paragraph of each major essay */
+        .drop-cap::first-letter {
+            float: left;
+            font-size: 3.4rem;
+            line-height: 0.82;
+            padding-top: 4px;
+            padding-right: 10px;
+            padding-bottom: 2px;
+            font-weight: 600;
+        }
+
+        ul, ol {
+            margin: 0 0 1.4rem 0;
+            padding-left: 1.6rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            text-align: justify;
+        }
+
+        li strong {
+            font-weight: 600;
+        }
+
+        hr.section-divider {
+            border: none;
+            border-top: 1px solid var(--muted-border);
+            margin: 2.4rem auto;
+            width: 40%;
+        }
+
+        /* Tables (Black on White, Clean Academic Style) */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            line-height: 1.5;
+            border-top: 2px solid #000000;
+            border-bottom: 2px solid #000000;
+        }
+
+        th, td {
+            padding: 0.75rem 0.85rem;
+            text-align: left;
+            vertical-align: top;
+            border-bottom: 1px solid var(--muted-border);
+        }
+
+        th {
+            font-weight: 700;
+            border-bottom: 1px solid #000000;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* Footer */
+        .reader-footer {
+            margin-top: 4rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--muted-border);
+            text-align: center;
+            font-size: 0.88rem;
+            font-style: italic;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 980px) {
+            .menu-toggle {
+                display: block;
+            }
+            .sidebar {
+                transform: translateX(-100%);
+                box-shadow: 2px 0 12px rgba(0,0,0,0.08);
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 4rem 1.4rem 4rem 1.4rem;
+            }
+        }
+
+        @media print {
+            .sidebar, .menu-toggle, #progress-container {
+                display: none !important;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 0;
+            }
+            .book-column {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <button class="menu-toggle" id="menu-btn" onclick="toggleSidebar()">☰ Índice</button>
+
+    <div class="reader-wrapper">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">Tabla de Contenido</h1>
+                <p class="sidebar-subtitle">Prolegómenos a El Anti-Edipo</p>
+            </div>
+
+            <div class="reader-controls">
+                <span class="controls-label"> Cuerpo de letra</span>
+                <div class="btn-group">
+                    <button class="control-btn" onclick="adjustFontSize(-1)" title="Reducir texto">A−</button>
+                    <button class="control-btn" onclick="adjustFontSize(0)" title="Tamaño original">A</button>
+                    <button class="control-btn" onclick="adjustFontSize(1)" title="Aumentar texto">A+</button>
+                </div>
+            </div>
+
+            <nav class="toc-nav">
+                <ul>
+                    <li class="toc-part">
+                        <a href="#preambulo" class="toc-part-link toc-link">Preámbulo Metodológico</a>
+                        <ul class="toc-sublist">
+                            <li><a href="#preambulo-exigencias" class="toc-sublink toc-link">La exigencia del psicoanálisis y el marxismo</a></li>
+                            <li><a href="#preambulo-arquitectura" class="toc-sublink toc-link">Concepción de los dos ensayos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="toc-part">
+                        <a href="#ensayo-1" class="toc-part-link toc-link">Ensayo I. Lo que hay que saber de Psicoanálisis</a>
+                        <ul class="toc-sublist">
+                            <li><a href="#e1-sec1" class="toc-sublink toc-link">I. Freud y el descubrimiento de la economía libidinal</a></li>
+                            <li><a href="#e1-sec2" class="toc-sublink toc-link">II. El giro edípico: teatro familiar, castración y transferencia</a></li>
+                            <li><a href="#e1-sec3" class="toc-sublink toc-link">III. Melanie Klein: la invención de los objetos parciales</a></li>
+                            <li><a href="#e1-sec4" class="toc-sublink toc-link">IV. Jacques Lacan: Significante, Carencia y objeto <em>a</em></a></li>
+                            <li><a href="#e1-sec5" class="toc-sublink toc-link">V. Balance crítico: esquizofrenizar el inconsciente</a></li>
+                            <li><a href="#e1-tabla" class="toc-sublink toc-link">Cuadro sinóptico: Psicoanálisis</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="toc-part">
+                        <a href="#ensayo-2" class="toc-part-link toc-link">Ensayo II. Lo que hay que saber de Marxismo y Economía Política</a>
+                        <ul class="toc-sublist">
+                            <li><a href="#e2-sec1" class="toc-sublink toc-link">I. Naturaleza, industria y esencia subjetiva del trabajo</a></li>
+                            <li><a href="#e2-sec2" class="toc-sublink toc-link">II. Materialismo histórico y las tres máquinas sociales (<em>Socius</em>)</a></li>
+                            <li><a href="#e2-sec3" class="toc-sublink toc-link">III. La mecánica de <em>El Capital</em>: plusvalía, fetichismo y baja tendencial</a></li>
+                            <li><a href="#e2-sec4" class="toc-sublink toc-link">IV. Más allá de la ideología: interés de clase vs. deseo de grupo</a></li>
+                            <li><a href="#e2-tabla" class="toc-sublink toc-link">Cuadro sinóptico: Marxismo</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Reading Column -->
+        <main class="main-content">
+            <article class="book-column">
+
+                <!-- Book Title Header -->
+                <header class="book-header">
+                    <div class="book-kicker">Cuadernos de Estudio Filosófico</div>
+                    <h1 class="book-title">Prolegómenos a <em>El Anti-Edipo</em></h1>
+                    <p class="book-subtitle">Dos ensayos pedagógicos sobre los fundamentos de psicoanálisis (Freud, Klein, Lacan) y de crítica de la economía política marxista indispensables para la lectura de Gilles Deleuze y Félix Guattari</p>
+                    <div class="book-meta">Edición de lectura · Tipografía EB Garamond</div>
+                </header>
+
+                <!-- PREÁMBULO -->
+                <section id="preambulo" class="essay-block">
+                    <span class="part-label">Introducción General</span>
+                    <h2 class="essay-title">La doble exigencia teórica de <em>El Anti-Edipo</em>: Psicoanálisis y Marxismo</h2>
+
+                    <h3 id="preambulo-exigencias" class="section-heading">1. Por qué es imprescindible manejar las coordenadas mínimas de ambas tradiciones</h3>
+                    <p class="drop-cap">La percepción respecto a las exigencias teóricas previas que demanda <em>El Anti-Edipo</em> no solo es enteramente acertada, sino que señala de manera precisa la arquitectura misma sobre la cual Gilles Deleuze y Félix Guattari erigen su proyecto filosófico. El propósito fundamental de la obra consiste, precisamente, en lograr un acercamiento teórico y una rearticulación radical entre el psicoanálisis y el marxismo con el fin de fundar un nuevo método de análisis crítico denominado «psiquiatría materialista» o «esquizoanálisis». Para que esta maquinaria conceptual funcione, el libro parte de los grandes materialismos de la modernidad —particularmente los de Freud y Marx, en una decisiva intersección con la genealogía y la voluntad de poder de Nietzsche— utilizándolos como materias primas que se corrigen y transforman recíprocamente en un complejo patrón de interferencias. El texto suele presentar severas dificultades para el lector porque opera comenzando <em>in medias res</em>, sumergiéndolo de inmediato en una plétora de detalles técnicos donde se producen nuevos conceptos (como las máquinas deseantes, el cuerpo sin órganos o la desterritorialización) mediante la adaptación y transfiguración radical de terminologías preexistentes. En consecuencia, carecer de las coordenadas mínimas de ambas tradiciones impide advertir cómo los autores están subvirtiendo desde adentro los aparatos conceptuales con los que discuten.</p>
+
+                    <p>En lo que respecta al psicoanálisis, el texto exige un manejo de sus categorías fundamentales puesto que el esquizoanálisis se construye, literalmente, sobre las ruinas o remanentes de la clínica psicoanalítica, ejecutando sobre ella una implacable «crítica interna» de corte inmanente. Deleuze y Guattari no rechazan el psicoanálisis en su totalidad; de hecho, rescatan como el gran descubrimiento de Freud la noción de la <em>libido</em> entendida como la esencia subjetiva y abstracta del deseo, además de apoyarse en conceptos como la asociación libre y la represión originaria (<em>Urverdrängung</em> o <em>refoulement originaire</em>). Sin embargo, para comprender los «cinco paralogismos del psicoanálisis» que estructuran el segundo capítulo del libro, el lector debe reconocer cómo Freud traiciona su propio descubrimiento al re-alienar esa libido libre encerrándola en el teatro representacional de la familia nuclear y el complejo de Edipo. Más aún, la obra sostiene un diálogo denso y constante con las corrientes posfreudianas que dominaban la escena intelectual parisina de la época: por un lado, se apropia de la teoría de los «objetos parciales» de la fase preedípica de Melanie Klein para explicar las conexiones de las máquinas deseantes, criticando al mismo tiempo que Klein termine reintegrando dichos objetos en personas globales; por otro lado, debate intensamente con el psicoanálisis estructural de Jacques Lacan. Es necesario distinguir las nociones lacanianas de lo Real, lo Imaginario y lo Simbólico, la función del Gran Otro, el Nombre-del-Padre (<em>nom/non du père</em>), el significante fálico, la castración y el <em>objeto pequeño a</em> (<em>objet petit a</em>), ya que Deleuze y Guattari elogian el <em>objeto a</em> como una verdadera máquina deseante perteneciente al orden de lo Real productivo, pero atacan ferozmente la subordinación del deseo a la «carencia» (<em>manque</em>) y a la Ley trascendente del significante que reinstaura un Edipo estructural.</p>
+
+                    <p>De manera paralela, el bagaje conceptual del marxismo resulta indispensable porque la segunda gran operación de <em>El Anti-Edipo</em> consiste en una «crítica externa» o sociohistórica que busca llevar al psicoanálisis al punto de su propia autocrítica revolucionaria, exactamente del mismo modo en que Marx llevó a la economía política burguesa de Adam Smith y David Ricardo a su autocrítica al demostrar que la propiedad privada alienaba la esencia subjetiva del trabajo. Deleuze y Guattari se mantienen profundamente marxistas en su convicción de que toda filosofía política debe girar en torno al análisis del capitalismo como un sistema inmanente que constantemente supera y recrea sus propios límites. No obstante, rechazan el intento clásico del freudomarxismo de simplemente «enganchar un motor freudiano al tren marxista-leninista», pues consideran que esto mantiene intacta la jerarquía estereotipada entre una infraestructura económica opaca y una superestructura ideológica donde el deseo queda confinado como mera representación o fantasía. Apoyándose de manera crucial en los <em>Grundrisse</em> y en <em>El Capital</em> (incluyendo las prácticas bancarias y financieras), los autores introducen el deseo directamente en la infraestructura económica y la noción de producción en el inconsciente, postulando que la producción social y la producción deseante poseen una estricta «identidad de naturaleza» aunque operen bajo una «diferencia de régimen». Para seguir el hilo del tercer capítulo del libro, el lector necesita manejar conceptos marxistas como fuerza de trabajo, plusvalía, fuerzas productivas, relaciones de producción y modos de producción, para así comprender cómo Deleuze y Guattari los reformulan al introducir la noción de «antiproducción» y al trazar una historia universal dividida en tres grandes formaciones sociales o tipos de <em>socius</em> (salvajes/tierra, bárbaros/déspota, civilizados/capital) que codifican, sobrecodifican o descodifican los flujos de deseo y trabajo. Asimismo, esta base permite entender su crítica a la noción tradicional de «falsa conciencia» o ideología (vía Althusser), la cual sustituyen —siguiendo la pregunta fundamental de Wilhelm Reich sobre cómo las masas llegaron a desear el fascismo— por una distinción rigurosa entre las catexis o inversiones preconscientes de <em>interés</em> de clase y las inversiones libidinales inconscientes de <em>deseo</em> de grupo.</p>
+
+                    <p>En última instancia, la estrategia discursiva misma de <em>El Anti-Edipo</em> funciona bajo la estructura de lo que Freud denominó un «chiste tendencioso»: establece un cortocircuito léxico y conceptual inesperado entre dos dominios que el pensamiento tradicional y la represión capitalista mantienen estrictamente segregados —la economía política (el trabajo abstracto estudiado por el marxismo) y la economía libidinal (el deseo abstracto estudiado por el psicoanálisis)— para demostrar que son una y la misma fuerza productiva. El capitalismo descubre la esencia subjetiva de la producción en general (trabajo y deseo descodificados), pero inmediatamente vuelve a alienarla mediante una máquina represiva que divide dicha esencia en dos, delegando la reproducción humana y psíquica a la institución privatizada de la familia nuclear para contener la esquizofrenia libre que el propio mercado desata. Por lo tanto, poseer las herramientas básicas del marxismo y del psicoanálisis no es un mero requisito erudito externo, sino la condición de posibilidad para apreciar cómo Deleuze y Guattari desmantelan la complicidad histórica entre el capital y el diván, transformando ambas disciplinas para liberar la potencia revolucionaria del inconsciente maquínico.</p>
+
+                    <h3 id="preambulo-arquitectura" class="section-heading">2. Concepción y arquitectura pedagógica de estos dos ensayos</h3>
+                    <p>La concepción y arquitectura de estos dos ensayos propedéuticos resuelven una paradoja pedagógica fundamental que atraviesa de principio a fin la recepción de <em>El Anti-Edipo</em>: el principiante no necesita un manual enciclopédico que abarque la totalidad de la obra de Sigmund Freud o de Karl Marx, sino una genealogía selectiva, clínica y conceptualmente dirigida hacia los puntos exactos donde Gilles Deleuze y Félix Guattari introducen su bisturí crítico. Estos documentos no funcionan como resúmenes pasivos o escolásticos de dos disciplinas cerradas, sino como «mapas de operaciones» escritos en una prosa clara, progresiva y didáctica que explica cada concepto clásico en su propio terreno (con ejemplos cotidianos y clínicos comprensibles para quien parte desde cero) e indica inmediatamente después por qué ese concepto resultará decisivo cuando el lector abra la primera página de <em>El Anti-Edipo</em>. El diseño metodológico de ambos textos se articula bajo una estructura simétrica: partir del gran descubrimiento emancipador que Deleuze y Guattari reconocen tanto en el psicoanálisis como en la economía política marxista —el descubrimiento de una actividad de producción subjetiva y abstracta en general, ya sea como <em>libido</em> o como <em>trabajo</em>—, para luego mostrar paso a paso cómo cada tradición conceptualiza las estructuras que terminan encadenando, codificando o alienando esa potencia productiva.</p>
+                </section>
+
+                <!-- ENSAYO I: PSICOANÁLISIS -->
+                <section id="ensayo-1" class="essay-block">
+                    <span class="part-label">Primer Ensayo Propedéutico</span>
+                    <h2 class="essay-title">Prolegómenos al inconsciente maquínico: Lo que hay que saber de psicoanálisis (Freud, Klein y Lacan) antes de leer <em>El Anti-Edipo</em></h2>
+
+                    <p class="drop-cap">La empresa intelectual acometida por Gilles Deleuze y Félix Guattari en <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> no constituye una simple impugnación externa de la clínica psicoanalítica, sino una minuciosa operación de transformación inmanente diseñada para producir una psiquiatría materialista y revolucionaria —el «esquizoanálisis»— a partir de las ruinas y los remanentes del propio psicoanálisis. Para el lector que se adentra por primera vez en esta obra, la principal dificultad estriba en que los autores sumergen el discurso <em>in medias res</em>, presuponiendo un dominio detallado de la evolución conceptual que va desde la metapsicología de Sigmund Freud hasta el psicoanálisis de las relaciones objetales de Melanie Klein y el giro estructuralista y lingüístico de Jacques Lacan. Lejos de rechazar el edificio analítico en su totalidad, Deleuze y Guattari le aplican una «crítica interna» de raigambre kantiana y una «crítica externa» de corte marxista: el objetivo es llevar al psicoanálisis hasta el punto de su propia «autocrítica», separando el descubrimiento revolucionario de la productividad del inconsciente de su posterior traición metafísica, familiarista y burguesa. Comprender esta encrucijada exige recorrer de manera sistemática y pedagógica las cuatro grandes estaciones conceptuales de la tradición psicoanalítica con las que el libro debate en cada una de sus páginas.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e1-sec1" class="section-heading">I. Sigmund Freud y el descubrimiento de la economía libidinal: Del inconsciente dinámico a la represión</h3>
+                    <p>El punto de partida indispensable para comprender tanto el psicoanálisis como la admiración inicial que Deleuze y Guattari profesan por Sigmund Freud reside en la formulación sistemática del inconsciente que este alcanza hacia su célebre ensayo de 1915, <em>Lo inconsciente</em>, y que reformula en 1923 en <em>El yo y el ello</em>. Para la psicología tradicional previa a Freud, la vida mental equivalía a la conciencia; Freud, en cambio, postula que la verdadera realidad psíquica es el <strong>inconsciente</strong>, al cual concibe a través de tres puntos de vista interrelacionados: el <em>dinámico</em>, el <em>tópico</em> (o topográfico) y el <em>económico</em>. Desde la perspectiva <strong>dinámica</strong>, la mente no es un receptáculo estático, sino un campo de fuerzas en conflicto donde determinados deseos, impulsos e ideas resultan intolerables, ilógicos o ilícitos para la conciencia moral y social, viéndose obligados a permanecer ocultos en un estado «latente», aunque pugnando constantemente por salir a la superficie. Desde la perspectiva <strong>tópica</strong>, Freud cartografía este aparato psíquico (en su segunda tópica) dividiéndolo en el <strong>Ello</strong> (<em>das Es</em>, término que Freud toma de Georg Groddeck e, indirectamente, de Friedrich Nietzsche), el <strong>Yo</strong> (<em>Ego</em>, la instancia mediadora y consciente que obedece al principio de realidad) y el <strong>Superyó</strong> (la instancia moral y censora internalizada). En sus <em>Conferencias de introducción al psicoanálisis</em>, Freud ilustra el funcionamiento del <strong>Ello</strong> comparándolo con un invitado ruidoso y salvaje al que se ha expulsado de una sala de conferencias, pero que continúa golpeando furiosamente la puerta desde afuera, obligando a la conciencia a colocar un centinela permanente (la censura) para impedir su reingreso; los lapsus, los sueños y los síntomas neuróticos no son más que las astucias mediante las cuales ese huésped indómito logra burlar al guardia.</p>
+
+                    <p>Sin embargo, es en el punto de vista <strong>económico</strong> donde se localiza lo que <em>El Anti-Edipo</em> celebra como el mayor descubrimiento de la historia del psicoanálisis: la noción de <strong>libido</strong> entendida como la esencia subjetiva y abstracta del deseo. Al pasar de lo tópico a lo económico, Freud introduce un modelo cuantitativo e intensivo en el que los procesos inconscientes son concebidos como flujos de energía psíquica y sexual en estado bruto —el Ello como una fuerza compulsiva, impersonal, insaciable, creativa y destructiva que habita en nosotros pero que experimentamos como «otra»— que buscan descargarse y adherirse a diversos objetos y representaciones. En la terminología técnica del psicoanálisis que usted encontrará constantemente en <em>El Anti-Edipo</em>, el acto mediante el cual esta energía libidinal se deposita, carga o invierte en un objeto, una parte del cuerpo o una idea se denomina <strong>catexis</strong> (traducido en francés y español como <em>investissement</em> o <strong>inversión/investidura libidinal</strong>). Lo revolucionario del descubrimiento freudiano inicial radica en mostrar que la sexualidad humana no es un mero instinto biológico subordinado a la reproducción de la especie (la genitalidad reproductiva), sino una <strong>perversidad polimorfa</strong>: una energía libre, plástica e indeterminada que no tiene objetos ni fines predeterminados de antemano, sino que confiere valor erótico a cualquier objeto a través de conexiones fluidas y síntesis libres. Para Deleuze y Guattari, al descubrir esta libido libre y el método de la asociación libre, Freud descubrió en realidad la <strong>producción deseante</strong> (<em>production désirante</em>): demostró que el inconsciente no es un receptáculo de sombras, sino un taller o una fábrica incansable que produce conexiones reales.</p>
+
+                    <p>Para que un principiante comprenda cómo esta energía libidinal es bloqueada o desviada según la clínica psicoanalítica —y cómo Deleuze y Guattari reinterpretan este bloqueo—, es imperativo dominar la distinción terminológica entre tres conceptos de represión que en la lengua francesa poseen vocablos distintos:</p>
+
+                    <ol>
+                        <li><strong>La represión originaria o primaria (<em>Urverdrängung</em> en alemán; <em>refoulement originaire</em> en francés):</strong> En textos como <em>La represión</em>, <em>Inhibición, síntoma y angustia</em> o el caso Schreber, Freud postula un primer momento fundacional e inconsciente mediante el cual se fija una pulsión y se crea un núcleo inconsciente inicial antes de cualquier conflicto consciente. En <em>El Anti-Edipo</em>, este concepto freudiano es reinterpretado de forma materialista a través del <strong>Cuerpo sin Órganos</strong> (noción extraída del poeta Antonin Artaud) y del <strong>instinto de muerte</strong>: frente a las incesantes conexiones de las máquinas-órganos productivas, surge una superficie inengendrada e improductiva de «antiproducción» (el Cuerpo sin Órganos) que repele los órganos porque no los soporta (lo que los autores llaman la «máquina paranoica»). Esta repulsión primaria o <em>refoulement originaire</em> es la condición ontológica interna que detiene momentáneamente el proceso productivo y permite que los flujos de deseo se registren como signos sobre el Cuerpo sin Órganos, haciendo posible que más tarde la sociedad capture y manipule el deseo.</li>
+                        <li><strong>La represión psíquica o secundaria (<em>Verdrängung</em> en alemán; <em>refoulement</em> en francés):</strong> Es la represión propiamente dicha en el sentido clínico freudiano; se trata de una operación inconsciente mediante la cual el aparato psíquico (el Yo auxiliado por el Superyó) expulsa y mantiene fuera de la conciencia aquellas representaciones ligadas a pulsiones que causarían displacer o angustia. Cuando aquello que fue reprimido intenta regresar disfrazado en forma de síntoma, sueño o delirio, el psicoanálisis habla del <strong>retorno de lo reprimido</strong> (<em>retour du refoulé</em>).</li>
+                        <li><strong>La represión social o general (<em>Unterdrückung</em> en alemán; <em>répression</em> en francés):</strong> Es la opresión consciente, política, institucional y cultural que la sociedad ejerce sobre los individuos para domesticar sus impulsos y obligarlos a trabajar y obedecer.</li>
+                    </ol>
+
+                    <p>Aquí se produce el primer gran choque teórico que el lector de <em>El Anti-Edipo</em> debe tener presente: para Freud, la <strong>represión psíquica</strong> (<em>refoulement</em>) es primaria, natural y universal (pues responde al tabú natural del incesto en el niño), mientras que la <strong>represión social</strong> (<em>répression</em>) es secundaria e inevitable, una mera prolongación necesaria para edificar la civilización mediante la <strong>sublimación</strong> (la desviación de la energía sexual hacia fines culturales, artísticos o laborales no sexuales). Apoyándose en el psicoanalista marxista <strong>Wilhelm Reich</strong> —a quien consideran el verdadero fundador de una psiquiatría materialista por haberse preguntado cómo las masas llegaron a <em>desear</em> activamente el fascismo en lugar de haber sido simplemente engañadas—, Deleuze y Guattari invierten por completo la causalidad freudiana: demuestran que la represión psíquica no es autónoma ni primaria, sino un medio e instrumento al servicio de la represión social. La función de la represión psíquica inconsciente es, literalmente, amaestrar al sujeto para que desee su propia represión social.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e1-sec2" class="section-heading">II. El giro edípico de Freud: El teatro familiar, la castración y la transferencia</h3>
+                    <p>Si Freud había descubierto la potencia salvaje y libre de la libido en el inconsciente, ¿por qué el psicoanálisis terminó convirtiéndose, a juicio de Deleuze y Guattari, en una institución burguesa de control y resignación? La respuesta se halla en lo que los autores denominan «el largo error» del psicoanálisis: el giro hacia el <strong>Complejo de Edipo</strong>, que Freud vislumbra en 1897 durante su autoanálisis (vinculado a la redacción de <em>La interpretación de los sueños</em>) y termina generalizando como estructura universal del inconsciente en 1923 con <em>El yo y el ello</em>. Según los autores, fue como si Freud hubiera retrocedido aterrorizado ante el mundo de producción salvaje y deseo explosivo que acababa de descubrir, decidiendo imponerle a toda costa un orden clásico tomado del viejo teatro griego de Sófocles. Al hacerlo, Freud traicionó la naturaleza maquínica y productiva del inconsciente: dejó de concebir el inconsciente como una <strong>fábrica</strong> o un taller de producción real y lo transformó en un <strong>teatro</strong> de representación privada donde siempre se escenifica el mismo drama íntimo entre papá, mamá y el niño.</p>
+
+                    <p>Para comprender cómo opera este modelo que <em>El Anti-Edipo</em> desmantela en su segundo capítulo (a través de los llamados «cinco paralogismos del psicoanálisis»), es preciso conocer las piezas centrales del dispositivo edípico freudiano:</p>
+
+                    <ul>
+                        <li><strong>El triángulo edípico y el tabú del incesto:</strong> Según la doctrina clásica de Freud, todo niño, con independencia de su época histórica, clase social o cultura, atraviesa una crisis universal en la que dirige su deseo erótico hacia el progenitor del sexo opuesto (la Madre, en el caso del varón) y experimenta al progenitor del mismo sexo (el Padre) como un rival odiado al que desea eliminar y sustituir.</li>
+                        <li><strong>El complejo de castración y el Superyó:</strong> El niño abandona su deseo incestuoso hacia la madre por el terror que le inspira la amenaza (real o imaginaria) de la <strong>castración</strong> ejecutada por el padre prohibidor (mientras que en la niña se postula la «envidia del pene»). Para «resolver» su complejo de Edipo, el sujeto debe resignarse a la prohibición, renunciar a la madre, identificarse con la autoridad del padre e internalizar esa ley paterna en su propia psique bajo la forma del <strong>Superyó</strong>, lo que engendra el sentimiento neurótico de <strong>culpa</strong>.</li>
+                        <li><strong>La clínica de la neurosis frente a la psicosis:</strong> Toda la terapia freudiana se construye sobre pacientes <strong>neuróticos</strong> (histéricos, obsesivos), es decir, sujetos cuyo Yo obedece a la realidad social, acepta el triángulo familiar y reprime sus deseos en el inconsciente. Freud, en cambio, desconfiaba profundamente de los <strong>psicóticos</strong> (esquizofrénicos y paranoicos, a los que solo abordó de manera indirecta, como en su análisis textual de las memorias del juez Daniel Paul Schreber), porque el esquizofrénico se resiste a la edipización y huye del universo paterno. Mientras que Freud reduce el delirio del juez Schreber (quien sentía que Dios lo transformaba en mujer mediante rayos solares y deliraba sobre los arios, los judíos o los jesuitas) a un deseo homosexual reprimido hacia su padre, Deleuze y Guattari sostienen que todo delirio es inmediatamente político, histórico-mundial, geográfico y racial, y que la familia nunca es la causa del deseo, sino una pantalla secundaria.</li>
+                        <li><strong>La transferencia:</strong> En la práctica clínica freudiana, la <strong>transferencia</strong> es el mecanismo mediante el cual el paciente proyecta inconscientemente sobre la figura del psicoanalista los afectos, deseos y conflictos que originalmente sentía hacia sus padres (mamá y papá). Para <em>El Anti-Edipo</em>, la transferencia es uno de los inventos más perniciosos de Freud: cuando la autoridad del padre real se debilita en la sociedad capitalista moderna, el psicoanalista entra en escena como un sustituto paterno a sueldo, encerrando cualquier deseo social o rebeldía política del paciente en el corralito infantil del consultorio («¡Di que es Edipo, responde papá-mamá cuando te hablo, o recibirás una bofetada!»).</li>
+                    </ul>
+
+                    <p>La crítica interna de Deleuze y Guattari demuestra que el psicoanálisis comete una falacia lógica monumental (el «paralogismo del desplazamiento») al deducir la naturaleza del deseo a partir de la ley que lo prohíbe: como la ley familiar prohíbe el incesto («no te casarás con tu madre ni matarás a tu padre»), el psicoanálisis concluye que eso era exactamente lo que el inconsciente deseaba hacer. Sin embargo, utilizando una semiótica materialista de tres términos —1) el <strong>representante reprimido</strong> del deseo (los flujos libres, intensivos y revolucionarios de la producción deseante), 2) la <strong>representación represora</strong> (la ley o prohibición del incesto), y 3) el <strong>representado desplazado</strong> (la imagen falsa y edípica del deseo)—, Deleuze y Guattari demuestran que el deseo jamás fue incestuoso por naturaleza. Edipo es una trampa, un espejo deformante fabricado por la represión social y delegado a la familia nuclear capitalista para avergonzar al deseo, culpabilizarlo y neutralizar su potencia revolucionaria haciéndole creer que lo único que quería era acostarse con su madre.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e1-sec3" class="section-heading">III. Melanie Klein y la escuela inglesa: La maravillosa invención de los objetos parciales y su traición</h3>
+                    <p>Si la lectura del segundo capítulo de <em>El Anti-Edipo</em> requiere dominar a Freud, el primer capítulo (<em>Las máquinas deseantes</em>) resulta prácticamente indescifrable sin conocer la obra de la psicoanalista austro-británica <strong>Melanie Klein</strong> (1882-1960), fundadora del psicoanálisis infantil y de la teoría de las relaciones de objeto. Al analizar a niños muy pequeños mediante la técnica del juego (como en sus famosos casos del pequeño Dick o Richard), Klein exploró las etapas más arcaicas de la vida psíquica —las fases que ella denominó <strong>preedípicas</strong>—, descubriendo que desde el primer día de vida el lactante no se relaciona con personas completas («la madre» o «el padre» como individuos unificados), sino con lo que ella bautizó como <strong>objetos parciales</strong> (<em>part-objects</em> / <em>objets partiels</em>).</p>
+
+                    <p>En la teoría kleiniana, el aparato psíquico temprano del bebé aún no posee un Yo integrado ni percibe su propio cuerpo o el de los demás como organismos totales. Impulsado por sus pulsiones orales y anales, y atravesado por la lucha entre el instinto de vida y el instinto de muerte (que le genera una profunda angustia de aniquilación), el infante se relaciona únicamente con partes anatómicas o sustancias corporales cargadas de valor afectivo: el pecho materno, la boca, el pene, las heces, la orina. Para defenderse de la angustia y protegerse de sus propios impulsos destructivos, el bebé opera mediante tres mecanismos fundamentales que usted verá discutidos en <em>El Anti-Edipo</em>:</p>
+
+                    <ul>
+                        <li><strong>La escisión (clivaje):</strong> Como el bebé no puede comprender que la misma madre que lo alimenta es la que a veces se ausenta y lo frustra, divide el objeto parcial en dos objetos distintos y opuestos: el <strong>pecho bueno</strong> (idealizado, que nutre y gratifica) y el <strong>pecho malo</strong> (persecutorio, que se retira, frustra y amenaza con devorarlo).</li>
+                        <li><strong>La introyección y la proyección:</strong> El lactante <em>introyecta</em> (incorpora fantasmáticamente dentro de su cuerpo, por vía oral) el objeto parcial bueno para fundar su Yo, y <em>proyecta</em> (expulsa agresiva o sádicamente hacia afuera) sus pulsiones destructivas sobre el objeto malo.</li>
+                        <li><strong>De la posición esquizo-paranoide a la posición depresiva:</strong> Según Klein, durante los primeros meses de vida el niño habita en la <strong>posición esquizo-paranoide</strong>, caracterizada precisamente por esta fragmentación de objetos parciales escindidos en buenos y malos y por la ansiedad persecutoria. No obstante, el desarrollo «normal» exige que el niño evolucione hacia una segunda etapa llamada <strong>posición depresiva</strong>: el momento madurativo en que el infante finalmente comprende que el pecho bueno y el pecho malo pertenecen a una misma <strong>persona global</strong> o <strong>objeto completo</strong> (la Madre entera), sintiendo culpa y depresión por haber deseado destruir en sus fantasías al mismo ser que ama, lo cual inaugura el ingreso al complejo de Edipo temprano y la unificación del Yo.</li>
+                    </ul>
+
+                    <p>¿Por qué es tan importante Melanie Klein para Deleuze y Guattari? Porque ellos afirman con entusiasmo que Klein realizó «el maravilloso descubrimiento de los objetos parciales, ese mundo de explosiones, de rotaciones, de vibraciones», descubriendo las verdaderas piezas trabajadoras (<em>working parts</em>) de lo que ellos rebautizan como <strong>máquinas deseantes</strong>. En el primer capítulo de <em>El Anti-Edipo</em>, el inconsciente funciona exactamente mediante el acoplamiento conectivo de objetos parciales y flujos materiales: una máquina-boca se conecta a una máquina-pecho para cortar un flujo de leche; una máquina-ano corta un flujo de heces; un ojo corta un flujo de luz. Los objetos parciales tienen en sí mismos la carga explosiva suficiente para hacer saltar en pedazos el triángulo de Edipo, ya que demuestran que <strong>el inconsciente ignora a las personas</strong> y que el deseo funciona a un nivel «molecular» y subpersonal de órganos y flujos, no de «papá» y «mamá».</p>
+
+                    <p>Sin embargo, Deleuze y Guattari acusan a Klein de haber fracasado en comprender la lógica de su propio descubrimiento y de haber caído en el cuarto paralogismo del psicoanálisis (el «paralogismo de la extrapolación») por dos razones fundamentales:</p>
+
+                    <ol>
+                        <li><strong>Idealismo del fantasma y del consumo:</strong> Klein piensa los objetos parciales como meros «fantasmas» psicológicos internos (introyección/proyección, bueno/malo) enfocados desde el punto de vista del consumo subjetivo, olvidando los flujos materiales y la producción real de las máquinas deseantes.</li>
+                        <li><strong>La subordinación al Todo y a las personas globales:</strong> Al llamar a esta etapa «preedípica» y postular una evolución natural obligatoria hacia la «posición depresiva», Klein trata a los objetos parciales como si fueran fragmentos extraídos de personas globales preexistentes (la madre, el padre) y destinados a reintegrarse en una totalidad orgánica y edípica. Cuando el pequeño Dick juega con un tren o mira el espacio oscuro entre dos puertas o un lavabo, Klein le impone a la fuerza el código edípico: «le expliqué que "está oscuro dentro de mamá; Dick está en lo oscuro de mamá"»; cuando los niños dicen «una barriga» o hablan de «un Hitler» o «un Churchill», Klein escucha «la barriga de mi mamá» o «el padre malo/bueno». Frente a Klein, el esquizoanálisis sostiene que los objetos parciales son estrictamente <strong>anedípicos</strong> (no preedípicos): no son partes de un organismo perdido ni representantes de los padres, sino intensidades y piezas maquínicas dispersas sobre el Cuerpo sin Órganos que jamás deben ser totalizadas en personas globales.</li>
+                    </ol>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e1-sec4" class="section-heading">IV. Jacques Lacan y el psicoanálisis estructural: El Significante, la Carencia y el rescate del <em>objeto a</em></h3>
+                    <p>Si Freud y Klein constituyen los cimientos clínicos de la discusión, el interlocutor más complejo, omnipresente y decisivo de <em>El Anti-Edipo</em> es el psicoanalista francés <strong>Jacques Lacan</strong> (1901-1981), cuya enseñanza dominaba de forma hegemónica la vida intelectual parisina a finales de los años sesenta y principios de los setenta (y de quien el propio Félix Guattari había sido discípulo y analizante). Lacan emprendió un célebre «retorno a Freud» con el propósito de rescatar al psicoanálisis del psicologismo adaptativo estadounidense (la psicología del Yo) y de las lecturas meramente biológicas o mitológicas. Para lograrlo, Lacan refundó la teoría psicoanalítica aliándola con la <strong>lingüística estructural</strong> de Ferdinand de Saussure y Roman Jakobson, y con la <strong>antropología estructural</strong> de Claude Lévi-Strauss, formulando su famoso axioma: <em>«el inconsciente está estructurado como un lenguaje»</em>.</p>
+
+                    <p>Para no perderse en el denso diálogo que Deleuze y Guattari mantienen con Lacan y sus discípulos (como Serge Leclaire o Maud Mannoni), el lector principiante necesita dominar cinco conceptos cardinales del edificio lacaniano:</p>
+
+                    <h4 class="subsection-heading">1. Los tres registros: Lo Imaginario, lo Simbólico y lo Real</h4>
+                    <p>Lacan organiza toda la experiencia psíquica humana en torno a tres órdenes o registros heterogéneos:</p>
+                    <ul>
+                        <li><strong>Lo Imaginario:</strong> Es el registro de las imágenes, las identificaciones especulares, las ilusiones de totalidad y las relaciones duales (yo-otro). Se inaugura en lo que Lacan denominó el <strong>estadio del espejo</strong> (su reformulación de la posición depresiva de Klein, inspirada en Henri Wallon): entre los seis y los dieciocho meses, el bebé humano —que aún experimenta su cuerpo como fragmentado e incoordinado— se reconoce en el espejo (o en la imagen de un semejante) y se identifica jubilosamente con esa imagen visual completa. Para Lacan, esto demuestra que el <strong>Yo (<em>Moi</em>)</strong> unificado no es un dato biológico natural, sino una ficción alienante, un espejismo narcisista construido para ocultar la fragmentación y la falta. En la notación algebraica de Lacan, este semejante especular con el que el yo se confunde se escribe como el <strong>pequeño otro (<em>a'</em> o <em>autre</em> con minúscula)</strong>.</li>
+                        <li><strong>Lo Simbólico:</strong> Es el orden preexistente del lenguaje, la cultura, las leyes de parentesco y las estructuras sociales. Siguiendo a Saussure (quien dividía el signo lingüístico en <em>significante</em> —la huella acústica o material de la palabra— y <em>significado</em> —el concepto mental—), Lacan otorga la primacía absoluta al <strong>Significante</strong>. El sujeto humano solo se constituye como tal al entrar en el orden Simbólico, el cual introduce una mediación terciaria (la Ley y el lenguaje) que rompe la confusión dual y narcisista del registro Imaginario. El lugar de este código lingüístico y legal transindividual es lo que Lacan denomina el <strong>Gran Otro (<em>A</em> o <em>Autre</em> con mayúscula)</strong>. En la clínica lacaniana, el analista ocupa en la transferencia el lugar del «sujeto supuesto saber» (<em>sujet supposé savoir</em>), pero no para reforzar la identificación imaginaria con su persona, sino para mantener vacío el lugar del Gran Otro y devolver al sujeto a su verdad en el orden Simbólico.</li>
+                        <li><strong>Lo Real:</strong> A diferencia de la «realidad» cotidiana (que siempre está filtrada por nuestras imágenes e ideas lingüísticas), <strong>lo Real</strong> en Lacan es aquello que escapa radicalmente a la imagen y al lenguaje: lo que no puede ser simbolizado ni representado («lo real es lo imposible»). En la ortodoxia lacaniana, lo Real suele entenderse de manera negativa como un agujero, una fisura o un <em>impasse</em> interno dentro de la estructura simbólica.</li>
+                    </ul>
+
+                    <h4 class="subsection-heading">2. La desmitologización estructural de Edipo: El Nombre-del-Padre y el Falo</h4>
+                    <p>Lacan consideraba que entender el complejo de Edipo como un drama literal con las personas de carne y hueso de papá y mamá era quedarse atrapado en el registro <strong>Imaginario</strong> y en el mito. En su traducción al registro <strong>Simbólico</strong>, Edipo deja de ser una novela familiar y se convierte en una estructura lingüística sobre cómo el niño adquiere el lenguaje e ingresa en la ley de la significación. Para entrar en el orden Simbólico, el infante debe separarse del cuerpo de la Madre (perdiendo el contacto inmediato con la sustancia física o el «ser» pleno) gracias a la intervención de un tercer término estructural: la metáfora paterna o el <strong>Nombre-del-Padre</strong>. Lacan juega aquí con la homofonía en francés entre <em>le Nom-du-Père</em> (el Nombre del Padre, el significante que nombra la ley y el linaje) y <em>le Non-du-Père</em> (el «No» del Padre, la prohibición del incesto).</p>
+
+                    <p>Esta operación estructural es lo que Lacan llama <strong>castración simbólica</strong>: tanto la madre como el niño están sometidos a la ley del lenguaje y ninguno posee la plenitud del ser. El significante supremo que rige todo este sistema no es el pene biológico (órgano real o imaginario), sino el <strong>Falo</strong> simbólico: un «significante despótico» privilegiado, el significante de la plenitud de sentido y de la falta misma, que distribuye las posiciones sexuales y mide la carencia de todos los sujetos. Al quedar «castrado» o separado de la sustancia materna por el lenguaje, el sujeto humano queda constitutivamente dividido —lo que Lacan escribe como <strong>sujeto barrado ($)</strong>—.</p>
+
+                    <h4 class="subsection-heading">3. Necesidad, Demanda, Deseo y el imperio de la Carencia (<em>Manque</em>)</h4>
+                    <p>A partir de esta castración simbólica, Lacan establece una distinción tripartita fundamental entre <strong>necesidad</strong>, <strong>demanda</strong> y <strong>deseo</strong>: la <em>necesidad</em> es un apetito puramente biológico (como el hambre del bebé) que puede satisfacerse con un objeto real (leche); sin embargo, como el ser humano habla, tiene que articular sus necesidades a través del lenguaje dirigiéndolas al Gran Otro en forma de una <em>demanda</em> (que en el fondo es siempre una demanda absoluta de amor y reconocimiento). Como las palabras jamás pueden capturar la totalidad del ser perdido tras la separación de la madre, entre la necesidad biológica que se satisface y la demanda de amor que nunca queda colmada se abre una brecha irreductible: de esa grieta nace el <strong>deseo</strong>. Por consiguiente, para Lacan (influido profundamente por la lectura hegeliana de Alexandre Kojève), <strong>el deseo se define esencialmente como carencia o falta en ser (<em>manque</em>)</strong>: deseamos porque nos falta algo primordial que hemos perdido para siempre al entrar en el lenguaje, y estamos condenados a buscar sustitutos parciales a lo largo de las cadenas de significantes (lo que Lacan llama la «metonimia del deseo») sin poder alcanzar jamás la satisfacción plena.</p>
+
+                    <h4 class="subsection-heading">4. La Forclusión (<em>Forclusion</em>) y las psicosis</h4>
+                    <p>¿Qué sucede, según Lacan, cuando en la estructuración psíquica de un sujeto falla la inscripción de ese significante fundamental que es el Nombre-del-Padre? Se produce el mecanismo específico de la <strong>psicosis</strong> (esquizofrenia, paranoia), al que Lacan denomina <strong>forclusión</strong> (o repudio): a diferencia del neurótico, que <em>reprime</em> los significantes en el inconsciente pero habita plenamente dentro de la ley del orden Simbólico, en el psicótico el Nombre-del-Padre está «forcluido», jamás llegó a inscribirse en la estructura simbólica, dejando un agujero que hace que el psicótico quede fuera del orden Simbólico y en contacto directo y alucinatorio con <strong>lo Real</strong>.</p>
+
+                    <h4 class="subsection-heading">5. El <em>objeto pequeño a</em> (<em>objet petit a</em>)</h4>
+                    <p>El último gran concepto lacaniano —y el más admirado por Deleuze y Guattari— es el <strong>objeto pequeño <em>a</em></strong> (<em>objet petit a</em>). Reelaborando los «objetos parciales» de Melanie Klein (el pecho, las heces, a los que Lacan añade la mirada y la voz), Lacan deja de pensar el <em>objeto a</em> como una simple imagen especular y lo define como el resto o residuo de lo Real que escapa a la captura del Significante y de la estructura simbólica. El <em>objeto a</em> no es el objeto hacia el cual tiende el deseo para satisfacerse, sino el <strong>objeto-causa del deseo</strong>: una pieza fragmentaria, un motor real de las pulsiones que irrumpe en el corazón del equilibrio estructural como una «máquina infernal» que pone en marcha el deseo.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e1-sec5" class="section-heading">V. El balance crítico de <em>El Anti-Edipo</em> frente a Lacan: Esquizofrenizar el inconsciente</h3>
+                    <p>Con este mapa conceptual en la mano, usted podrá comprender con total claridad la compleja estrategia que Deleuze y Guattari despliegan frente a Lacan a lo largo de <em>El Anti-Edipo</em>. En una famosa nota a pie de página del primer capítulo (y en el capítulo cuarto), los autores afirman que la admirable teoría lacaniana del deseo posee <strong>dos polos</strong> opuestos entre los cuales es necesario elegir:</p>
+
+                    <ol>
+                        <li><strong>El polo revolucionario del <em>objeto pequeño a</em>:</strong> Deleuze y Guattari rescatan el <em>objeto a</em> porque Lacan lo concibe como una verdadera <strong>máquina deseante</strong>, una pieza molecular que define el deseo en términos de una producción real, más allá de toda necesidad biológica y de toda fantasía imaginaria, sembrando la destrucción del totalitarismo del Significante desde adentro.</li>
+                        <li><strong>El polo reaccionario del Gran Otro (<em>A</em>) y del Significante:</strong> Al mismo tiempo, rechazan de plano la subordinación del deseo al Gran Otro, a la Ley del Padre, al Falo como significante despótico y a la noción de la <strong>carencia o falta (<em>manque</em>)</strong>.</li>
+                    </ol>
+
+                    <p>Deleuze y Guattari reconocen que Lacan hizo un esfuerzo titánico por despersonalizar el psicoanálisis y llevar a Edipo hasta el punto de su autocrítica, demostrando que el Edipo familiar es solo un mito imaginario producido por una estructura simbólica de castración. Sin embargo, ironizan diciendo que la crítica lacaniana se parece a la historia de aquellos combatientes de la Resistencia que colocaron cargas explosivas tan perfectamente equilibradas bajo las torres de un puente que la estructura entera saltó por los aires solo para volver a caer exactamente en el mismo agujero: al reemplazar a «papá y mamá» (Edipo imaginario) por el «Nombre-del-Padre, el Falo y la Castración» (Edipo estructural o simbólico), Lacan y sus discípulos no nos liberan del familiarismo, sino que lo elevan a una metáfora lingüística universal aún más abstracta y opresiva. Para <em>El Anti-Edipo</em>, definir el deseo por la carencia y la castración convierte al psicoanálisis en una «teología negativa» piadosa, una religión de la resignación infinita regida por un sacerdote (el analista) que enseña al sujeto a aceptar su mutilación ante la Ley. Además, tal como demostrarán en su crítica histórico-social, los elementos estructurales de Lacan tienen un origen histórico preciso que el psicoanálisis oculta: el cuerpo materno perdido proviene del territorio codificado de las sociedades salvajes, mientras que el Gran Significante fálico y la ley castradora del Nombre-del-Padre no son más que la resurrección arcaica e internalizada del antiguo <strong>Déspota imperial</strong> en la intimidad del hombre privado capitalista.</p>
+
+                    <p>Frente a esta teología de la falta, <em>El Anti-Edipo</em> postula su tesis ontológica fundamental: <strong>al deseo no le falta nada; el deseo no carece de objeto, sino que es producción real de lo Real</strong>. Si algo falta en el deseo, es un sujeto fijo, puesto que el deseo es un proceso maquínico de flujos y cortes que precede al sujeto y al objeto. Y dado que para el propio Lacan el <strong>psicótico</strong> (el esquizofrénico) es aquel que escapa por «forclusión» a la dictadura simbólica del Nombre-del-Padre y habita directamente en lo Real, Deleuze y Guattari deciden tomar el proceso esquizofrénico (distinguiéndolo rigurosamente del esquizofrénico enfermo y destruido en el manicomio) como el verdadero modelo del inconsciente productivo. En su lectura, el inconsciente no funciona mediante una estructura lingüística cerrada, sino a través de <strong>tres síntesis pasivas e inmanentes</strong> (la síntesis <em>conectiva</em> de producción que acopla órganos y flujos; la síntesis <em>disyuntiva</em> de registro que inscribe signos polívocos sobre el Cuerpo sin Órganos; y la síntesis <em>conjuntiva</em> de consumo que engendra sujetos nómadas y estados intensivos del tipo «Yo siento»), las cuales son sistemáticamente traicionadas y deformadas por los usos ilegítimos y trascendentes del Edipo psicoanalítico.</p>
+
+                    <h3 id="e1-tabla" class="section-heading">Cuadro sinóptico de referencia: Psicoanálisis</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto Psicoanalítico (Freud, Klein, Lacan)</th>
+                                    <th>Definición en la clínica clásica</th>
+                                    <th>Crítica y transformación en <em>El Anti-Edipo</em> (Esquizoanálisis)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Inconsciente</strong></td>
+                                    <td>Escenario donde se representan deseos reprimidos, fantasmas infantiles y mitos (Freud), o estructura lingüística de significantes (Lacan).</td>
+                                    <td>No es un <strong>teatro</strong> de representación ni una estructura lingüística, sino una <strong>fábrica</strong> o taller que produce lo Real mediante <strong>tres síntesis pasivas</strong> (conectiva, disyuntiva y conjuntiva).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Libido y Catexis (<em>Investissement</em>)</strong></td>
+                                    <td>Energía sexual de las pulsiones que se invierte (<em>catectiza</em>) en objetos o representaciones intrapsíquicas y familiares.</td>
+                                    <td>El gran descubrimiento de Freud (esencia subjetiva abstracta del deseo). La libido es la energía de las máquinas deseantes que inviste directamente el campo social, económico e histórico sin pasar por la familia.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Represión originaria (<em>Refoulement originaire</em>)</strong></td>
+                                    <td>Primer momento inconsciente que fija la pulsión y funda el núcleo del inconsciente antes de cualquier represión secundaria.</td>
+                                    <td>Redefinida como la repulsión que el <strong>Cuerpo sin Órganos</strong> (instancia de antiproducción e instinto de muerte) ejerce sobre las máquinas-órganos, permitiendo el registro de signos.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Represión psíquica (<em>Refoulement</em>) vs. Social (<em>Répression</em>)</strong></td>
+                                    <td>La represión psíquica del deseo incestuoso es primaria y universal; la represión social es secundaria y necesaria para la cultura (vía sublimación).</td>
+                                    <td>Se invierte la causalidad (siguiendo a W. Reich): la <strong>represión psíquica</strong> es un medio al servicio de la <strong>represión social</strong> para enseñar a los sujetos a desear su propia servidumbre.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Complejo de Edipo y Prohibición del Incesto</strong></td>
+                                    <td>Deseo universal e innato del niño de poseer a la madre y matar al padre, reprimido por la ley del incesto.</td>
+                                    <td>Es un producto ficticio («paralogismo del desplazamiento»). La ley del incesto falsifica la imagen del deseo para atraparlo y neutralizar su naturaleza revolucionaria en la familia nuclear capitalista.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Objetos parciales (Melanie Klein)</strong></td>
+                                    <td>Fragmentos corporales (pecho bueno/malo, heces) vividos como fantasmas en la fase «preedípica» esquizo-paranoide, destinados a integrarse en personas completas en la posición depresiva.</td>
+                                    <td>Son las piezas trabajadoras moleculares de las <strong>máquinas deseantes</strong>. Son estrictamente <strong>anedípicos</strong>: no derivan de personas globales (mamá/papá) ni deben totalizarse en un organismo o Yo unificado.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Imaginario y Simbólico (Jacques Lacan)</strong></td>
+                                    <td>Dos órdenes distintos: la identificación especular dual con la imagen (<em>a'</em>) frente a la estructura mediadora del lenguaje, la Ley y el Gran Otro (<em>A</em>).</td>
+                                    <td>Su distinción es indecidible en última instancia; pasar del Edipo imaginario al Edipo simbólico/estructural no rompe con el familiarismo, sino que instala un arcano despótico y paraliza la producción deseante.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>El Significante, el Nombre-del-Padre y el Falo (Lacan)</strong></td>
+                                    <td>El significante paterno que prohíbe a la madre, ejecuta la castración simbólica e inaugura el orden del sentido y de la diferencia sexual.</td>
+                                    <td>Rechazado como el «paralogismo de la extrapolación»: extrae un objeto del flujo para convertirlo en un término trascendente y despótico que sobrecodifica el deseo y distribuye la falta.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Deseo como Carencia (<em>Manque</em>) vs. <em>Objeto pequeño a</em> (Lacan)</strong></td>
+                                    <td>El deseo nace de una falta de ser irreparable tras la castración, aunque es causado e impulsado por un resto real no simbolizable: el <em>objeto a</em>.</td>
+                                    <td>Se rechaza radicalmente la <strong>carencia</strong> (teología negativa impuesta por la antiproducción social) y se rescata el <strong><em>objeto pequeño a</em></strong> como verdadera <strong>máquina deseante</strong> que produce lo Real positivo.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ENSAYO II: MARXISMO Y ECONOMÍA POLÍTICA -->
+                <section id="ensayo-2" class="essay-block">
+                    <span class="part-label">Segundo Ensayo Propedéutico</span>
+                    <h2 class="essay-title">Anatomía del capital y la historia universal: Lo que hay que saber de marxismo y economía política antes de leer <em>El Anti-Edipo</em></h2>
+
+                    <p class="drop-cap">Si el psicoanálisis constituye el primer gran interlocutor de <em>El Anti-Edipo</em>, el marxismo y la crítica de la economía política conforman la columna vertebral que sostiene su arquitectura ontológica, histórica y revolucionaria. Muchos años después de la publicación de la obra, Gilles Deleuze afirmaría sin ambages que tanto él como Félix Guattari habían seguido siendo profundamente marxistas —quizá cada uno a su manera—, bajo la convicción inquebrantable de que toda filosofía política digna de ese nombre debe girar en torno al análisis del capitalismo y de las operaciones mediante las cuales este sistema inmanente supera y desplaza sin cesar sus propios límites. Sin embargo, para el lector que se aproxima por primera vez al libro, el uso que los autores hacen de Karl Marx (apoyándose simultáneamente en los <em>Manuscritos económico-filosóficos de 1844</em>, en los borradores de los <em>Grundrisse</em> —recién traducidos al francés en 1967-1968 por Roger Dangeville— y en los tres tomos de <em>El Capital</em>) puede resultar intimidante, dado que no se limitan a repetir los dogmas del marxismo escolar o de partido, sino que someten las categorías económicas a una transfiguración radical. Para navegar con soltura por los capítulos primero, tercero (<em>Salvajes, bárbaros, civilizados</em>) y cuarto de la obra, es indispensable recorrer de forma progresiva y pedagógica las cuatro grandes estaciones del pensamiento económico y marxista que Deleuze y Guattari movilizan en su proyecto de esquizoanálisis.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e2-sec1" class="section-heading">I. Naturaleza, industria y el descubrimiento de la esencia subjetiva del trabajo: Del joven Marx a Adam Smith y David Ricardo</h3>
+                    <p>El primer concepto marxista que aparece en las páginas inaugurales de <em>El Anti-Edipo</em> proviene directamente de los escritos de juventud de Karl Marx (los <em>Manuscritos económico-filosóficos de 1844</em>): la tesis materialista de la <strong>identidad procesual entre el hombre y la naturaleza</strong> a través de la <strong>producción</strong> y la <strong>industria</strong>. En la filosofía tradicional, se solía pensar al «Hombre» y a la «Naturaleza» como dos mundos separados y opuestos (el sujeto frente al objeto, la cultura frente al medio natural). Para el joven Marx, en cambio, la naturaleza misma no es un paisaje pasivo, sino un proceso vivo de producción incesante, y el ser humano es una parte activa de esa naturaleza que produce y transforma el mundo a través de su actividad vital e industrial. Deleuze y Guattari toman esta idea de Marx al pie de la letra para fundar su teoría de las <strong>máquinas deseantes</strong>: no existen dos esferas separadas (el hombre por un lado y la naturaleza por otro), sino un único proceso de producción donde el productor y el producto son una y la misma realidad.</p>
+
+                    <p>A partir de esta premisa, <em>El Anti-Edipo</em> establece una comparación luminosa entre la historia de la economía política (analizada por Marx) y la historia del psicoanálisis, mostrando cómo ambas disciplinas realizaron exactamente el mismo descubrimiento revolucionario y cometieron exactamente la misma traición. Para que un principiante comprenda este pasaje crucial, debemos revisar brevemente cómo evolucionó la pregunta económica fundamental —<em>«¿de dónde nace la riqueza?»</em>— antes de Marx:</p>
+
+                    <ul>
+                        <li><strong>El mercantilismo (siglos XVI-XVII):</strong> Los primeros teóricos económicos de los Estados absolutistas creían que la riqueza residía en un objeto exterior: la acumulación de metales preciosos (oro y plata) en las arcas del Rey o del Estado mediante el comercio exterior. Como señalan Deleuze y Guattari, los mercantilistas aún pensaban la riqueza atada a una «máquina despótica» hacedora de dinero.</li>
+                        <li><strong>La fisiocracia (siglo XVIII, liderada por François Quesnay):</strong> Los fisiócratas dieron un paso adelante al afirmar que la riqueza no nace del comercio ni del oro acumulado, sino de la producción; sin embargo, seguían creyendo que la única actividad verdaderamente productiva era la <strong>agricultura</strong>, atando así la riqueza a una condición objetiva exterior: la fertilidad de la <strong>tierra</strong> (una «máquina territorial»).</li>
+                        <li><strong>La economía política clásica (finales del siglo XVIII y principios del XIX, con Adam Smith y David Ricardo):</strong> Aquí se produce la gran revolución conceptual que Marx elogia con entusiasmo. Adam Smith y David Ricardo descubren que la fuente de todo valor y de toda riqueza no está del lado del objeto (ni en el oro ni en la tierra), sino del lado del sujeto productor: reside en el <strong>trabajo en general</strong>, sin importar si ese trabajo se aplica a la agricultura, a la manufactura o al comercio. A esta actividad creadora de riqueza, libre de cualquier atadura a un oficio o territorio específico, Marx la denomina la <strong>esencia subjetiva y abstracta de la riqueza</strong> o <strong>trabajo abstracto</strong>. Siguiendo a Friedrich Engels, Marx afirma que <strong>Adam Smith fue el «Lutero de la economía política»</strong>: así como Martín Lutero dijo que la verdadera religión no estaba en los objetos externos (las reliquias o los templos católicos) sino en la fe interior del sujeto, Adam Smith demostró que la verdadera riqueza no está en las cosas exteriores sino en la actividad productiva subjetiva del trabajo humano.</li>
+                    </ul>
+
+                    <p>Sin embargo —y aquí reside la crítica demoledora de Marx que Deleuze y Guattari hacen suya—, apenas Adam Smith y David Ricardo descubrieron que el trabajo libre y subjetivo era la fuente de toda riqueza, se apresuraron a encadenarlo y <strong>alienarlo</strong> de nuevo bajo las reglas del capitalismo, sometiéndolo a la <strong>propiedad privada de los medios de producción</strong> (el capital). El trabajador produce toda la riqueza, pero en el régimen de propiedad privada el producto de su trabajo se le vuelve ajeno y hostil, enriqueciendo al capitalista que lo explota.</p>
+
+                    <p>En <em>El Anti-Edipo</em>, Deleuze y Guattari muestran que <strong>Sigmund Freud es el Lutero y el Adam Smith de la psiquiatría</strong>: Freud tuvo la genialidad de descubrir que la esencia del deseo ya no depende de objetos o territorios externos, sino que es una actividad productiva subjetiva y abstracta en general —la <strong>libido</strong>—; pero, exactamente igual que hizo Adam Smith al encerrar el trabajo libre en la propiedad privada del capital, Freud volvió a encerrar y alienar inmediatamente a la libido libre en la «propiedad privada» de la familia nuclear burguesa (el complejo de Edipo). Bajo el capitalismo, la economía política (el trabajo abstracto) y el psicoanálisis (el deseo abstracto) nacen del mismo movimiento histórico de liberación de flujos y cumplen la misma función represiva de re-encadenamiento.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e2-sec2" class="section-heading">II. La arquitectura del materialismo histórico y su subversión: Infraestructura, superestructura y las tres grandes máquinas sociales (<em>Socius</em>)</h3>
+                    <p>Para comprender cómo <em>El Anti-Edipo</em> reescribe la historia de la humanidad en su tercer capítulo, es necesario conocer primero el esquema clásico del <strong>materialismo histórico</strong> de Marx y Engels (expuesto en textos como <em>La ideología alemana</em>, el <em>Prólogo a la Contribución a la crítica de la economía política</em> o <em>El origen de la familia, la propiedad privada y el Estado</em>), así como la lectura estructuralista que de él hicieron <strong>Louis Althusser</strong> y <strong>Étienne Balibar</strong> en su influyente obra <em>Para leer El Capital</em> (1965), profusamente citada por Deleuze y Guattari.</p>
+
+                    <p>En el vocabulario marxista clásico, toda sociedad histórica se analiza a partir de cuatro conceptos fundamentales:</p>
+
+                    <ol>
+                        <li><strong>Las fuerzas productivas:</strong> Son los elementos materiales y humanos que intervienen en el proceso de trabajo: la fuerza de trabajo humana, las herramientas, las máquinas, la tecnología y las materias primas.</li>
+                        <li><strong>Las relaciones de producción:</strong> Son los vínculos sociales y jurídicos que se establecen entre las personas en función de quién posee los medios de producción y cómo se reparte el producto del trabajo (por ejemplo, la relación entre el amo y el esclavo, entre el señor feudal y el siervo, o entre el capitalista propietario de la fábrica y el obrero asalariado).</li>
+                        <li><strong>La infraestructura (base económica) frente a la superestructura (ideológica, jurídica y política):</strong> Según la metáfora arquitectónica del marxismo tradicional, el conjunto de las fuerzas productivas y las relaciones de producción forma la <strong>infraestructura</strong> o base material real de la sociedad; sobre esta base económica se levanta un edificio secundario llamado <strong>superestructura</strong>, compuesto por el Estado, las leyes, la religión, la moral, la familia y la <strong>ideología</strong> (las ideas y representaciones con las que los hombres imaginan su mundo).</li>
+                        <li><strong>Los modos de producción:</strong> La combinación de determinadas fuerzas productivas y relaciones de producción define cada gran etapa histórica o «modo de producción» (el comunismo primitivo, el <strong>modo de producción asiático</strong> —aquellos grandes imperios antiguos como Egipto, China o Mesopotamia donde un Estado despótico centralizado era dueño de todas las tierras y obras hidráulicas cobrando tributo a las aldeas—, el modo esclavista, el feudal y el capitalista).</li>
+                    </ol>
+
+                    <p>¿Cómo intervienen Deleuze y Guattari en este esquema? En los años cincuenta y sesenta, diversos pensadores de la llamada corriente <strong>freudo-marxista</strong> (como Wilhelm Reich o Herbert Marcuse) habían intentado unir a Marx con Freud, pero mantenían intacta la división entre infraestructura y superestructura: dejaban la economía y las fábricas para Marx (en la infraestructura) y colocaban el deseo, la sexualidad y la familia en la <strong>superestructura ideológica</strong>, como si el deseo fuera solo un reflejo mental o una fantasía secundaria. <em>El Anti-Edipo</em> dinamita por completo esta separación mediante su tesis más célebre: <strong>«el deseo forma parte de la infraestructura»</strong>. No existe una producción económica real allá afuera y una producción de fantasmas psicológicos acá adentro; <strong>la producción social es única y exclusivamente la propia producción deseante bajo condiciones históricas determinadas</strong>. La libido no necesita sublimarse ni pasar por mediaciones ideológicas para cargar directamente las fuerzas productivas y las relaciones de producción.</p>
+
+                    <p>Al introducir el deseo en la infraestructura material, Deleuze y Guattari reformulan la teoría marxista de los modos de producción y proponen una nueva <strong>Historia Universal</strong> (retrospectiva y contingente, no evolutiva ni determinista). Para ellos, antes que modos de producción definidos únicamente por las herramientas o la economía, la historia está poblada por grandes <strong>máquinas sociales</strong>. Cada máquina social posee una superficie inscriptora e improductiva —el <strong>Socius</strong> o gran cuerpo lleno social, equivalente macroscópico del Cuerpo sin Órganos— cuya función principal es <strong>codificar los flujos</strong> del deseo y del trabajo (es decir, ponerles reglas estrictas, marcas y canales para impedir que fluyan libremente y destruyan el orden social). A partir de este criterio, el capítulo tercero de <em>El Anti-Edipo</em> divide la historia universal en tres grandes regímenes o formas de <em>Socius</em>:</p>
+
+                    <ul>
+                        <li><strong>1. Los Salvajes y la Máquina Territorial Primitiva (El cuerpo lleno de la Tierra):</strong> Basándose en la antropología política y en la <em>Genealogía de la moral</em> de Nietzsche (contra el estructuralismo de Lévi-Strauss), muestran que las sociedades tribales o primitivas tienen como <em>socius</em> el cuerpo de la <strong>Tierra</strong>. Aquí no hay Estado ni economía independiente; la sociedad funciona <strong>codificando</strong> todos los flujos (de comida, de mujeres, de bienes, de palabras) mediante alianzas matrimoniales, linajes de filiación y ritos crueles de iniciación (tatuajes, escarificaciones) que graban la ley del grupo directamente sobre la carne de los cuerpos, instaurando bloques de deuda finita y móvil. Su pánico absoluto es que algún flujo escape al código tribal.</li>
+                        <li><strong>2. Los Bárbaros y la Máquina Despótica Imperial (El cuerpo lleno del Déspota):</strong> Retomando directamente el concepto de Marx sobre el <strong>modo de producción asiático</strong>, Deleuze y Guattari explican el nacimiento del <strong>Estado</strong> (al que llaman <em>Urstaat</em> o Estado originario). Un fundador de imperios o conquistador llega desde afuera, rompe las alianzas horizontales de las tribus primitivas y se erige en el <strong>Déspota</strong> (el Faraón, el Emperador chino, el Rey-Dios), cuyo propio cuerpo pasa a ser el nuevo <em>socius</em> del que todo parece emanar por milagro. El Déspota no destruye los antiguos códigos de las aldeas campesinas, sino que realiza una operación llamada <strong>sobrecodificación</strong>: conserva las comunas territoriales para que sigan trabajando la tierra, pero les impone desde las alturas una segunda capa de control estatal —la escritura burocrática, el censo, la moneda real, las grandes obras públicas y el tributo—, transformando la antigua deuda finita en una <strong>deuda infinita</strong> del súbdito hacia el soberano e instalando el régimen del terror y del Gran Significante.</li>
+                        <li><strong>3. Los Civilizados y la Máquina Capitalista (El cuerpo lleno del Capital-Dinero):</strong> Tanto las sociedades salvajes como los imperios bárbaros vivían aterrorizados ante la posibilidad de que los flujos de riqueza y de trabajo escaparan a sus códigos y sobrecodificaciones. Sin embargo, por una serie de accidentes históricos contingentes en Occidente, esos flujos lograron escapar, dando nacimiento al <strong>capitalismo</strong>: la única máquina social de la historia que ya no funciona mediante códigos ni tradiciones sagradas, sino mediante la <strong>descodificación generalizada de los flujos</strong> y su conjugación en una <strong>axiomática</strong> puramente económica y contable sobre el cuerpo lleno del <strong>Capital-Dinero</strong>.</li>
+                    </ul>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e2-sec3" class="section-heading">III. La mecánica de <em>El Capital</em>: Mercancía, Fetichismo, Plusvalía, Antiproducción y la Ley de la Baja Tendencial</h3>
+                    <p>Para entender con exactitud cómo funciona esta «máquina capitalista civilizada» en <em>El Anti-Edipo</em> —y cómo se conecta con las síntesis del inconsciente del capítulo primero—, es imprescindible explicar de manera sencilla seis mecanismos centrales que Karl Marx desarrolla en <em>El Capital</em> y que Deleuze y Guattari reinterpretan magistralmente:</p>
+
+                    <h4 class="subsection-heading">1. Valor de uso, Valor de cambio y la forma Dinero (M − D − M vs. D − M − D')</h4>
+                    <p>Marx comienza <em>El Capital</em> explicando que toda <strong>mercancía</strong> tiene dos caras: un <strong>valor de uso</strong> (su cualidad material concreta para satisfacer una necesidad, como el calor que da un abrigo o el alimento que da el pan) y un <strong>valor de cambio</strong> (la proporción cuantitativa abstracta en que esa mercancía se intercambia por otras en el mercado a través del <strong>dinero</strong>, medida por el tiempo de trabajo socialmente necesario para producirla). En las sociedades precapitalistas, el comercio simple seguía la fórmula <strong>M − D − M</strong> (Mercancía − Dinero − Mercancía): un campesino vendía trigo (M) por dinero (D) para comprarse unos zapatos (M); el dinero era solo un mediador para consumir cualidades concretas. En el capitalismo, en cambio, la fórmula se invierte y se vuelve <strong>D − M − D'</strong> (Dinero − Mercancía − Más Dinero): el capitalista invierte una suma de dinero (D) en comprar mercancías (máquinas, materias primas y fuerza de trabajo) únicamente para vender el resultado y obtener al final una cantidad mayor de dinero (D'). El objetivo del capitalismo ya no es satisfacer necesidades concretas, sino la acumulación ilimitada de valor abstracto: «producir por producir» y hacer que el dinero engendre más dinero.</p>
+
+                    <h4 class="subsection-heading">2. El encuentro de los dos flujos descodificados (Capital constante, Capital variable y la relación diferencial dy/dx)</h4>
+                    <p>¿Cómo nació históricamente el capitalismo según el famoso capítulo sobre la «acumulación originaria» de <em>El Capital</em> de Marx? Para que exista el capitalismo no basta con que haya mercaderes ricos o talleres; fue necesario que todos los códigos feudales y gremiales se rompieran (<strong>descodificación y desterritorialización</strong>) y se encontraran cara a cara dos tipos de flujos completamente «desnudos» y libres:</p>
+                    <ul>
+                        <li>Por un lado, el flujo del <strong>trabajador «libre»</strong>: masas de campesinos que fueron expulsados violentamente de sus tierras comunales y despojados de sus herramientas, quedando «libres» en el doble sentido irónico que señala Marx (libres de ataduras feudales para vender sus brazos en el mercado, pero también «libres» o vacíos de cualquier propiedad o medio de vida). En la inversión del capitalista, la parte del dinero destinada a comprar esta fuerza de trabajo viva a cambio de un salario es lo que Marx llama <strong>capital variable</strong> (porque es el único que varía y crea nuevo valor).</li>
+                        <li>Por otro lado, el flujo del <strong>dinero autónomo e industrial</strong>: riquezas financieras y mercantiles acumuladas que quedaron libres de las ataduras de la propiedad territorial feudal y pudieron comprar libremente máquinas, edificios y materias primas. A esta parte invertida en máquinas y medios materiales Marx la denomina <strong>capital constante</strong>.</li>
+                    </ul>
+                    <p>Deleuze y Guattari traducen este análisis histórico de Marx al lenguaje del cálculo infinitesimal (que Deleuze ya había utilizado en su libro <em>Diferencia y repetición</em>): el capitalismo nace cuando se conjugan en una <strong>relación diferencial (<em>dy/dx</em>)</strong> dos flujos descodificados e inconmensurables: el flujo de trabajo desterritorializado (<em>dy</em>, capital variable) y el flujo de dinero-capital desterritorializado (<em>dx</em>, capital constante).</p>
+
+                    <h4 class="subsection-heading">3. La extracción de la Plusvalía (y el paso de la «plusvalía de código» a la «plusvalía de flujo» y «plusvalía maquínica»)</h4>
+                    <p>¿De dónde sale ese dinero extra (D') que gana el capitalista si en el mercado todo parece pagarse por su valor justo? Marx descubre el secreto en el concepto de <strong>plusvalía</strong> (o plusvalor): el capitalista compra en el mercado una mercancía muy especial —la <strong>fuerza de trabajo</strong> del obrero— y le paga un salario equivalente a lo que ese obrero necesita para sobrevivir y reproducirse (supongamos que el obrero produce el valor equivalente a su salario en las primeras 4 horas de su jornada); sin embargo, al haber comprado su jornada entera, el capitalista lo hace trabajar 8 o 10 horas. Esas horas extras de trabajo no pagado que el obrero entrega gratuitamente y que el capitalista se embolsa constituyen la <strong>plusvalía</strong>.</p>
+                    <p>En el capítulo tercero de <em>El Anti-Edipo</em>, Deleuze y Guattari amplían genialmente este concepto marxista:</p>
+                    <ul>
+                        <li>Explican que en las sociedades primitivas y despóticas existía una <strong>plusvalía de código</strong> (el jefe o el déspota extraían un excedente de bienes, prestigio o tributos mediante reglas jerárquicas y rituales codificados).</li>
+                        <li>En el capitalismo, en cambio, la plusvalía deja de depender de códigos sociales y se transforma en una <strong>plusvalía de flujo</strong> puramente cuantitativa, nacida del diferencial entre el flujo de dinero que el banco inyecta como capital-crédito infinito y el pequeño flujo de dinero que se entrega al obrero como salario o medio de pago impotente.</li>
+                        <li>Además, apoyándose en el célebre «Fragmento sobre las máquinas» de los <em>Grundrisse</em> de Marx, Deleuze y Guattari introducen el concepto de <strong>plusvalía maquínica</strong>: en el capitalismo avanzado, la riqueza ya no proviene únicamente del tiempo de trabajo muscular inmediato del obrero manual (<strong>plusvalía humana</strong>), sino también del flujo de conocimiento científico, tecnológico e intelectual incorporado directamente en los sistemas automatizados y cibernéticos de las máquinas constantes.</li>
+                    </ul>
+
+                    <h4 class="subsection-heading">4. El Fetichismo de la mercancía y del capital: El «movimiento objetivo aparente» como modelo del Cuerpo sin Órganos</h4>
+                    <p>Uno de los conceptos marxistas más importantes para entender <em>todo</em> <em>El Anti-Edipo</em> (desde su primer capítulo) es la teoría de Marx sobre el <strong>fetichismo de la mercancía y del capital</strong> (desarrollada en el Tomo I y en el Tomo III de <em>El Capital</em>). En el capitalismo, aunque es el trabajo humano vivo el que produce absolutamente toda la riqueza, una vez que el capital se apropia del proceso productivo se produce una inversión óptica real a la que Marx llama el <strong>movimiento objetivo aparente</strong>: a los ojos de todos, parece como si el Dinero o el Capital tuviera la propiedad mágica y milagrosa de engendrar más dinero por sí solo (como el árbol que da peras o el dinero que da intereses en el banco), y parece que el obrero le debe su existencia y su capacidad misma de trabajar al Capital que le «da empleo». Marx subraya que este fetichismo no es una simple ilusión mental o un error de personas ignorantes, sino una <strong>ilusión objetiva real</strong> inscrita en el funcionamiento material del sistema.</p>
+                    <p>Deleuze y Guattari utilizan exactamente este mecanismo marxista para explicar cómo funcionan el <strong>Cuerpo sin Órganos</strong> en el inconsciente y el <strong>Socius</strong> en la historia: el Cuerpo sin Órganos (al igual que la Tierra primitiva, el Déspota imperial y el Capital-Dinero) es en sí mismo completamente improductivo y estéril; sin embargo, se abate o se vuelca (<em>se rabat sur</em>) sobre las máquinas deseantes y productivas, se apropia de todo su trabajo y se erige como una <strong>cuasi-causa</strong> fetichista y milagrosa (la «máquina milagrosa»), haciendo parecer que todas las fuerzas productivas y los órganos brotan mágicamente de él.</p>
+
+                    <h4 class="subsection-heading">5. La Ley de la Baja Tendencial de la Tasa de Ganancia y el capitalismo como sistema de límites inmanentes</h4>
+                    <p>En el Tomo III de <em>El Capital</em>, Marx formula la que considera la ley más importante de la economía política moderna: la <strong>ley de la baja tendencial de la tasa de ganancia</strong>. ¿En qué consiste? Para competir entre sí y aumentar la productividad, los capitalistas invierten cada vez más dinero en máquinas y tecnología (<strong>capital constante</strong>) y proporcionalmente menos dinero en trabajadores vivos (<strong>capital variable</strong>). Pero como, según Marx, la única fuente viva que crea nueva plusvalía es el trabajo humano (el capital variable), a medida que la proporción de máquinas crece frente a la de trabajadores, la <strong>tasa o porcentaje de ganancia</strong> en relación con el capital total invertido tiende inevitablemente a disminuir a largo plazo, provocando crisis periódicas de sobreproducción y falta de rentabilidad. Sin embargo, Marx añade que esta ley no provoca el derrumbe automático del capitalismo porque existen «causas contrarrestantes» (mayor explotación, abaratamiento de máquinas, expansión al comercio exterior, etc.) que frenan la caída.</p>
+                    <p>Deleuze y Guattari hacen una lectura filosófica extraordinaria de esta ley marxista: para ellos, la baja tendencial demuestra que <strong>el capitalismo carece de límite exterior y solo tiene un límite interior inmanente (que es el propio Capital)</strong>, un límite que nunca se alcanza definitivamente porque el capitalismo no cesa de superarlo y desplazarlo reproduciéndolo a una escala cada vez más amplia y planetaria. Esto explica la <strong>doble tendencia simultánea</strong> del capitalismo: por un lado, el capitalismo revoluciona constantemente el mundo y <strong>desterritorializa</strong> todos los flujos sin piedad; pero, por otro lado y al mismo tiempo, para no desintegrarse en su límite absoluto exterior (que sería la esquizofrenia libre y la destrucción del beneficio capitalista), tiene que frenar su propio movimiento inventando fronteras artificiales, resucitando arcaísmos estatales y <strong>reterritorializando</strong> brutalmente a las personas (en la patria, en el consumo y, sobre todo, en el triángulo familiar de Edipo).</p>
+
+                    <h4 class="subsection-heading">6. La Antiproducción (Militarismo, Burocracia, Publicidad) y la Axiomática Monetaria</h4>
+                    <p>Precisamente para absorber ese exceso monstruoso de mercancías y capitales que la ley de la baja tendencial genera —y para evitar que la abundancia tecnológica destruya la escasez del mercado—, el capitalismo contemporáneo desarrolla lo que Félix Guattari y Gilles Deleuze (inspirándose en Georges Bataille y en los economistas marxistas estadounidenses <strong>Paul Baran y Paul Sweezy</strong>, autores de <em>El capital monopolista</em>) denominan el aparato de <strong>antiproducción</strong>. En los imperios antiguos, la antiproducción (los palacios del rey, las pirámides, los ejércitos) era una instancia separada de la producción campesina; en el capitalismo moderno, en cambio, la <strong>antiproducción se infiltra por todas partes dentro de la propia máquina productiva</strong> para regularla y permitir que se realice la plusvalía. ¿Qué es la antiproducción capitalista? Es el gigantesco <strong>complejo militar-industrial</strong> (fabricar armamento carísimo destinado a ser destruido o a quedar obsoleto), el aparato publicitario y de mercadotecnia, la obsolescencia programada y la hipertrofia burocrática y estatal. Según <em>El Anti-Edipo</em>, este aparato de antiproducción cumple dos funciones supremas en nuestra sociedad: 1) <strong>introducir artificialmente la carencia y la escasez allí donde siempre hay sobreabundancia</strong> (haciéndonos vivir en el miedo perpetuo a que nos falte algo), y 2) inyectar un flujo equivalente de <strong>imbecilidad</strong> en medio de la ciencia y el conocimiento para asegurar la docilidad de los individuos.</p>
+                    <p>Al mismo tiempo, Deleuze y Guattari critican a los economistas marxistas ortodoxos por haberse quedado anclados en el capítulo primero de <em>El Capital</em> (donde el dinero aparece solo como una mercancía equivalente para intercambiar cosas) y haber descuidado los análisis de Marx en el Tomo III —así como los de John Maynard Keynes, Suzanne de Brunhoff y Bernard Schmitt— sobre <strong>la banca, las finanzas y la moneda de crédito</strong>. En el capitalismo, el dinero tiene dos caras disimuladas: por un lado, el <strong>dinero como medio de pago o salario</strong> (un flujo finito e impotente que va al bolsillo del trabajador para comprar bienes de consumo); y por otro lado, el <strong>dinero como estructura de financiación o capital-crédito</strong> creado <em>ex nihilo</em> por los bancos centrales y comerciales (un flujo mutante e infinito que decide qué se produce y gobierna toda la economía). Esta gestión financiera y estatal funciona como una <strong>axiomática</strong>: a diferencia de los antiguos «códigos» religiosos o tradicionales (que eran rígidos y cualitativos: si entraba un elemento nuevo, el código se rompía), una <strong>axiomática</strong> es un sistema flexible de ecuaciones contables y operativas puramente cuantitativas. Si surge una revuelta obrera, un movimiento juvenil, una vanguardia artística o una minoría rebelde, al capitalismo no le importa su contenido moral o tradicional: simplemente <strong>añade un nuevo axioma</strong> (crea un nuevo mercado, otorga un derecho sindical regulado o financia un programa estatal en el polo socialdemócrata, o bien recorta axiomas a sangre y fuego en el polo totalitario y neoliberal) para volver a capturar e integrar los flujos rebeldes dentro de la contabilidad del capital.</p>
+
+                    <hr class="section-divider">
+
+                    <h3 id="e2-sec4" class="section-heading">IV. Más allá de la «Ideología»: Interés preconsciente de clase frente a Catexis inconsciente de deseo</h3>
+                    <p>Llegamos así a la cuarta y última estación, donde el marxismo y el psicoanálisis convergen en el problema político fundamental que dio origen a <em>El Anti-Edipo</em> tras el reflujo de Mayo del 68. En la tradición marxista clásica (desde Engels hasta Georg Lukács, Antonio Gramsci y la teoría de los «Aparatos Ideológicos del Estado» de Louis Althusser), cuando la clase obrera o las masas oprimidas no hacían la revolución, votaban a la derecha o apoyaban regímenes tiránicos como el fascismo, la explicación habitual recurría al concepto de <strong>ideología</strong> o <strong>falsa conciencia</strong>: se decía que la clase trabajadora tenía un «interés objetivo» claro (derrocar al capitalismo), pero que la burguesía, a través de la escuela, la religión y la prensa, había <em>engañado</em>, ilusionado o cegado la conciencia de los trabajadores.</p>
+
+                    <p>Deleuze y Guattari rechazan de plano esta explicación afirmando de manera tajante que <strong>«el concepto de ideología es un concepto execrable que oculta los verdaderos problemas»</strong>. Retomando la pregunta que Baruch Spinoza formuló en el siglo XVII y que Wilhelm Reich lanzó en los años treinta ante el triunfo de Hitler —<em>«¿Por qué los hombres combaten por su servidumbre tan tenazmente como si se tratara de su salvación?»</em>—, los autores responden con una distinción revolucionaria que todo lector de <em>El Anti-Edipo</em> debe grabar en su memoria: <strong>no, las masas no fueron engañadas; las masas desearon positivamente el fascismo en un momento dado</strong>, porque existe una diferencia radical entre el <strong>interés</strong> y el <strong>deseo</strong>.</p>
+
+                    <p>En el capítulo cuarto de la obra, Deleuze y Guattari dividen las inversiones (<em>catexis</em>) de la infraestructura social en dos niveles distintos que no siempre coinciden:</p>
+
+                    <ol>
+                        <li><strong>Las catexis preconscientes de interés (de clase):</strong> Pertenecen al orden de los objetivos conscientes o preconscientes, los salarios, el nivel de vida y la lucha molar entre grandes clases sociales (burguesía frente a proletariado). Una persona o un partido político puede tener un interés preconsciente perfectamente revolucionario (querer derrocar a la burguesía y tomar el poder del Estado).</li>
+                        <li><strong>Las catexis libidinales inconscientes de deseo (de grupo):</strong> Pertenecen al nivel microfísico y profundo de las máquinas deseantes, donde la libido carga directamente los flujos, las jerarquías y las formas de poder social con independencia del interés económico del sujeto. Estas inversiones inconscientes oscilan entre dos grandes polos: el <strong>polo paranoico, reaccionario y fascista</strong> (que desea el orden gregario, la autoridad del jefe, la pureza de la raza o de la nación y la sumisión de las máquinas deseantes a los grandes aparatos molares) y el <strong>polo esquizoide y revolucionario</strong> (que libera los flujos descodificados y subordina las instituciones sociales a la libre creación de las multiplicidades deseantes).</li>
+                    </ol>
+
+                    <p>Esta distinción explica por fin las dos grandes tragedias políticas del siglo XX que desconcertaban al marxismo tradicional: por un lado, explica cómo trabajadores explotados cuyos <em>intereses</em> objetivos son anticapitalistas pueden, sin embargo, mantener <em>catexis inconscientes de deseo</em> profundamente reaccionarias y enamorarse del poder que los humilla (el microfascismo que hace vibrar de goce a las masas ante un dictador o ante el complejo militar y financiero); y, por otro lado, explica <strong>cómo puede ser traicionada desde adentro una revolución</strong> (el problema del leninismo, del estalinismo en la URSS o de los partidos comunistas y grupúsculos izquierdistas burocratizados). Cuando un partido de vanguardia realiza una ruptura únicamente en el nivel preconsciente de los <em>intereses de clase</em> (tomar el aparato de Estado y planificar la economía), pero mantiene intactas en el nivel inconsciente las <em>catexis libidinales paranoicas</em> de disciplina, jerarquía, culto al líder y represión del deseo, la revolución termina inevitablemente reconstruyendo un nuevo <strong>capitalismo de Estado</strong> y una nueva tecnoburocracia opresiva («Todo empieza con Marx, prosigue con Lenin y se acaba con "Bienvenido Sr. Brezhnev"»). De ahí también la diferenciación que introduce el esquizoanálisis entre los <strong>grupos sometidos</strong> (aquellos que reciben su ley desde afuera, reproducen jerarquías autoritarias y taponan los flujos de deseo) y los <strong>grupos-sujeto</strong> (colectivos transversales y abiertos a su propia finitud que conectan el interés revolucionario con una verdadera ruptura libidinal inconsciente).</p>
+
+                    <h3 id="e2-tabla" class="section-heading">Cuadro sinóptico de referencia: Marxismo y Economía Política</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Concepto de Marxismo / Economía Política</th>
+                                    <th>Definición en la teoría clásica de Marx</th>
+                                    <th>Apropiación y transformación en <em>El Anti-Edipo</em></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Trabajo abstracto (Adam Smith, Ricardo y Marx)</strong></td>
+                                    <td>Descubrimiento moderno de que la fuente de toda riqueza es la actividad humana productiva en general, la cual es alienada bajo la propiedad privada del capital.</td>
+                                    <td>Exactamente paralelo al descubrimiento de la <strong>libido</strong> por Freud: el capitalismo descubre la esencia subjetiva de la producción en general (trabajo y deseo), pero la divide y aliena doblemente en la propiedad privada (economía política) y en la familia edípica (psicoanálisis).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Infraestructura económica vs. Superestructura ideológica</strong></td>
+                                    <td>La base material (fuerzas productivas y relaciones de producción) determina la superestructura (Estado, derecho, familia, ideología).</td>
+                                    <td>Se destruye el dualismo freudo-marxista: <strong>el deseo forma parte directamente de la infraestructura</strong>. La producción social no es más que la propia producción deseante en condiciones determinadas (régimen molar frente a régimen molecular).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Modos de Producción (Primitivo, Asiático, Capitalista)</strong></td>
+                                    <td>Etapas históricas definidas por el desarrollo de las fuerzas productivas y las formas de propiedad y explotación del trabajo.</td>
+                                    <td>Reinterpretados como tres grandes <strong>Máquinas Sociales</strong> definidas por su superficie de inscripción (<strong>Socius</strong>) y su trato con los flujos: <strong>Salvajes</strong> (Tierra / codificación), <strong>Bárbaros</strong> (Déspota asiático / sobrecodificación estatal) y <strong>Civilizados</strong> (Capital / descodificación y axiomática).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Fetichismo de la mercancía y del capital (Movimiento objetivo aparente)</strong></td>
+                                    <td>Ilusión objetiva real en la que el producto del trabajo humano (el Dinero/Capital) parece poseer vida propia y engendrar valor y riqueza por sí mismo.</td>
+                                    <td>Modelo exacto del <strong>Cuerpo sin Órganos</strong> y de todo <strong>Socius</strong>: una superficie improductiva de antiproducción que se abate sobre las máquinas productivas, se apropia de sus fuerzas y actúa como <strong>cuasi-causa</strong> milagrosa («máquina milagrosa»).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Encuentro entre Capital constante y Capital variable</strong></td>
+                                    <td>Condición histórica del capitalismo: unión de medios de producción/dinero acumulado con trabajadores «libres» desposeídos de todo.</td>
+                                    <td>Formulado como la conjugación en una <strong>relación diferencial (<em>dy/dx</em>)</strong> de dos flujos descodificados y desterritorializados: el flujo de trabajo libre (<em>dy</em>) y el flujo de dinero-capital mutante (<em>dx</em>).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Plusvalía</strong></td>
+                                    <td>Valor no pagado que el capitalista extrae de la fuerza de trabajo del obrero durante la jornada laboral.</td>
+                                    <td>Se distingue entre <strong>plusvalía de código</strong> (en sociedades precapitalistas) y <strong>plusvalía de flujo</strong> (en el capitalismo, nacida del diferencial entre el flujo de crédito bancario y el flujo salarial), sumando la <strong>plusvalía maquínica</strong> (científica e intelectual).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ley de la baja tendencial de la tasa de ganancia</strong></td>
+                                    <td>Tendencia del beneficio a caer por el aumento del capital constante (máquinas) frente al variable (trabajo vivo), frenada por causas contrarrestantes.</td>
+                                    <td>Explica por qué el capitalismo no tiene límite exterior sino <strong>límites interiores inmanentes</strong> que desplaza sin cesar, combinando la máxima <strong>desterritorialización</strong> con brutales <strong>reterritorializaciones</strong> artificiales (como Edipo).</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Ideología y Conciencia de clase</strong></td>
+                                    <td>La dominación se mantiene mediante el engaño ideológico («falsa conciencia»); la emancipación exige tomar conciencia del interés objetivo de clase.</td>
+                                    <td>Se rechaza el concepto de ideología (las masas no fueron engañadas en el fascismo): se distingue entre <strong>catexis preconscientes de interés (clase)</strong> y <strong>catexis inconscientes de deseo (grupo)</strong>, que oscilan entre el polo paranoico-fascista y el polo esquizo-revolucionario.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <footer class="reader-footer">
+                    Prolegómenos a <em>El Anti-Edipo: Capitalismo y esquizofrenia</em> (Gilles Deleuze y Félix Guattari) · Lector Académico
+                </footer>
+
+            </article>
+        </main>
+    </div>
+
+    <script>
+        // Toggle mobile sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Font size controls
+        let currentFontSize = 19;
+        function adjustFontSize(delta) {
+            if (delta === 0) {
+                currentFontSize = 19;
+            } else {
+                currentFontSize = Math.min(25, Math.max(15, currentFontSize + delta));
+            }
+            document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
+        }
+
+        // Reading progress bar & active TOC link highlight
+        const sections = document.querySelectorAll('section[id], h3[id]');
+        const navLinks = document.querySelectorAll('.toc-link');
+
+        window.addEventListener('scroll', () => {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+            document.getElementById('progress-bar').style.width = progress + '%';
+
+            let currentSectionId = '';
+            sections.forEach(sec => {
+                const top = sec.offsetTop - 120;
+                if (scrollTop >= top) {
+                    currentSectionId = sec.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSectionId) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Close sidebar on mobile when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 980) {
+                    document.getElementById('sidebar').classList.remove('open');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
